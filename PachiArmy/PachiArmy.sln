@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PachiArmy", "PachiArmy.csproj", "{12F2E1AA-A5D1-4EE5-A814-27B6FF36C86D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12F2E1AA-A5D1-4EE5-A814-27B6FF36C86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F2E1AA-A5D1-4EE5-A814-27B6FF36C86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F2E1AA-A5D1-4EE5-A814-27B6FF36C86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F2E1AA-A5D1-4EE5-A814-27B6FF36C86D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B20C974-74A8-4FC5-BC1F-2B1707A8627D}
+	EndGlobalSection
+EndGlobal
