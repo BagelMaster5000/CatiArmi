@@ -1,0 +1,69 @@
+﻿@page "/Test"
+
+<Container Padding="Padding.Is2">
+    <PageTitle>TestPage</PageTitle>
+
+    @* <DropContainer TItem="DropItem" Items="@items" ItemsFilter="@((item, dropZone) => item.Group == dropZone)" ItemDropped="@ItemDropped" Flex="Flex.Wrap.Grow.Is1"> *@
+    <DropContainer TItem="DropItem" Items="@items" ItemsFilter="@((item, dropZone) => item.Group == dropZone)" ItemDropped="@ItemDropped">
+        <ChildContent>
+            <Container TextAlignment="TextAlignment.Center">
+                <Row>
+                    <Column Background="Background.Light" ColumnSize="ColumnSize.Is9">
+                        <Container TextAlignment="TextAlignment.Center">
+                            @for (int r = 0; r < 8; r++)
+                            {
+                                var row = r.ToString();
+                                <div class="d-flex">
+                                    @for (int c = 0; c < 8; c++)
+                                    {
+                                        var col = c.ToString();
+                                        <DropZone Padding="Padding.Is1" TItem="DropItem" Name="@($"{row}{col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is1" Height="Height.Rem(7)" Width="Width.Rem(7)" />
+                                    }
+                                </div>
+                            }
+                        </Container>
+                    </Column>
+                    <Column Background="Background.Dark" ColumnSize="ColumnSize.Is3">
+
+                    </Column>
+                </Row>
+            </Container>
+        </ChildContent>
+        <ItemTemplate>
+            <Div class="pachimari gallery-item" onclick="@Clicked" TextAlignment="TextAlignment.Center">
+                <Image Source="@context.Image" Width="Width.Is100" Height="Height.Is100" />
+            </Div>
+        </ItemTemplate>
+    </DropContainer>
+</Container>
+
+@code {
+    public class DropItem
+    {
+        public string Group { get; set; }
+
+        public string Image { get; set; }
+    }
+
+    private List<DropItem> items = new()
+    {
+        new DropItem() { Group = "00", Image = "placeholders/pachimari.png" },
+        new DropItem() { Group = "01", Image = "placeholders/pachimari.png" },
+        new DropItem() { Group = "10", Image = "placeholders/pachimari.png" },
+        new DropItem() { Group = "02", Image = "placeholders/pachimari.png" },
+        new DropItem() { Group = "03", Image = "placeholders/pachimari.png" },
+        new DropItem() { Group = "04", Image = "placeholders/pachimari.png" },
+        new DropItem() { Group = "05", Image = "placeholders/pachimari.png" },
+    };
+
+    private Task ItemDropped(DraggableDroppedEventArgs<DropItem> dropItem)
+    {
+        dropItem.Item.Group = dropItem.DropZoneName;
+        return Task.CompletedTask;
+    }
+
+    private void Clicked()
+    {
+        Console.WriteLine("Pachi clicked!");
+    }
+}
