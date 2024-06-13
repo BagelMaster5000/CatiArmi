@@ -1,0 +1,38 @@
+﻿@page "/Horde"
+@using PachiArmy.Scripts
+
+<Container Padding="Padding.Is2">
+    <PageTitle>Horde</PageTitle>
+
+    <DropContainer TItem="Placeable" Items="@BoardManager.ActivePlaceables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved">
+        <ChildContent>
+            <Container TextAlignment="TextAlignment.Center">
+                <Row>
+                    <Column Background="Background.Light" ColumnSize="ColumnSize.Is9">
+                        <Container TextAlignment="TextAlignment.Center">
+                            @for (int r = 0; r < 8; r++)
+                            {
+                                var row = r.ToString();
+                                <div class="d-flex">
+                                    @for (int c = 0; c < 8; c++)
+                                    {
+                                        var col = c.ToString();
+                                        <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is1" Height="Height.Rem(7)" Width="Width.Rem(7)" />
+                                    }
+                                </div>
+                            }
+                        </Container>
+                    </Column>
+                    <Column Background="Background.Dark" ColumnSize="ColumnSize.Is3">
+
+                    </Column>
+                </Row>
+            </Container>
+        </ChildContent>
+        <ItemTemplate>
+            <Div class="pachimari gallery-item" onclick="@context.Clicked" TextAlignment="TextAlignment.Center">
+                <Image Source="@context.GetImage()" Width="Width.Is100" Height="Height.Is100" />
+            </Div>
+        </ItemTemplate>
+    </DropContainer>
+</Container>
