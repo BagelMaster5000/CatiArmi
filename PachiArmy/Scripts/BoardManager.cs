@@ -5,13 +5,7 @@
         public const uint ROWS = 8;
         public const uint COLS = 8;
 
-        public static List<Placeable> ActivePlaceables = new List<Placeable>()
-        {
-            new Pachimari() { Position = new GridPosition(0,0)},
-            new Pachimari() { Position = new GridPosition(0,1)},
-            new Pachimari() { Position = new GridPosition(0,2)},
-            new Pachimari() { Position = new GridPosition(0,3)},
-        };
+        public static List<Placeable> ActivePlaceables = new List<Placeable>();
 
         private static bool[,] occupiedSpaces = new bool[ROWS, COLS];
 
@@ -26,7 +20,7 @@
             }
             else
             {
-                var occupyingPlaceable = ActivePlaceables.Find(p => p.Position == destination);
+                var occupyingPlaceable = ActivePlaceables.Find(p => p.Position.Row == destination.Row && p.Position.Col == destination.Col);
                 if (occupyingPlaceable != null)
                 {
                     SwapPlaceables(movingPlaceable, occupyingPlaceable);

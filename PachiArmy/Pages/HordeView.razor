@@ -30,9 +30,11 @@
             </Container>
         </ChildContent>
         <ItemTemplate>
-            <Div class="pachimari gallery-item" onclick="@context.Clicked" TextAlignment="TextAlignment.Center">
-                <Image Source="@context.GetImage()" Width="Width.Is100" Height="Height.Is100" />
-            </Div>
+            <Tooltip Text="@context.GetHoverText()" Multiline=true Fade=true FadeDuration="70">
+                <Div class="pachimari gallery-item" onclick="@context.Clicked" TextAlignment="TextAlignment.Center">
+                    <Image Source="@context.GetImage()" Width="Width.Is100" Height="Height.Is100" />
+                </Div>
+            </Tooltip>
         </ItemTemplate>
     </DropContainer>
 </Container>

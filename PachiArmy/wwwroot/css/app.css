@@ -100,6 +100,30 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
+
+
+
+/*CUSTOM*/
+
+:root {
+    /*Hot Panda*/
+    --hotpanda-red: #c8024f;
+    --hotpanda-orange: #ff585F;
+    --hotpanda-lightyellow: #fce4a8;
+    --hotpanda-lightblue: #bed7e9;
+    --hotpanda-teal: #0a7e8b;
+    --hotpanda-darkblue: #093a54;
+    --hotpanda-darkpurple: #2f2041;
+}
+.hotpanda-red{ color: var(--hotpanda-red); }
+.hotpanda-orange{ color: var(--hotpanda-orange); }
+.hotpanda-lightyellow{ color: var(--hotpanda-lightyellow); }
+.hotpanda-lightblue{ color: var(--hotpanda-lightblue); }
+.hotpanda-teal{ color: var(--hotpanda-teal); }
+.hotpanda-darkblue{ color: var(--hotpanda-darkblue); }
+.hotpanda-darkpurple{ color: var(--hotpanda-darkpurple); }
+
+
 .clicky-card {
     transition: .2s ease-out;
     border-width: 2px;
