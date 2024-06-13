@@ -1,8 +1,10 @@
-﻿namespace PachiArmy.Scripts
+﻿using Blazorise;
+
+namespace PachiArmy.Scripts
 {
-    public class FoodBowl : PachiInteractablePlaceable
+    public class FoodBowl : InteractablePlaceable
     {
-        public GridPosition Position { get; set; }
+        public Position Position { get; set; }
 
         private const uint MAX_FOOD = 20;
         private uint food;
@@ -10,7 +12,9 @@
         public FoodBowl()
         {
             // TODO don't default this to 0,0
-            Position = new GridPosition(0, 0);
+            Position = new Position(0, 0);
+
+            food = MAX_FOOD;
         }
 
         // Click behavior
@@ -26,12 +30,12 @@
         // Hover behavior
         public string GetHoverText()
         {
-            throw new NotImplementedException();
+            return "<strong>Fill:</strong> " + food + "/" + MAX_FOOD;
         }
 
         public string GetImage()
         {
-            throw new NotImplementedException();
+            return "placeholders/foodbowl.png";
         }
 
         // Pachi interaction
@@ -41,8 +45,11 @@
         }
         public void TryEat(Pachimari invokerPachimari)
         {
-
+            if (food > 0)
+            {
+                food--;
+                invokerPachimari.Eat();
+            }
         }
-
     }
 }

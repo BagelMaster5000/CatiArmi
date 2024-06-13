@@ -1,8 +1,8 @@
 ﻿namespace PachiArmy.Scripts
 {
-    public class Toy : PachiInteractablePlaceable
+    public class Toy : InteractablePlaceable
     {
-        public GridPosition Position { get; set; }
+        public Position Position { get; set; }
 
         private const uint INITIAL_DURABILITY = 30;
         private uint durability;
@@ -10,7 +10,9 @@
         public Toy()
         {
             // TODO don't default this to 0,0
-            Position = new GridPosition(0, 0);
+            Position = new Position(0, 0);
+
+            durability = INITIAL_DURABILITY;
         }
 
         // Click behavior
@@ -26,12 +28,12 @@
         // Hover behavior
         public string GetHoverText()
         {
-            throw new NotImplementedException();
+            return "<strong>Durability:</strong> " + durability + "/" + INITIAL_DURABILITY;
         }
 
         public string GetImage()
         {
-            throw new NotImplementedException();
+            return "placeholders/toy.png";
         }
 
         // Pachi interaction
@@ -41,7 +43,13 @@
         }
         public void TryPlay(Pachimari invokerPachimari)
         {
+            durability--;
+            invokerPachimari.Play();
 
+            if (durability <= 0)
+            {
+                // Destroy
+            }
         }
     }
 }

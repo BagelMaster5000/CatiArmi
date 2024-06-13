@@ -1,8 +1,8 @@
 ﻿namespace PachiArmy.Scripts
 {
-    public class WaterBowl : PachiInteractablePlaceable
+    public class WaterBowl : InteractablePlaceable
     {
-        public GridPosition Position { get; set; }
+        public Position Position { get; set; }
 
         private const uint MAX_WATER = 20;
         private uint water;
@@ -10,7 +10,9 @@
         public WaterBowl()
         {
             // TODO don't default this to 0,0
-            Position = new GridPosition(0, 0);
+            Position = new Position(0, 0);
+
+            water = MAX_WATER;
         }
 
         // Click behavior
@@ -26,12 +28,12 @@
         // Hover behavior
         public string GetHoverText()
         {
-            throw new NotImplementedException();
+            return "<strong>Fill:</strong> " + water + "/" + MAX_WATER;
         }
 
         public string GetImage()
         {
-            throw new NotImplementedException();
+            return "placeholders/waterbowl.png";
         }
 
         // Pachi interaction
@@ -41,7 +43,11 @@
         }
         public void TryDrink(Pachimari invokerPachimari)
         {
-
+            if (water > 0)
+            {
+                water--;
+                invokerPachimari.Drink();
+            }
         }
     }
 }

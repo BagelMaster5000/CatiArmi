@@ -4,7 +4,7 @@ namespace PachiArmy.Scripts
 {
     public class Pachimari : Placeable
     {
-        public GridPosition Position { get; set; }
+        public Position Position { get; set; }
 
         enum PachiState
         {
@@ -31,7 +31,7 @@ namespace PachiArmy.Scripts
         public Pachimari()
         {
             // TODO don't default this to 0,0. Find a random open spot on the board
-            Position = new GridPosition(0, 0);
+            Position = new Position(0, 0);
 
             happiness = (uint)RandomNumberGenerator.GetInt32(100);
             hunger = (uint)RandomNumberGenerator.GetInt32(100);
@@ -80,7 +80,7 @@ namespace PachiArmy.Scripts
             {
                 hungerTooltipText = "<span class='hotpanda-lightyellow'>Kinda... 😐</span>";
             }
-            else if (hungerPercentage > 0f)
+            else if (hungerPercentage > 0.1f)
             {
                 hungerTooltipText = "<span class='hotpanda-orange'>So hungry... 🥺</span>";
             }
@@ -99,7 +99,7 @@ namespace PachiArmy.Scripts
             {
                 thirstTooltipText = "<span class='hotpanda-lightyellow'>Kinda... 😐</span>";
             }
-            else if (thirstPercentage > 0f)
+            else if (thirstPercentage > 0.1f)
             {
                 thirstTooltipText = "<span class='hotpanda-orange'>So thirsty... 🥺</span>";
             }
@@ -119,17 +119,53 @@ namespace PachiArmy.Scripts
 
         public string GetImage()
         {
-            return "placeholders/pachimari.png";
+            switch (state)
+            {
+                case PachiState.Idle: return "placeholders/pachimari-idle.png";
+                case PachiState.Eating: return "placeholders/pachimari-eating.png";
+                case PachiState.Drinking: return "placeholders/pachimari-drinking.png";
+                case PachiState.Playing: return "placeholders/pachimari-playing.png";
+                case PachiState.Exhausted: return "placeholders/pachimari-exhausted.png";
+                case PachiState.Pet: return "placeholders/pachimari-pet.png";
+                default: return "placeholders/pachimari-idle.png";
+            }
         }
 
         // Tick
         public void ProcessTick()
         {
-
+            ProcessInteractions();
         }
         private void ProcessInteractions()
         {
+            float hungerPercentage = hunger * 1.0f / MAX_HUNGER;
+            float thirstPercentage = thirst * 1.0f / MAX_THIRST;
+            if (hungerPercentage < 0.1f || thirstPercentage < 0.1f)
+            {
+                state = PachiState.Exhausted;
+                return;
+            }
 
+            var interactablePlaceables = BoardManager.GetAllAdjacentInteractablePlaceables(Position.Row, Position.Col);
+            foreach (var placeable in interactablePlaceables)
+            {
+                placeable.PachiInteract(this);
+            }
+        }
+
+        public void Eat()
+        {
+            hunger += 2;
+            happiness += 1;
+        }
+        public void Drink()
+        {
+            thirst += 2;
+            happiness += 1;
+        }
+        public void Play()
+        {
+            happiness += 2;
         }
     }
 }

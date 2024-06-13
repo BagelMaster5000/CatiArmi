@@ -1,4 +1,6 @@
-﻿namespace PachiArmy.Scripts
+﻿using Blazorise;
+
+namespace PachiArmy.Scripts
 {
     public static class BoardManager
     {
@@ -10,7 +12,7 @@
         private static bool[,] occupiedSpaces = new bool[ROWS, COLS];
 
 
-        public static void MovePlaceable(Placeable movingPlaceable, GridPosition destination)
+        public static void MovePlaceable(Placeable movingPlaceable, Position destination)
         {
             if (!GetSpaceOccupied(destination))
             {
@@ -58,17 +60,100 @@
 
         public static void ProcessTick()
         {
-            List<Pachimari> activePachis = ActivePlaceables.OfType<Pachimari>().ToList();
-            foreach (Pachimari pachi in activePachis)
+            var activePachis = ActivePlaceables.OfType<Pachimari>().ToList();
+            foreach (var pachi in activePachis)
             {
                 pachi.ProcessTick();
             }
         }
 
+        public static List<InteractablePlaceable> GetAllAdjacentInteractablePlaceables(uint row, uint col)
+        {
+            var interactablePlaceables = ActivePlaceables.OfType<InteractablePlaceable>().ToList();
+            var adjacentInteractablePlaceables = new List<InteractablePlaceable>();
+
+            // Top left
+            if (row - 1 >= 0 || col - 1 >= 0)
+            {
+                var placeable = interactablePlaceables.Find(p => p.Position.Row == row - 1 && p.Position.Col == col - 1);
+                if (placeable != null)
+                {
+                    adjacentInteractablePlaceables.Add(placeable);
+                }
+            }
+            // Top
+            if (row - 1 >= 0)
+            {
+                var placeable = interactablePlaceables.Find(p => p.Position.Row == row - 1 && p.Position.Col == col);
+                if (placeable != null)
+                {
+                    adjacentInteractablePlaceables.Add(placeable);
+                }
+            }
+            // Top right
+            if (row - 1 >= 0 || col + 1 >= 0)
+            {
+                var placeable = interactablePlaceables.Find(p => p.Position.Row == row - 1 && p.Position.Col == col + 1);
+                if (placeable != null)
+                {
+                    adjacentInteractablePlaceables.Add(placeable);
+                }
+            }
+            // Left
+            if (col - 1 >= 0)
+            {
+                var placeable = interactablePlaceables.Find(p => p.Position.Row == row && p.Position.Col == col - 1);
+                if (placeable != null)
+                {
+                    adjacentInteractablePlaceables.Add(placeable);
+                }
+            }
+            // Right
+            if (col + 1 >= 0)
+            {
+                var placeable = interactablePlaceables.Find(p => p.Position.Row == row && p.Position.Col == col + 1);
+                if (placeable != null)
+                {
+                    adjacentInteractablePlaceables.Add(placeable);
+                }
+            }
+            // Bottom left
+            if (row + 1 >= 0 || col - 1 >= 0)
+            {
+                var placeable = interactablePlaceables.Find(p => p.Position.Row == row + 1 && p.Position.Col == col - 1);
+                if (placeable != null)
+                {
+                    adjacentInteractablePlaceables.Add(placeable);
+                }
+            }
+            // Bottom
+            if (row + 1 >= 0)
+            {
+                var placeable = interactablePlaceables.Find(p => p.Position.Row == row + 1 && p.Position.Col == col);
+                if (placeable != null)
+                {
+                    adjacentInteractablePlaceables.Add(placeable);
+                }
+            }
+            // Bottom right
+            if (row + 1 >= 0 || col + 1 >= 0)
+            {
+                var placeable = interactablePlaceables.Find(p => p.Position.Row == row + 1 && p.Position.Col == col + 1);
+                if (placeable != null)
+                {
+                    adjacentInteractablePlaceables.Add(placeable);
+                }
+            }
+
+            return adjacentInteractablePlaceables;
+        }
+
 
         public static bool IsSpaceOccupied(uint row, uint col) => occupiedSpaces[row, col];
-        public static bool GetSpaceOccupied(GridPosition gridPosition) => occupiedSpaces[gridPosition.Row, gridPosition.Col];
+        public static bool GetSpaceOccupied(Position position) => occupiedSpaces[position.Row, position.Col];
         public static void SetSpaceOccupied(uint row, uint col, bool occupied) => occupiedSpaces[row, col] = occupied;
-        public static void SetSpaceOccupied(GridPosition gridPosition, bool occupied) => occupiedSpaces[gridPosition.Row, gridPosition.Col] = occupied;
+        public static void SetSpaceOccupied(Position position, bool occupied) => occupiedSpaces[position.Row, position.Col] = occupied;
+        public static Placeable? TryGetPlaceableOnSpace(uint row, uint col) => ActivePlaceables.Find(p => p.Position.Row == row && p.Position.Col == col);
+        public static Placeable? TryGetPlaceableOnSpace(Position gridPosition) => ActivePlaceables.Find(p => p.Position.Row == gridPosition.Row && p.Position.Col == gridPosition.Col);
     }
 }
