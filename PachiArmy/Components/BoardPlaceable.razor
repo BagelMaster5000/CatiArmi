@@ -1,4 +1,5 @@
 ﻿@using PachiArmy.Scripts;
+@using PachiArmy.Pages;
 @using System.Timers;
 
 <Tooltip Text="@Placeable.GetHoverText()" Multiline=true Fade=true FadeDuration="70">
@@ -14,7 +15,7 @@
     [Parameter]
     public Placeable Placeable { get; set; } = default!;
 
-    public TestCell()
+    public BoardPlaceable()
     {
         GlobalTimer.Timer.Elapsed += OnTimedEvent;
     }

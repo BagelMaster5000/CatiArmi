@@ -1,10 +1,11 @@
 ﻿@page "/"
 @using PachiArmy.Scripts;
+@using PachiArmy.Components;
 @using System.Timers;
 
 <HordeView Items="Placeables">
     <TestBody Context="placeable">
-        <TestCell Placeable=placeable></TestCell>
+        <BoardPlaceable Placeable=placeable></BoardPlaceable>
     </TestBody>
 </HordeView>
 
