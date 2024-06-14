@@ -1,7 +1,4 @@
 ﻿@using PachiArmy.Scripts;
-@* @typeparam Pachimari *@
-
-@* @attribute [CascadingTypeParameter(nameof(Pachimari))]; *@
 
 <CascadingValue Value="this" IsFixed="true">
     <DropContainer TItem="Placeable" Items="Items" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)">
@@ -31,17 +28,6 @@
         </ChildContent>
         <ItemTemplate>
             @TestBody(context)
-@*             @foreach (Pachimari pachi in Items)
-                    {
-                        if (pachi.Equals(context))
-                        {
-                            <tr>
-                                @TestBody(pachi)
-                            </tr>
-                        }
-                    } *@
         </ItemTemplate>
     </DropContainer>
-
-
 </CascadingValue>

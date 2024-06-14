@@ -14,17 +14,9 @@
     [Parameter]
     public Placeable Placeable { get; set; } = default!;
 
-    // [Parameter]
-    // public RenderFragment ChildContent { get; set; } = default!;
-
-    public System.Timers.Timer timer;
-    protected override async Task OnInitializedAsync()
+    public TestCell()
     {
-        timer = new Timer(1000);
-        timer.Elapsed += this.OnTimedEvent;
-        timer.AutoReset = true;
-        timer.Enabled = true;
-        timer.Start();
+        GlobalTimer.Timer.Elapsed += OnTimedEvent;
     }
 
     public void OnTimedEvent(Object source, ElapsedEventArgs e)
