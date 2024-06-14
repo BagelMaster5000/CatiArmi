@@ -33,5 +33,10 @@ namespace PachiArmy.Pages
                 i++;
             }
         }
+
+        public void Refresh()
+        {
+            StateHasChanged();
+        }
     }
 }
