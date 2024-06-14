@@ -4,24 +4,108 @@
 <DropContainer TItem="Placeable" Items="Placeables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved">
     <ChildContent>
         <Container TextAlignment="TextAlignment.Center">
+            <Row Padding="Padding.Is2">
+                <Text TextSize="TextSize.Heading1" Padding="Padding.Is2">CatiArmi</Text>
+            </Row>
             <Row>
-                <Column Background="Background.Light" ColumnSize="ColumnSize.Is9">
-                    <Container TextAlignment="TextAlignment.Center">
-                        @for (int r = 0; r < 8; r++)
-                        {
-                            var row = r.ToString();
-                            <Div class="d-flex">
-                                @for (int c = 0; c < 8; c++)
-                                {
-                                    var col = c.ToString();
-                                    <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is1" Height="Height.Rem(7)" Width="Width.Rem(7)" />
-                                }
-                            </Div>
-                        }
-                    </Container>
+                <Column Background="Background.Light" ColumnSize="ColumnSize.Is8">
+                    @for (int r = 0; r < 8; r++)
+                    {
+                        var row = r.ToString();
+                        <Div class="d-flex">
+                            @for (int c = 0; c < 8; c++)
+                            {
+                                var col = c.ToString();
+                                <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is1" Height="Height.Rem(6.8)" Width="Width.Rem(6.8)"/>
+                            }
+                        </Div>
+                    }
                 </Column>
-                <Column Background="Background.Dark" ColumnSize="ColumnSize.Is3">
+                <Column Background="Background.Light" ColumnSize="ColumnSize.Is4">
+                    <Container TextAlignment="TextAlignment.Center" Padding="Padding.Is2">
 
+                        @* Resources *@
+                        <Row Padding="Padding.Is2">
+                            <Column ColumnSize="ColumnSize.Is4" Background="Background.Warning" Padding="Padding.Is2">
+                                <Row Padding="Padding.Is2">
+                                    <Container>
+                                        <Image Source="placeholders/coin.png" Width="Width.Is50"></Image>
+                                    </Container>
+                                </Row>
+                                <Row Padding="Padding.Is1">
+                                    <Text >$27</Text>
+                                </Row>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is8" Background="Background.Light" Padding="Padding.Is2">
+                                <Div Padding="Padding.Is2" Height="Height.Rem(3)">
+                                    <Text Height="Height.Is25">Food Reserve</Text>
+                                    <Progress Value="75" Max="100" Height="Height.Is75" Color="Color.Danger"/>
+                                </Div>
+                                <Div Padding="Padding.Is1"/>
+                                <Div Padding="Padding.Is2" Height="Height.Rem(3)">
+                                    <Text Height="Height.Is25">Water Reserve</Text>
+                                    <Progress Value="50" Max="100" Height="Height.Is75"/>
+                                </Div>
+                                <Div Padding="Padding.Is2"/>
+                            </Column>
+                        </Row>
+
+                        @* Store Links *@
+                        <Row Padding="Padding.Is2">
+                            <Text TextSize="TextSize.ExtraLarge">Store Links</Text>
+                            <Row Padding="Padding.Is2">
+                                <Text TextSize="TextSize.Small">Open!</Text>
+                                <Div class="clicky-card-link">
+                                    <Card Padding="Padding.Is2">
+                                        <Row>
+                                            <Container>
+                                                <Span>
+                                                    <Image Source="placeholders/pachimari-idle.png" Width="Width.Rem(3)"/>
+                                                    <Text Padding="Padding.Is2">
+                                                        Pet Store
+                                                    </Text>
+                                                </Span>
+                                            </Container>
+                                        </Row>
+                                    </Card>
+                                </Div>
+                            </Row>
+                            <Row Padding="Padding.Is2">
+                                <Text TextSize="TextSize.Small">🔒 0/20 Pachis</Text>
+                                <Div class="clicky-card-link">
+                                    <Card Padding="Padding.Is2">
+                                        <Row>
+                                            <Container>
+                                                <Span>
+                                                    <Image Source="placeholders/pachimari-idle.png" Width="Width.Rem(3)"/>
+                                                    <Text Padding="Padding.Is2">
+                                                        Candy Store
+                                                    </Text>
+                                                </Span>
+                                            </Container>
+                                        </Row>
+                                    </Card>
+                                </Div>
+                            </Row>
+                            <Row Padding="Padding.Is2">
+                                <Text TextSize="TextSize.Small">🔒 0/50 Pachis</Text>
+                                <Div class="clicky-card-link">
+                                    <Card Padding="Padding.Is2">
+                                        <Row>
+                                            <Container>
+                                                <Span>
+                                                    <Image Source="placeholders/pachimari-idle.png" Width="Width.Rem(3)"/>
+                                                    <Text Padding="Padding.Is2">
+                                                        Toy Store
+                                                    </Text>
+                                                </Span>
+                                            </Container>
+                                        </Row>
+                                    </Card>
+                                </Div>
+                            </Row>
+                        </Row>
+                    </Container>
                 </Column>
             </Row>
         </Container>
