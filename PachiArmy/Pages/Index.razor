@@ -2,18 +2,18 @@
 @using PachiArmy.Scripts;
 @using System.Timers;
 
-<Test Items="Pachimaris">
-    <TestBody Context="row">
-        <TestCell Placeable=row></TestCell>
+<HordeView Items="Placeables">
+    <TestBody Context="placeable">
+        <TestCell Placeable=placeable></TestCell>
     </TestBody>
-</Test>
+</HordeView>
 
 @code {
-    public List<Placeable> Pachimaris = BoardManager.ActivePlaceables;
+    public List<Placeable> Placeables = BoardManager.ActivePlaceables;
 
     private void IncrementCount()
     {
-        foreach (Pachimari p in Pachimaris)
+        foreach (Pachimari p in Placeables)
         {
             p.test++;
         }

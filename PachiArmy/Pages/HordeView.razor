@@ -1,13 +1,7 @@
-﻿@page "/horde"
-@using PachiArmy.Scripts
-@using System.Timers;
-@* @inject TickTimer TickTimer *@
-@inject NavigationManager NavigationManager
+﻿@using PachiArmy.Scripts;
 
-<Container Padding="Padding.Is2">
-    <PageTitle>Horde</PageTitle>
-
-    <DropContainer TItem="Placeable" Items="@BoardManager.ActivePlaceables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved" @key="@BoardManager.ActivePlaceables">
+<CascadingValue Value="this" IsFixed="true">
+    <DropContainer TItem="Placeable" Items="Items" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved">
         <ChildContent>
             <Container TextAlignment="TextAlignment.Center">
                 <Row>
@@ -33,42 +27,7 @@
             </Container>
         </ChildContent>
         <ItemTemplate>
-            <Tooltip Text="@currentCount.ToString()" Multiline=true Fade=true FadeDuration="70">
-                <Div class="pachimari gallery-item" onclick="@context.Clicked" TextAlignment="TextAlignment.Center">
-                    <Text>@currentCount.ToString()</Text>
-                    <Image Source="@context.GetImage()" Width="Width.Is100" Height="Height.Is50" />
-                </Div>
-            </Tooltip>
+            @TestBody(context)
         </ItemTemplate>
     </DropContainer>
-</Container>
-
-@code {
-    public void Refresh()
-    {
-        StateHasChanged();
-    }
-
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
-
-    public System.Timers.Timer timer;
-    protected override async Task OnInitializedAsync()
-    {
-        timer = new Timer(1000);
-        timer.Elapsed += this.OnTimedEvent;
-        timer.AutoReset = true;
-        timer.Enabled = true;
-        timer.Start();
-    }
-
-    public void OnTimedEvent(Object source, ElapsedEventArgs e)
-    {
-        IncrementCount();
-        StateHasChanged();
-    }
-}
+</CascadingValue>

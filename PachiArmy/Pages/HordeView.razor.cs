@@ -1,25 +1,20 @@
 ﻿using Blazorise;
+using Microsoft.AspNetCore.Components;
 using PachiArmy.Scripts;
 
 namespace PachiArmy.Pages
 {
     public partial class HordeView
     {
-        public HordeView()
+        [Parameter]
+        public List<Placeable> Items { get; set; } = default!;
+
+        [Parameter]
+        public RenderFragment<Placeable> TestBody { get; set; } = default!;
+
+        public void Refresh()
         {
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    var pachi = new Pachimari();
-            //    BoardManager.TryFindOpenSpaceAndPlacePlaceable(pachi);
-            //}
-            //var foodbowl = new FoodBowl();
-            //BoardManager.TryFindOpenSpaceAndPlacePlaceable(foodbowl);
-            //var waterBowl = new WaterBowl();
-            //BoardManager.TryFindOpenSpaceAndPlacePlaceable(waterBowl);
-            //var toy = new Toy();
-            //BoardManager.TryFindOpenSpaceAndPlacePlaceable(toy);
-            //var snack = new Snack();
-            //BoardManager.TryFindOpenSpaceAndPlacePlaceable(snack);
+            StateHasChanged();
         }
 
         private Task ObjectMoved(DraggableDroppedEventArgs<Placeable> movePlaceable)
