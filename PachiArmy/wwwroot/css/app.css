@@ -167,20 +167,20 @@ a, .btn-link {
 
 .pachimari {
     transition: .2s ease-out;
-    border-width: 2px;
+    border-width: 4px;
     border: dashed;
     border-color: transparent;
 }
 
     .pachimari:hover {
-        border-color: pink;
-        transform: scaleX(1.03) scaleY(1.03);
+        border-color: transparent;
+        transform: scaleX(1.1) scaleY(1.1);
     }
 
     .pachimari:active {
         opacity: 0.2;
         border-color: transparent;
-        transform: scaleX(0.95) scaleY(0.98);
+        transform: scaleX(0.95) scaleY(0.95);
         transition: 0s;
     }
 

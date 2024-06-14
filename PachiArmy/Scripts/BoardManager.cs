@@ -62,18 +62,18 @@ namespace PachiArmy.Scripts
         }
         #endregion
 
-        #region Ticks
-        public static void ProcessTick()
-        {
-            Console.WriteLine("Board processing tick");
+        //public static void ProcessTick()
+        //{
+        //    Console.WriteLine("Board processing tick");
 
-            var activePachis = ActivePlaceables.OfType<Pachimari>().ToList();
-            foreach (var pachi in activePachis)
-            {
-                pachi.ProcessTick();
-            }
-        }
+        //    var activePachis = ActivePlaceables.OfType<Pachimari>().ToList();
+        //    foreach (var pachi in activePachis)
+        //    {
+        //        pachi.ProcessTick();
+        //    }
+        //}
 
+        #region Helpers
         public static List<InteractablePlaceable> GetAllAdjacentInteractablePlaceables(uint row, uint col)
         {
             var interactablePlaceables = ActivePlaceables.OfType<InteractablePlaceable>().ToList();
@@ -154,9 +154,7 @@ namespace PachiArmy.Scripts
 
             return adjacentInteractablePlaceables;
         }
-        #endregion
 
-        #region Helpers
         public static bool IsSpaceOccupied(uint row, uint col) => occupiedSpaces[row, col];
         public static bool GetSpaceOccupied(Position position) => occupiedSpaces[position.Row, position.Col];
         public static void SetSpaceOccupied(uint row, uint col, bool occupied) => occupiedSpaces[row, col] = occupied;
