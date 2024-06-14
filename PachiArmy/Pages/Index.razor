@@ -1,5 +1,11 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<Test Items="Transactions">
+    <TestBody Context="row">
+        <TestCell Row=row></TestCell>
+    </TestBody>
+</Test>
 
-<HordeView/>
+@code {
+    public List<int> Transactions = new List<int> {0, 1, 2, 3, 4, 5};
+}

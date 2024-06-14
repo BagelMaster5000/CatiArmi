@@ -5,6 +5,7 @@ namespace PachiArmy.Scripts
     public class FoodBowl : InteractablePlaceable
     {
         public Position Position { get; set; }
+        public string Test { get; set; }
 
         private const uint MAX_FOOD = 20;
         private uint food;
@@ -24,12 +25,13 @@ namespace PachiArmy.Scripts
         }
         public void Fill()
         {
-
+            food = MAX_FOOD;
         }
 
         // Hover behavior
         public string GetHoverText()
         {
+            Test = "<strong>Fill:</strong> " + food + "/" + MAX_FOOD;
             return "<strong>Fill:</strong> " + food + "/" + MAX_FOOD;
         }
 
@@ -42,6 +44,7 @@ namespace PachiArmy.Scripts
         public void PachiInteract(Pachimari invokerPachimari)
         {
             TryEat(invokerPachimari);
+            Test = "<strong>Fill:</strong> " + food + "/" + MAX_FOOD;
         }
         public void TryEat(Pachimari invokerPachimari)
         {

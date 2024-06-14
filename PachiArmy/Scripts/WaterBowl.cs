@@ -3,6 +3,7 @@
     public class WaterBowl : InteractablePlaceable
     {
         public Position Position { get; set; }
+        public string Test { get; set; }
 
         private const uint MAX_WATER = 20;
         private uint water;

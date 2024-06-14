@@ -1,10 +1,13 @@
-﻿@page "/Horde"
+﻿@page "/horde"
 @using PachiArmy.Scripts
+@using System.Timers;
+@* @inject TickTimer TickTimer *@
+@inject NavigationManager NavigationManager
 
 <Container Padding="Padding.Is2">
     <PageTitle>Horde</PageTitle>
 
-    <DropContainer TItem="Placeable" Items="@BoardManager.ActivePlaceables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved">
+    <DropContainer TItem="Placeable" Items="@BoardManager.ActivePlaceables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved" @key="@BoardManager.ActivePlaceables">
         <ChildContent>
             <Container TextAlignment="TextAlignment.Center">
                 <Row>
@@ -13,13 +16,13 @@
                             @for (int r = 0; r < 8; r++)
                             {
                                 var row = r.ToString();
-                                <div class="d-flex">
+                                <Div class="d-flex">
                                     @for (int c = 0; c < 8; c++)
                                     {
                                         var col = c.ToString();
                                         <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is1" Height="Height.Rem(7)" Width="Width.Rem(7)" />
                                     }
-                                </div>
+                                </Div>
                             }
                         </Container>
                     </Column>
@@ -30,11 +33,42 @@
             </Container>
         </ChildContent>
         <ItemTemplate>
-            <Tooltip Text="@context.GetHoverText()" Multiline=true Fade=true FadeDuration="70">
+            <Tooltip Text="@currentCount.ToString()" Multiline=true Fade=true FadeDuration="70">
                 <Div class="pachimari gallery-item" onclick="@context.Clicked" TextAlignment="TextAlignment.Center">
-                    <Image Source="@context.GetImage()" Width="Width.Is100" Height="Height.Is100" />
+                    <Text>@currentCount.ToString()</Text>
+                    <Image Source="@context.GetImage()" Width="Width.Is100" Height="Height.Is50" />
                 </Div>
             </Tooltip>
         </ItemTemplate>
     </DropContainer>
 </Container>
+
+@code {
+    public void Refresh()
+    {
+        StateHasChanged();
+    }
+
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    public System.Timers.Timer timer;
+    protected override async Task OnInitializedAsync()
+    {
+        timer = new Timer(1000);
+        timer.Elapsed += this.OnTimedEvent;
+        timer.AutoReset = true;
+        timer.Enabled = true;
+        timer.Start();
+    }
+
+    public void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        IncrementCount();
+        StateHasChanged();
+    }
+}

@@ -1,10 +1,14 @@
-﻿using System.Security.Cryptography;
+﻿using Microsoft.AspNetCore.Components;
+using System.Security.Cryptography;
 
 namespace PachiArmy.Scripts
 {
     public class Pachimari : Placeable
     {
         public Position Position { get; set; }
+        public string Test { get; set; }
+        //[CascadingParameter]
+        //public HordeView<Horde> Owner { get; set; } = default!;
 
         enum PachiState
         {
@@ -42,10 +46,12 @@ namespace PachiArmy.Scripts
         public void Clicked()
         {
             bool exploded = TryExplode();
-            if (!exploded)
+            if (exploded)
             {
-                Pet();
+                return;
             }
+
+            Pet();
         }
         private bool TryExplode()
         {
@@ -57,7 +63,7 @@ namespace PachiArmy.Scripts
         }
         private void Pet()
         {
-
+            happiness++;
         }
 
         // Hover behavior

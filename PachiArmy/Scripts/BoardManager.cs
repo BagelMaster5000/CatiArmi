@@ -1,4 +1,5 @@
 ﻿using Blazorise;
+using System.Security.Cryptography.X509Certificates;
 
 namespace PachiArmy.Scripts
 {
@@ -7,11 +8,13 @@ namespace PachiArmy.Scripts
         public const uint ROWS = 8;
         public const uint COLS = 8;
 
+        public static bool timerStarted = false;
+
         public static List<Placeable> ActivePlaceables = new List<Placeable>();
 
         private static bool[,] occupiedSpaces = new bool[ROWS, COLS];
 
-
+        #region Board
         public static void MovePlaceable(Placeable movingPlaceable, Position destination)
         {
             if (!GetSpaceOccupied(destination))
@@ -57,9 +60,13 @@ namespace PachiArmy.Scripts
 
             return false;
         }
+        #endregion
 
+        #region Ticks
         public static void ProcessTick()
         {
+            Console.WriteLine("Board processing tick");
+
             var activePachis = ActivePlaceables.OfType<Pachimari>().ToList();
             foreach (var pachi in activePachis)
             {
@@ -147,13 +154,15 @@ namespace PachiArmy.Scripts
 
             return adjacentInteractablePlaceables;
         }
+        #endregion
 
-
+        #region Helpers
         public static bool IsSpaceOccupied(uint row, uint col) => occupiedSpaces[row, col];
         public static bool GetSpaceOccupied(Position position) => occupiedSpaces[position.Row, position.Col];
         public static void SetSpaceOccupied(uint row, uint col, bool occupied) => occupiedSpaces[row, col] = occupied;
         public static void SetSpaceOccupied(Position position, bool occupied) => occupiedSpaces[position.Row, position.Col] = occupied;
         public static Placeable? TryGetPlaceableOnSpace(uint row, uint col) => ActivePlaceables.Find(p => p.Position.Row == row && p.Position.Col == col);
         public static Placeable? TryGetPlaceableOnSpace(Position gridPosition) => ActivePlaceables.Find(p => p.Position.Row == gridPosition.Row && p.Position.Col == gridPosition.Col);
+        #endregion
     }
 }
