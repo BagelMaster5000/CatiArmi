@@ -1,20 +1,36 @@
 ﻿@using PachiArmy.Scripts;
+@using System.Timers;
 
-<input type="checkbox" @onchange="eventArgs => { OnCheckChanged(eventArgs.Value); }" />
+<Tooltip Text="@Placeable.GetHoverText()" Multiline=true Fade=true FadeDuration="70">
+    <Div class="pachimari gallery-item" onclick="@Placeable.Clicked" TextAlignment="TextAlignment.Center">
+        <Image Source="@Placeable.GetImage()" Width="Width.Is100" Height="Height.Is50" />
+    </Div>
+</Tooltip>
 
 @code {
     [CascadingParameter]
     public Test Owner { get; set; } = default!;
 
     [Parameter]
-    public Pachimari Row { get; set; } = default!;
+    public Placeable Placeable { get; set; } = default!;
 
     // [Parameter]
     // public RenderFragment ChildContent { get; set; } = default!;
 
-    public void OnCheckChanged(object checkedValue)
+    public System.Timers.Timer timer;
+    protected override async Task OnInitializedAsync()
     {
-        //Row.Checked = (bool)checkedValue;
-        //Owner.Refresh();
+        timer = new Timer(1000);
+        timer.Elapsed += this.OnTimedEvent;
+        timer.AutoReset = true;
+        timer.Enabled = true;
+        timer.Start();
+    }
+
+    public void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        Placeable.Clicked();
+        Owner.Refresh();
+        StateHasChanged();
     }
 }

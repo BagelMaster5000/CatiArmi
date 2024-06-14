@@ -23,7 +23,7 @@ namespace PachiArmy.Scripts
         private bool readyToExplode;
 
         const uint HAPPINESS_THRESHOLD = 100;
-        private uint happiness;
+        public uint happiness;
 
         const uint MAX_HUNGER = 100;
         private uint hunger;

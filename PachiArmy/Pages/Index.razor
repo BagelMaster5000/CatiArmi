@@ -2,28 +2,18 @@
 @using PachiArmy.Scripts;
 @using System.Timers;
 
-<Test Items="Transactions">
-@*     <TestBody Context="row">
-        <TestCell Row=row></TestCell>
-    </TestBody> *@
+<Test Items="Pachimaris">
+    <TestBody Context="row">
+        <TestCell Placeable=row></TestCell>
+    </TestBody>
 </Test>
 
 @code {
-    public List<Pachimari> Transactions = new List<Pachimari>()
-    {
-        new Pachimari(),
-        new Pachimari(),
-        new Pachimari(),
-        new Pachimari(),
-        new Pachimari(),
-        new Pachimari(),
-        new Pachimari(),
-        new Pachimari(),
-    };
+    public List<Placeable> Pachimaris = BoardManager.ActivePlaceables;
 
     private void IncrementCount()
     {
-        foreach (Pachimari p in Transactions)
+        foreach (Pachimari p in Pachimaris)
         {
             p.test++;
         }
@@ -32,6 +22,20 @@
     public System.Timers.Timer timer;
     protected override async Task OnInitializedAsync()
     {
+        for (uint i = 0; i < 5; i++)
+        {
+            var pachi = new Pachimari();
+            BoardManager.TryFindOpenSpaceAndPlacePlaceable(pachi);
+        }
+        var foodbowl = new FoodBowl();
+        BoardManager.TryFindOpenSpaceAndPlacePlaceable(foodbowl);
+        var waterBowl = new WaterBowl();
+        BoardManager.TryFindOpenSpaceAndPlacePlaceable(waterBowl);
+        var toy = new Toy();
+        BoardManager.TryFindOpenSpaceAndPlacePlaceable(toy);
+        var snack = new Snack();
+        BoardManager.TryFindOpenSpaceAndPlacePlaceable(snack);
+
         timer = new Timer(1000);
         timer.Elapsed += this.OnTimedEvent;
         timer.AutoReset = true;
