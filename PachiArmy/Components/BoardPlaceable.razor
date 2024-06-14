@@ -9,9 +9,6 @@
 </Tooltip>
 
 @code {
-    [CascadingParameter]
-    public HordeView Owner { get; set; } = default!;
-
     [Parameter]
     public Placeable Placeable { get; set; } = default!;
 
@@ -23,7 +20,6 @@
     public void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
         Placeable.Clicked();
-        Owner.Refresh();
         StateHasChanged();
     }
 }
