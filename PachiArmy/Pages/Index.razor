@@ -1,11 +1,47 @@
 ﻿@page "/"
+@using PachiArmy.Scripts;
+@using System.Timers;
 
 <Test Items="Transactions">
-    <TestBody Context="row">
+@*     <TestBody Context="row">
         <TestCell Row=row></TestCell>
-    </TestBody>
+    </TestBody> *@
 </Test>
 
 @code {
-    public List<int> Transactions = new List<int> {0, 1, 2, 3, 4, 5};
+    public List<Pachimari> Transactions = new List<Pachimari>()
+    {
+        new Pachimari(),
+        new Pachimari(),
+        new Pachimari(),
+        new Pachimari(),
+        new Pachimari(),
+        new Pachimari(),
+        new Pachimari(),
+        new Pachimari(),
+    };
+
+    private void IncrementCount()
+    {
+        foreach (Pachimari p in Transactions)
+        {
+            p.test++;
+        }
+    }
+
+    public System.Timers.Timer timer;
+    protected override async Task OnInitializedAsync()
+    {
+        timer = new Timer(1000);
+        timer.Elapsed += this.OnTimedEvent;
+        timer.AutoReset = true;
+        timer.Enabled = true;
+        timer.Start();
+    }
+
+    public void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        IncrementCount();
+        StateHasChanged();
+    }
 }

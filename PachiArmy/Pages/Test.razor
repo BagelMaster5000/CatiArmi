@@ -1,15 +1,15 @@
-﻿@typeparam TItem
+﻿@using PachiArmy.Scripts;
+@* @typeparam Pachimari *@
 
-@attribute [CascadingTypeParameter(nameof(TItem))];
+@* @attribute [CascadingTypeParameter(nameof(Pachimari))]; *@
 
 <CascadingValue Value="this" IsFixed="true">
     <table>
         <tbody>
-            @foreach (var row in Rows)
+            @foreach (Pachimari pachi in Rows)
             {
-                <tr @key="row">
-                    @TestBody(row)
-                    <span>@row.Checked</span>   // .. this does not get updated
+                <tr @key="pachi">
+                    <span>@pachi.test</span>   // .. this does not get updated
                 </tr>
             }
         </tbody>

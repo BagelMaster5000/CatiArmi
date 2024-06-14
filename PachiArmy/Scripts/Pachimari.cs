@@ -6,7 +6,7 @@ namespace PachiArmy.Scripts
     public class Pachimari : Placeable
     {
         public Position Position { get; set; }
-        public string Test { get; set; }
+        public int test = 5;
         //[CascadingParameter]
         //public HordeView<Horde> Owner { get; set; } = default!;
 

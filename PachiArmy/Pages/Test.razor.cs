@@ -1,36 +1,30 @@
 ﻿using Microsoft.AspNetCore.Components;
+using PachiArmy.Scripts;
 
 namespace PachiArmy.Pages
 {
-    public class TestRow<TItem>
-    {
-        public TItem Item { get; set; } = default!;
-        public int Id { get; set; } = default!;
-        public bool Checked = false;
-    }
+    //public class TestRow<Pachimari>
+    //{
+    //    public Pachimari Pachi { get; set; } = default!;
+    //    public int Id { get; set; } = default!;
+    //    public bool Checked = false;
+    //}
 
-    public partial class Test<TItem>
+    public partial class Test
     {
         [Parameter]
-        public IList<TItem> Items { get; set; } = default!;
+        public List<Pachimari> Items { get; set; } = default!;
 
-        [Parameter]
-        public RenderFragment<TestRow<TItem>> TestBody { get; set; } = default!;
+        //[Parameter]
+        //public RenderFragment<Pachimari> TestBody { get; set; } = default!;
 
-        public List<TestRow<TItem>> Rows { get; set; } = new();
+        public List<Pachimari> Rows { get; set; } = new();
 
         protected override void OnInitialized()
         {
-            int i = 1;
-            foreach (var item in Items)
+            for (int i = 0; i < Items.Count; i++)
             {
-                var gridRow = new TestRow<TItem>()
-                {
-                    Id = i,
-                    Item = item,
-                };
-                Rows.Add(gridRow);
-                i++;
+                Rows.Add(Items[i]);
             }
         }
 

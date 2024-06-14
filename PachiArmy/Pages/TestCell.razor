@@ -1,3 +1,20 @@
-﻿@typeparam TItem
+﻿@using PachiArmy.Scripts;
 
 <input type="checkbox" @onchange="eventArgs => { OnCheckChanged(eventArgs.Value); }" />
+
+@code {
+    [CascadingParameter]
+    public Test Owner { get; set; } = default!;
+
+    [Parameter]
+    public Pachimari Row { get; set; } = default!;
+
+    // [Parameter]
+    // public RenderFragment ChildContent { get; set; } = default!;
+
+    public void OnCheckChanged(object checkedValue)
+    {
+        //Row.Checked = (bool)checkedValue;
+        //Owner.Refresh();
+    }
+}
