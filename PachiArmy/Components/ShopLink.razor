@@ -1,5 +1,6 @@
-﻿<Div Padding="Padding.Is2">
+﻿<Div Padding="Padding.Is1">
     <Text TextSize="TextSize.Small">Open!</Text>
+    <Link To="Store">
     <Div class="clicky-card-link">
         <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
             <Container>
@@ -10,9 +11,13 @@
             </Container>
         </Card>
     </Div>
+    </Link>
 </Div>
 
 @code {
+    [Parameter]
+    public string StoreId { get; set; } = default!;
+
     [Parameter]
     public string StoreName { get; set; } = default!;
 
