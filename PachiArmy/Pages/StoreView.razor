@@ -40,19 +40,7 @@
                     <Div style="overflow-y: auto" Height="Height.Rem(24)" Padding="Padding.Is2">
                         @for (int i = 0; i < 6; i++)
                         {
-                            <Div Padding="Padding.Is1">
-                                <Div class="clicky-card">
-                                    <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100" @onclick="dummy">
-                                        <Container>
-                                            <Span>
-                                                <Image Source="placeholders/pachimari-idle.png" Width="Width.Rem(3)" />
-                                                <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">Candy</Text>
-                                                <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">$10</Text>
-                                            </Span>
-                                        </Container>
-                                    </Card>
-                                </Div>
-                            </Div>
+                            <StoreItem />
                         }
                     </Div>
                 </Card>
@@ -73,7 +61,3 @@
         </Card>
     </Row>
 </Container>
-
-@code {
-    void dummy() { }
-}

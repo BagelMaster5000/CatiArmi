@@ -9,19 +9,6 @@ namespace PachiArmy.Pages
 
         public HordeView()
         {
-            for (uint i = 0; i < 2; i++)
-            {
-                var pachi = new Pachimari();
-                BoardManager.TryFindOpenSpaceAndPlacePlaceable(pachi);
-            }
-            var foodbowl = new FoodBowl();
-            BoardManager.TryFindOpenSpaceAndPlacePlaceable(foodbowl);
-            var waterBowl = new WaterBowl();
-            BoardManager.TryFindOpenSpaceAndPlacePlaceable(waterBowl);
-            var toy = new Toy();
-            BoardManager.TryFindOpenSpaceAndPlacePlaceable(toy);
-            var snack = new Snack();
-            BoardManager.TryFindOpenSpaceAndPlacePlaceable(snack);
         }
 
         private Task ObjectMoved(DraggableDroppedEventArgs<Placeable> movePlaceable)

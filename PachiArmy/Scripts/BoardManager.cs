@@ -14,6 +14,23 @@ namespace PachiArmy.Scripts
 
         private static bool[,] occupiedSpaces = new bool[ROWS, COLS];
 
+        public static void Setup()
+        {
+            for (uint i = 0; i < 2; i++)
+            {
+                var pachi = new Pachimari();
+                TryFindOpenSpaceAndPlacePlaceable(pachi);
+            }
+            var foodbowl = new FoodBowl();
+            TryFindOpenSpaceAndPlacePlaceable(foodbowl);
+            var waterBowl = new WaterBowl();
+            TryFindOpenSpaceAndPlacePlaceable(waterBowl);
+            var toy = new Toy();
+            TryFindOpenSpaceAndPlacePlaceable(toy);
+            var snack = new Snack();
+            TryFindOpenSpaceAndPlacePlaceable(snack);
+        }
+
         #region Board
         public static void MovePlaceable(Placeable movingPlaceable, Position destination)
         {
@@ -61,17 +78,6 @@ namespace PachiArmy.Scripts
             return false;
         }
         #endregion
-
-        //public static void ProcessTick()
-        //{
-        //    Console.WriteLine("Board processing tick");
-
-        //    var activePachis = ActivePlaceables.OfType<Pachimari>().ToList();
-        //    foreach (var pachi in activePachis)
-        //    {
-        //        pachi.ProcessTick();
-        //    }
-        //}
 
         #region Helpers
         public static List<InteractablePlaceable> GetAllAdjacentInteractablePlaceables(uint row, uint col)
