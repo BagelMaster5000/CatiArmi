@@ -199,13 +199,24 @@ a, .btn-link {
         pointer-events: none;
     }
 
-/*    .gallery-item div {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
-        margin: auto;
-        text-align: center;
-    }
-*/
+*::-webkit-scrollbar {
+    display: flow;
+    width: 8px;
+}
+
+*::-webkit-scrollbar-button {
+    display: none;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #00000040;
+    border-radius: 24px;
+}
