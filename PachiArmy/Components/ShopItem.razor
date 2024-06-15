@@ -1,0 +1,19 @@
+﻿@using PachiArmy.Scripts;
+
+<Div Padding="Padding.Is1">
+    <Div class="clicky-card">
+        <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
+            <Container>
+                <Span>
+                    <Image Source="@Item.Icon" Width="Width.Rem(3)" />
+                    <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@Item.Name @Item.Price</Text>
+                </Span>
+            </Container>
+        </Card>
+    </Div>
+</Div>
+
+@code {
+    [Parameter]
+    public StoreItem Item { get; set; } = default!;
+}

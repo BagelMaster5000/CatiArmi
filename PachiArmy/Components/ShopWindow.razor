@@ -1,0 +1,15 @@
+﻿@using PachiArmy.Scripts;
+
+<Card Padding="Padding.Is2" Margin="Margin.Is2">
+    <Div style="overflow-y: auto" Height="Height.Rem(24)" Padding="Padding.Is2">
+        @foreach (StoreItem item in Store.ItemsForSale)
+        {
+            <ShopItem Item="@item"/>
+        }
+    </Div>
+</Card>
+
+@code {
+    [Parameter]
+    public Store Store { get; set; } = default!;
+}

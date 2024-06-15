@@ -36,14 +36,7 @@
                 <Div Padding="Padding.Is2" />
 
                 @* ShopWindow *@
-                <Card Padding="Padding.Is2" Margin="Margin.Is2">
-                    <Div style="overflow-y: auto" Height="Height.Rem(24)" Padding="Padding.Is2">
-                        @for (int i = 0; i < 6; i++)
-                        {
-                            <StoreItem />
-                        }
-                    </Div>
-                </Card>
+                <ShopWindow Store="@StoreManager.CurStore" />
             </Container>
         </Column>
     </Row>

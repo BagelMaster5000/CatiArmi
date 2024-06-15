@@ -15,6 +15,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 // Startup
 GlobalTimer.StartTimer();
+StoreManager.Setup();
 BoardManager.Setup();
 
 
