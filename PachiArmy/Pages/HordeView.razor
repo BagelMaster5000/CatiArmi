@@ -39,30 +39,7 @@
                 <Column ColumnSize="ColumnSize.Is4">
                     <Container TextAlignment="TextAlignment.Center" Padding="Padding.Is2">
                         @* Resources *@
-                        <Row Padding="Padding.Is2">
-                            <Column ColumnSize="ColumnSize.Is4" Background="Background.Warning" Padding="Padding.Is2">
-                                <Row Padding="Padding.Is2">
-                                    <Container>
-                                        <Image Source="placeholders/coin.png" Width="Width.Is50"></Image>
-                                    </Container>
-                                </Row>
-                                <Row Padding="Padding.Is1">
-                                    <Text>$27</Text>
-                                </Row>
-                            </Column>
-                            <Column ColumnSize="ColumnSize.Is8" Background="Background.Light" Padding="Padding.Is2">
-                                <Div Padding="Padding.Is2" Height="Height.Rem(3)">
-                                    <Text Height="Height.Is25">Food Reserve</Text>
-                                    <Progress Value="75" Max="100" Height="Height.Is75" Color="Color.Danger" />
-                                </Div>
-                                <Div Padding="Padding.Is1" />
-                                <Div Padding="Padding.Is2" Height="Height.Rem(3)">
-                                    <Text Height="Height.Is25">Water Reserve</Text>
-                                    <Progress Value="50" Max="100" Height="Height.Is75" />
-                                </Div>
-                                <Div Padding="Padding.Is2" />
-                            </Column>
-                        </Row>
+                        <ResourcesPanel />
 
                         @* Pachi Count *@
                         <Row Padding="Padding.Is2">
@@ -76,7 +53,7 @@
                                     <Div Padding="Padding.Is1" />
                                     <Span>
                                         <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle" TextSize="TextSize.Large"> </Text>
-                                        <Image Source="placeholders/pachimari-idle.png" Height="Height.Rem(4)"/>
+                                        <Image Source="placeholders/pachimari-idle.png" Height="Height.Rem(4)" />
                                         <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle" TextSize="TextSize.Large"> x 5</Text>
                                     </Span>
                                 </Column>
@@ -86,70 +63,29 @@
                         @* Store Links *@
                         <Row Padding="Padding.Is2">
                             <Text TextSize="TextSize.ExtraLarge">Store Links</Text>
-                            <Div Padding="Padding.Is2">
-                                <Text TextSize="TextSize.Small">Open!</Text>
-                                <Div class="clicky-card-link">
-                                    <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
-                                        <Container>
-                                            <Span>
-                                                <Image Source="placeholders/pachimari-idle.png" Width="Width.Rem(3)" />
-                                                <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">
-                                                    Pet Store
-                                                </Text>
-                                            </Span>
-                                        </Container>
-                                    </Card>
-                                </Div>
-                            </Div>
-                            <Div Padding="Padding.Is2">
-                                <Text TextSize="TextSize.Small">🔒 0/20 Pachis</Text>
-                                <Div class="clicky-card-link">
-                                    <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
-                                        <Container>
-                                            <Span>
-                                                <Image Source="placeholders/pachimari-idle.png" Width="Width.Rem(3)" />
-                                                <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">
-                                                    Candy Store
-                                                </Text>
-                                            </Span>
-                                        </Container>
-                                    </Card>
-                                </Div>
-                            </Div>
-                            <Div Padding="Padding.Is2">
-                                <Text TextSize="TextSize.Small">🔒 0/50 Pachis</Text>
-                                <Div class="clicky-card-link">
-                                    <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
-                                        <Container>
-                                            <Span>
-                                                <Image Source="placeholders/pachimari-idle.png" Width="Width.Rem(3)" />
-                                                <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">
-                                                    Toy Store
-                                                </Text>
-                                            </Span>
-                                        </Container>
-                                    </Card>
-                                </Div>
-                            </Div>
+                            <ShopLink StoreName="Pet Store" StoreIcon="placeholders/pachimari-idle.png" PachisToUnlock="0" />
+                            <ShopLink StoreName="Candy Store" StoreIcon="placeholders/pachimari-idle.png" PachisToUnlock="20" />
+                            <ShopLink StoreName="Toy Store" StoreIcon="placeholders/pachimari-idle.png" PachisToUnlock="50" />
                         </Row>
-                        
-                        <Div Padding="Padding.Is2"/>
 
-                        <Row Padding="Padding.Is2" >
-                        <Div Padding="Padding.Is2" >
-                            <Text TextSize="TextSize.Small">🔒 0/100 Pachis</Text>
-                            <Div class="clicky-card-link">
-                                <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
-                                    <Container>
-                                        <Div Padding="Padding.Is3"/>
-                                        <Text Padding="Padding.Is2" Margin="Margin.Is2" VerticalAlignment="VerticalAlignment.Middle" TextSize="TextSize.Large">
-                                            ⭐ Take over the world ⭐
-                                        </Text>
-                                        <Div Padding="Padding.Is3"/>
-                                    </Container>
-                                </Card>
+                        <Div Padding="Padding.Is2" />
+
+                        @* Win Game Button *@
+                        <Row Padding="Padding.Is2">
+                            <Div Padding="Padding.Is2">
+                                <Text TextSize="TextSize.Small">🔒 0/100 Pachis</Text>
+                                <Div class="clicky-card-link">
+                                    <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
+                                        <Container>
+                                            <Div Padding="Padding.Is3" />
+                                            <Text Padding="Padding.Is2" Margin="Margin.Is2" VerticalAlignment="VerticalAlignment.Middle" TextSize="TextSize.Large">
+                                                ⭐ Take over the world ⭐
+                                            </Text>
+                                            <Div Padding="Padding.Is3" />
+                                        </Container>
+                                    </Card>
+                                </Div>
                             </Div>
-                        </Div>
                         </Row>
                     </Container>
                 </Column>
