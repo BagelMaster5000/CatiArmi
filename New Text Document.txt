@@ -1,0 +1,1 @@
+Hot reload is so buggy. It sometimes re-loads but misses basic changes, such as changing width/height of a component via rem value. It somestime fails and requires a re-build after the randomest of changes, like once I added an empty div and I got a popup saying hot reload has stopped working

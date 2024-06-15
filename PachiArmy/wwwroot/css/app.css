@@ -133,7 +133,7 @@ a, .btn-link {
 
     .clicky-card:hover {
         opacity: 0.8;
-        border-color: white;
+        border-color: black;
         transform: scaleX(1.03) scaleY(1);
     }
 
