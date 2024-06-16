@@ -1,7 +1,4 @@
-﻿using Blazorise;
-using System.Security.Cryptography.X509Certificates;
-
-namespace PachiArmy.Scripts
+﻿namespace PachiArmy.Scripts
 {
     public static class BoardManager
     {

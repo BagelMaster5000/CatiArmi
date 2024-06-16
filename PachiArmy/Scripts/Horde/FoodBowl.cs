@@ -1,6 +1,4 @@
-﻿using Blazorise;
-
-namespace PachiArmy.Scripts
+﻿namespace PachiArmy.Scripts
 {
     public class FoodBowl : InteractablePlaceable
     {

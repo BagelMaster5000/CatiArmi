@@ -1,5 +1,6 @@
 ﻿using Blazorise;
 using PachiArmy.Scripts;
+using Position = PachiArmy.Scripts.Position;
 
 namespace PachiArmy.Pages
 {
@@ -13,7 +14,7 @@ namespace PachiArmy.Pages
 
         private Task ObjectMoved(DraggableDroppedEventArgs<Placeable> movePlaceable)
         {
-            var position = Scripts.Position.ParsePositionFromString(movePlaceable.DropZoneName);
+            var position = Position.ParsePositionFromString(movePlaceable.DropZoneName);
             BoardManager.MovePlaceable(movePlaceable.Item, position);
 
             return Task.CompletedTask;
