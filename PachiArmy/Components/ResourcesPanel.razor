@@ -1,4 +1,5 @@
-﻿<Row Padding="Padding.Is2">
+﻿@using PachiArmy.Scripts;
+<Row Padding="Padding.Is2">
     <Column ColumnSize="ColumnSize.Is4" Background="Background.Warning" Padding="Padding.Is2">
         <Row Padding="Padding.Is2">
             <Container>
@@ -6,18 +7,18 @@
             </Container>
         </Row>
         <Row Padding="Padding.Is1">
-            <Text>$27</Text>
+            <Text>$@Inventory.Money</Text>
         </Row>
     </Column>
     <Column ColumnSize="ColumnSize.Is8" Background="Background.Light" Padding="Padding.Is2">
         <Div Padding="Padding.Is2" Height="Height.Rem(3)">
             <Text Height="Height.Is25">Food Reserve</Text>
-            <Progress Value="75" Max="100" Height="Height.Is75" Color="Color.Danger" />
+            <Progress Value="@((int)Inventory.FoodReserve)" Max="@((int)Inventory.MAX_FOOD_RESERVE)" Height="Height.Is75" Color="Color.Danger" />
         </Div>
         <Div Padding="Padding.Is1" />
         <Div Padding="Padding.Is2" Height="Height.Rem(3)">
             <Text Height="Height.Is25">Water Reserve</Text>
-            <Progress Value="50" Max="100" Height="Height.Is75" />
+            <Progress Value="@((int)Inventory.WaterReserve)" Max="@((int)Inventory.MAX_WATER_RESERVE)" Height="Height.Is75" />
         </Div>
         <Div Padding="Padding.Is2" />
     </Column>
