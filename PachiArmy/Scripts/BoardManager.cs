@@ -7,7 +7,7 @@
 
         public static bool timerStarted = false;
 
-        public static List<Placeable> ActivePlaceables = new List<Placeable>();
+        private static List<Placeable> ActivePlaceables = new List<Placeable>();
 
         private static bool[,] occupiedSpaces = new bool[ROWS, COLS];
 
@@ -164,6 +164,8 @@
         public static void SetSpaceOccupied(Position position, bool occupied) => occupiedSpaces[position.Row, position.Col] = occupied;
         public static Placeable? TryGetPlaceableOnSpace(uint row, uint col) => ActivePlaceables.Find(p => p.Position.Row == row && p.Position.Col == col);
         public static Placeable? TryGetPlaceableOnSpace(Position gridPosition) => ActivePlaceables.Find(p => p.Position.Row == gridPosition.Row && p.Position.Col == gridPosition.Col);
+        public static List<Placeable> GetAllActivePlaceables() => ActivePlaceables;
+        public static List<Pachimari> GetAllActivePachis() => ActivePlaceables.OfType<Pachimari>().ToList();
         #endregion
     }
 }

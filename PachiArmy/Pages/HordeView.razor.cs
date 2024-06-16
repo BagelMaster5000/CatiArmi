@@ -6,7 +6,7 @@ namespace PachiArmy.Pages
 {
     public partial class HordeView
     {
-        public List<Placeable> Placeables = BoardManager.ActivePlaceables;
+        public List<Placeable> Placeables { get => BoardManager.GetAllActivePlaceables(); }
 
         public HordeView()
         {
