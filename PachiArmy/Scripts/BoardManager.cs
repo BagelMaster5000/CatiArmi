@@ -11,6 +11,10 @@
 
         private static bool[,] occupiedSpaces = new bool[ROWS, COLS];
 
+        public static Action ForceBoardRefresh = delegate { };
+        public static void InvokeForceBoardRefresh() => ForceBoardRefresh?.Invoke();
+        public static void ClearForceBoardRefresh() => ForceBoardRefresh = null;
+
         public static void Setup()
         {
             for (uint i = 0; i < 2; i++)
@@ -56,6 +60,8 @@
 
         public static bool TryFindOpenSpaceAndPlacePlaceable(Placeable placeable)
         {
+            placeable.Position = new Position(0, 0);
+
             for (uint r = 0; r < ROWS; r++)
             {
                 for (uint c = 0; c < COLS; c++)
@@ -73,6 +79,14 @@
             }
 
             return false;
+        }
+
+        public static void RemovePlaceable(Placeable placeable)
+        {
+            SetSpaceOccupied(placeable.Position, false);
+            ActivePlaceables.Remove(placeable);
+
+            ForceBoardRefresh?.Invoke();
         }
         #endregion
 

@@ -5,15 +5,13 @@
         public Position Position { get; set; }
         public string Test { get; set; }
 
-        private const uint MAX_FOOD = 20;
+        private const uint MAX_FOOD = 50;
         private uint food;
+        private const uint FILL_INCREMENT = 10;
 
         public FoodBowl()
         {
-            // TODO don't default this to 0,0
-            Position = new Position(0, 0);
-
-            food = MAX_FOOD;
+            food = 0;
         }
 
         // Click behavior
@@ -23,13 +21,41 @@
         }
         public void Fill()
         {
-            food = MAX_FOOD;
+            if (food == MAX_FOOD) { return; }
+            else if (MAX_FOOD - food < FILL_INCREMENT)
+            {
+                uint remainingSpaceInBowl = MAX_FOOD - food;
+                if (Inventory.FoodReserve >= remainingSpaceInBowl)
+                {
+                    food += remainingSpaceInBowl;
+                    Inventory.FoodReserve -= remainingSpaceInBowl;
+                }
+                else
+                {
+                    food += Inventory.FoodReserve;
+                    Inventory.FoodReserve = 0;
+                }
+            }
+            else
+            {
+                if (Inventory.FoodReserve >= FILL_INCREMENT)
+                {
+                    food += FILL_INCREMENT;
+                    Inventory.FoodReserve -= FILL_INCREMENT;
+                }
+                else
+                {
+                    food += Inventory.FoodReserve;
+                    Inventory.FoodReserve = 0;
+                }
+            }
+
+            Inventory.InvokeResourcesUpdated();
         }
 
         // Hover behavior
         public string GetHoverText()
         {
-            Test = "<strong>Fill:</strong> " + food + "/" + MAX_FOOD;
             return "<strong>Fill:</strong> " + food + "/" + MAX_FOOD;
         }
 

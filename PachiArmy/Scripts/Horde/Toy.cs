@@ -10,9 +10,6 @@
 
         public Toy()
         {
-            // TODO don't default this to 0,0
-            Position = new Position(0, 0);
-
             durability = INITIAL_DURABILITY;
         }
 
@@ -23,7 +20,10 @@
         }
         public void TryTrashBrokenToy()
         {
-
+            if (durability == 0)
+            {
+                BoardManager.RemovePlaceable(this);
+            }
         }
 
         // Hover behavior
@@ -44,12 +44,10 @@
         }
         public void TryPlay(Pachimari invokerPachimari)
         {
-            durability--;
-            invokerPachimari.Play();
-
-            if (durability <= 0)
+            if (durability > 0)
             {
-                // Destroy
+                durability--;
+                invokerPachimari.Play();
             }
         }
     }

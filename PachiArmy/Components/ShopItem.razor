@@ -1,7 +1,7 @@
 ﻿@using PachiArmy.Scripts;
 
 <Div Padding="Padding.Is1">
-    <Div class="clicky-card">
+    <Div Class="@GetShopItemClass()" onclick="@TryPurchaseWrapper">
         <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
             <Container>
                 <Span>
@@ -16,4 +16,29 @@
 @code {
     [Parameter]
     public StoreItem Item { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        Inventory.ResourcesUpdated += StateHasChanged;
+    }
+
+    string GetShopItemClass()
+    {
+        if (Item.OutOfStock)
+        {
+            return "store-item-outofstock";
+        }
+
+        else
+        {
+            return Item.CanPurchase() ? "store-item" : "store-item-disabled";
+        }
+    }
+
+    void TryPurchaseWrapper()
+    {
+        Item.TryPurchase();
+
+        Inventory.InvokeResourcesUpdated();
+    }
 }

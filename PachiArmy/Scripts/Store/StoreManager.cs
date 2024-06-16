@@ -14,10 +14,10 @@
                     Name = "Placeholder's Pet Store",
                     ItemsForSale = new List<StoreItem>()
                     {
-                        new PlaceableStoreItem { Placeable = new FoodBowl(), Name = "Food Bowl", Icon = "placeholders/pachimari-idle.png", Price = 5, LimitedItem = true },
-                        new PlaceableStoreItem { Placeable = new WaterBowl(), Name = "Water Bowl", Icon = "placeholders/pachimari-idle.png", Price = 5, LimitedItem = true },
-                        new FoodFillStoreItem { FillAmount = 30, Name = "30u Food Fill", Icon = "placeholders/pachimari-idle.png", Price = 5, LimitedItem = true },
-                        new WaterFillStoreItem { FillAmount = 30, Name = "30u Water Fill", Icon = "placeholders/pachimari-idle.png", Price = 5, LimitedItem = true },
+                        new PlaceableStoreItem { Placeable = new FoodBowl(), Name = "Food Bowl", Icon = "placeholders/pachimari-idle.png", Price = 1, LimitedItem = true },
+                        new PlaceableStoreItem { Placeable = new WaterBowl(), Name = "Water Bowl", Icon = "placeholders/pachimari-idle.png", Price = 1, LimitedItem = true },
+                        new FoodFillStoreItem { FillAmount = 30, Name = "30u Food Fill", Icon = "placeholders/pachimari-idle.png", Price = 1, LimitedItem = false },
+                        new WaterFillStoreItem { FillAmount = 30, Name = "30u Water Fill", Icon = "placeholders/pachimari-idle.png", Price = 1, LimitedItem = false },
                         new PlaceableStoreItem { Placeable = new Snack(), Name = "Scooby Snack 1", Icon = "placeholders/pachimari-idle.png", Price = 3, LimitedItem = false },
                     }
                 },

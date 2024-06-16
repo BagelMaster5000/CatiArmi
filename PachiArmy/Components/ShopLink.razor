@@ -1,6 +1,8 @@
-﻿<Div Padding="Padding.Is1">
+﻿@using PachiArmy.Scripts;
+
+<Div Padding="Padding.Is1">
     <Text TextSize="TextSize.Small">Open!</Text>
-    <Link To="Store">
+    <Link onclick="@GameManager.ClearAllDelegateSubscriptions" To="Store">
     <Div class="clicky-card-link">
         <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
             <Container>

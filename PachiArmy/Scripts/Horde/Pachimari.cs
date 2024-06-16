@@ -6,8 +6,6 @@ namespace PachiArmy.Scripts
     {
         public Position Position { get; set; }
         public int test = 5;
-        //[CascadingParameter]
-        //public HordeView<Horde> Owner { get; set; } = default!;
 
         enum PachiState
         {
@@ -33,9 +31,6 @@ namespace PachiArmy.Scripts
 
         public Pachimari()
         {
-            // TODO don't default this to 0,0. Find a random open spot on the board
-            Position = new Position(0, 0);
-
             happiness = (uint)RandomNumberGenerator.GetInt32(100);
             hunger = (uint)RandomNumberGenerator.GetInt32(100);
             thirst = (uint)RandomNumberGenerator.GetInt32(100);

@@ -23,3 +23,10 @@
         <Div Padding="Padding.Is2" />
     </Column>
 </Row>
+
+@code {
+    public ResourcesPanel()
+    {
+        Inventory.ResourcesUpdated += StateHasChanged;
+    }
+}

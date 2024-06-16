@@ -2,18 +2,19 @@
 {
     public class WaterFillStoreItem : StoreItem
     {
-        public int FillAmount;
+        public uint FillAmount;
 
-        public override bool TryPurchase()
+        public override void TryPurchase()
         {
-            bool success = base.TryPurchase();
-            if (!success)
+            if (!CanPurchase())
             {
-                return false;
+                return;
             }
 
-            // Fill bowl
-            return true;
+            base.TryPurchase();
+
+            Console.WriteLine("Purchased waterfill!");
+            Inventory.WaterReserve += FillAmount;
         }
     }
 }

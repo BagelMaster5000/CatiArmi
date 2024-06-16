@@ -5,15 +5,13 @@
         public Position Position { get; set; }
         public string Test { get; set; }
 
-        private const uint MAX_WATER = 20;
+        private const uint MAX_WATER = 50;
         private uint water;
+        private const uint FILL_INCREMENT = 10;
 
         public WaterBowl()
         {
-            // TODO don't default this to 0,0
-            Position = new Position(0, 0);
-
-            water = MAX_WATER;
+            water = 0;
         }
 
         // Click behavior
@@ -23,7 +21,36 @@
         }
         public void Fill()
         {
+            if (water == MAX_WATER) { return; }
+            else if (MAX_WATER - water < FILL_INCREMENT)
+            {
+                uint remainingSpaceInBowl = MAX_WATER - water;
+                if (Inventory.WaterReserve >= remainingSpaceInBowl)
+                {
+                    water += remainingSpaceInBowl;
+                    Inventory.WaterReserve -= remainingSpaceInBowl;
+                }
+                else
+                {
+                    water += Inventory.WaterReserve;
+                    Inventory.WaterReserve = 0;
+                }
+            }
+            else
+            {
+                if (Inventory.WaterReserve >= FILL_INCREMENT)
+                {
+                    water += FILL_INCREMENT;
+                    Inventory.WaterReserve -= FILL_INCREMENT;
+                }
+                else
+                {
+                    water += Inventory.WaterReserve;
+                    Inventory.WaterReserve = 0;
+                }
+            }
 
+            Inventory.InvokeResourcesUpdated();
         }
 
         // Hover behavior

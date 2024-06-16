@@ -12,12 +12,18 @@
     [Parameter]
     public Placeable Placeable { get; set; } = default!;
 
-    public BoardPlaceable()
+    protected override void OnInitialized()
     {
-        GlobalTimer.Timer.Elapsed += OnTimedEvent;
+        GlobalTimer.TickTimer.Elapsed += Tick;
+        GlobalTimer.RefreshTimer.Elapsed += Refresh;
     }
 
-    public void OnTimedEvent(Object source, ElapsedEventArgs e)
+    public void Tick(Object source, ElapsedEventArgs e)
+    {
+        StateHasChanged();
+    }
+
+    public void Refresh(Object source, ElapsedEventArgs e)
     {
         StateHasChanged();
     }

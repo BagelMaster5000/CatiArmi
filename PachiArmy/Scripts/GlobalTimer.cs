@@ -1,17 +1,35 @@
-﻿using System.Timers;
-using Timer = System.Timers.Timer;
+﻿using Timer = System.Timers.Timer;
 
 namespace PachiArmy.Scripts
 {
     public static class GlobalTimer
     {
-        public static Timer Timer;
-        public static void StartTimer()
+        public static Timer TickTimer;
+        public static void StartTickTimer()
         {
-            Timer = new Timer(1000);
-            Timer.AutoReset = true;
-            Timer.Enabled = true;
-            Timer.Start();
+            if (TickTimer != null)
+            {
+                TickTimer.Stop();
+            }
+
+            TickTimer = new Timer(5000);
+            TickTimer.AutoReset = true;
+            TickTimer.Enabled = true;
+            TickTimer.Start();
+        }
+
+        public static Timer RefreshTimer;
+        public static void StartRefreshTimer()
+        {
+            if (RefreshTimer != null)
+            {
+                RefreshTimer.Stop();
+            }
+
+            RefreshTimer = new Timer(200);
+            RefreshTimer.AutoReset = true;
+            RefreshTimer.Enabled = true;
+            RefreshTimer.Start();
         }
     }
 }

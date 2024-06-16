@@ -1,4 +1,6 @@
 ﻿@page "/Horde"
+@inject NavigationManager NavigationManager
+
 @using PachiArmy.Components
 @using PachiArmy.Scripts;
 
@@ -87,3 +89,10 @@
         <BoardPlaceable Placeable=@context />
     </ItemTemplate>
 </DropContainer>
+
+@code {
+    protected override void OnInitialized()
+    {
+        BoardManager.ForceBoardRefresh = () => NavigationManager.NavigateTo("Refresh");
+    }
+}

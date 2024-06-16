@@ -7,26 +7,26 @@
         public uint Price;
         public bool LimitedItem;
 
-        private bool disabled;
+        public bool OutOfStock;
 
         public bool CanPurchase()
         {
-            return false;
+            return !OutOfStock && Inventory.Money >= Price;
         }
 
-        public virtual bool TryPurchase()
+        public virtual void TryPurchase()
         {
             if (!CanPurchase())
             {
-                return false;
+                return;
             }
+
+            Inventory.Money -= Price;
 
             if (LimitedItem)
             {
-                disabled = true;
+                OutOfStock = true;
             }
-
-            return true;
         }
     }
 }

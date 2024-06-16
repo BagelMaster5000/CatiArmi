@@ -2,7 +2,7 @@
 {
     public static class Inventory
     {
-        public static uint Money = 0;
+        public static uint Money = 8;
 
         public const uint MAX_FOOD_RESERVE = 100;
         public static uint FoodReserve = 0;
@@ -16,5 +16,9 @@
         {
             return StoredPachis.Count + BoardManager.GetAllActivePachis().Count;
         }
+
+        public static Action ResourcesUpdated = delegate { };
+        public static void InvokeResourcesUpdated() => ResourcesUpdated?.Invoke();
+        public static void ClearResourcesUpdated() => ResourcesUpdated = null;
     }
 }

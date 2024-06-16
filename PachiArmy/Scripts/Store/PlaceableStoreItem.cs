@@ -4,16 +4,17 @@
     {
         public Placeable Placeable;
 
-        public override bool TryPurchase()
+        public override void TryPurchase()
         {
-            bool success = base.TryPurchase();
-            if (!success)
+            if (!CanPurchase())
             {
-                return false;
+                return;
             }
 
+            base.TryPurchase();
+
+            Console.WriteLine("Purchased item!");
             BoardManager.TryFindOpenSpaceAndPlacePlaceable(Placeable);
-            return true;
         }
     }
 }

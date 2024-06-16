@@ -10,9 +10,6 @@
 
         public Snack()
         {
-            // TODO don't default this to 0,0
-            Position = new Position(0, 0);
-
             durability = INITIAL_DURABILITY;
         }
 
