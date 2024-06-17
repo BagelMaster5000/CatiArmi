@@ -5,8 +5,8 @@
         public Position Position { get; set; }
         public string Test { get; set; }
 
-        private const uint INITIAL_DURABILITY = 30;
-        private uint durability;
+        private const int INITIAL_DURABILITY = 30;
+        private int durability;
 
         public Toy()
         {
@@ -14,11 +14,8 @@
         }
 
         // Click behavior
-        public void Clicked()
-        {
-            TryTrashBrokenToy();
-        }
-        public void TryTrashBrokenToy()
+        public void Clicked() => TryTrash();
+        public void TryTrash()
         {
             if (durability == 0)
             {
@@ -46,8 +43,11 @@
         {
             if (durability > 0)
             {
-                durability--;
-                invokerPachimari.Play();
+                bool played = invokerPachimari.Play(0);
+                if (played)
+                {
+                    durability--;
+                }
             }
         }
     }

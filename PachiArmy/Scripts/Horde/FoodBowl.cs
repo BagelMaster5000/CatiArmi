@@ -3,11 +3,9 @@
     public class FoodBowl : InteractablePlaceable
     {
         public Position Position { get; set; }
-        public string Test { get; set; }
 
-        private const uint MAX_FOOD = 50;
-        private uint food;
-        private const uint FILL_INCREMENT = 10;
+        private int food;
+        private const int FILL_INCREMENT = 30;
 
         public FoodBowl()
         {
@@ -21,10 +19,10 @@
         }
         public void Fill()
         {
-            if (food == MAX_FOOD) { return; }
-            else if (MAX_FOOD - food < FILL_INCREMENT)
+            if (food == GameManager.FoodBowlSize) { return; }
+            else if (GameManager.FoodBowlSize - food < FILL_INCREMENT)
             {
-                uint remainingSpaceInBowl = MAX_FOOD - food;
+                int remainingSpaceInBowl = GameManager.FoodBowlSize - food;
                 if (Inventory.FoodReserve >= remainingSpaceInBowl)
                 {
                     food += remainingSpaceInBowl;
@@ -56,7 +54,7 @@
         // Hover behavior
         public string GetHoverText()
         {
-            return "<strong>Fill:</strong> " + food + "/" + MAX_FOOD;
+            return "<strong>Fill:</strong> " + food + "/" + GameManager.FoodBowlSize;
         }
 
         public string GetImage()
@@ -68,14 +66,16 @@
         public void PachiInteract(Pachimari invokerPachimari)
         {
             TryEat(invokerPachimari);
-            Test = "<strong>Fill:</strong> " + food + "/" + MAX_FOOD;
         }
         public void TryEat(Pachimari invokerPachimari)
         {
             if (food > 0)
             {
-                food--;
-                invokerPachimari.Eat();
+                bool ate = invokerPachimari.Eat();
+                if (ate)
+                {
+                    food--;
+                }
             }
         }
     }

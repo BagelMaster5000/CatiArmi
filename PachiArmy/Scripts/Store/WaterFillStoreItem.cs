@@ -2,13 +2,13 @@
 {
     public class WaterFillStoreItem : StoreItem
     {
-        public uint FillAmount;
+        public int FillAmount;
 
         public override bool CanPurchase()
         {
             if (!base.CanPurchase()) { return false; }
 
-            return Inventory.WaterReserve < Inventory.MAX_WATER_RESERVE;
+            return Inventory.WaterReserve < Inventory.MaxWaterReserve;
         }
 
         public override void TryPurchase()
@@ -17,9 +17,9 @@
 
             base.TryPurchase();
 
-            if (Inventory.MAX_WATER_RESERVE - Inventory.WaterReserve < FillAmount)
+            if (Inventory.MaxWaterReserve - Inventory.WaterReserve < FillAmount)
             {
-                Inventory.WaterReserve = Inventory.MAX_WATER_RESERVE;
+                Inventory.WaterReserve = Inventory.MaxWaterReserve;
             }
             else
             {

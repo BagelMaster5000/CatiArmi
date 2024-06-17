@@ -2,10 +2,10 @@
 {
     public class Position
     {
-        public uint Row;
-        public uint Col;
+        public int Row;
+        public int Col;
 
-        public Position(uint row, uint column)
+        public Position(int row, int column)
         {
             Row = row;
             Col = column;
@@ -16,7 +16,7 @@
             try
             {
                 string[] rowAndColumnString = gridPositionString.Split(' ');
-                Position position = new Position(uint.Parse(rowAndColumnString[0]), uint.Parse(rowAndColumnString[1]));
+                Position position = new Position(int.Parse(rowAndColumnString[0]), int.Parse(rowAndColumnString[1]));
 
                 return position;
             }

@@ -12,7 +12,7 @@ namespace PachiArmy.Scripts
                 TickTimer.Stop();
             }
 
-            TickTimer = new Timer(5000);
+            TickTimer = new Timer(GameManager.TickTimeSeconds * 1000);
             TickTimer.AutoReset = true;
             TickTimer.Enabled = true;
             TickTimer.Start();
@@ -26,7 +26,7 @@ namespace PachiArmy.Scripts
                 RefreshTimer.Stop();
             }
 
-            RefreshTimer = new Timer(200);
+            RefreshTimer = new Timer(GameManager.RefreshTimeSeconds * 1000);
             RefreshTimer.AutoReset = true;
             RefreshTimer.Enabled = true;
             RefreshTimer.Start();

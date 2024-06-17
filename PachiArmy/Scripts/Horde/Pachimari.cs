@@ -1,11 +1,12 @@
-﻿using System.Security.Cryptography;
+﻿using System.Diagnostics.Metrics;
+using System.Security.Cryptography;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PachiArmy.Scripts
 {
     public class Pachimari : Placeable
     {
         public Position Position { get; set; }
-        public int test = 5;
 
         enum PachiState
         {
@@ -17,23 +18,23 @@ namespace PachiArmy.Scripts
             Pet
         }
         private PachiState state;
-        private bool readyToExplode;
 
-        const uint HAPPINESS_THRESHOLD = 100;
-        public uint happiness;
+        const int HAPPINESS_THRESHOLD = 100;
+        public int happiness;
 
-        const uint MAX_HUNGER = 100;
-        private uint hunger;
+        const int MAX_HUNGER = 100;
+        private int hunger;
 
-        const uint MAX_THIRST = 100;
-        private uint thirst;
+        const int MAX_THIRST = 100;
+        private int thirst;
 
+        public bool ConnectedToTickTimer = false;
 
         public Pachimari()
         {
-            happiness = (uint)RandomNumberGenerator.GetInt32(100);
-            hunger = (uint)RandomNumberGenerator.GetInt32(100);
-            thirst = (uint)RandomNumberGenerator.GetInt32(100);
+            happiness = (int)RandomNumberGenerator.GetInt32(5, 10);
+            hunger = (int)RandomNumberGenerator.GetInt32(60, 90);
+            thirst = (int)RandomNumberGenerator.GetInt32(60, 90);
         }
 
         // Click behavior
@@ -49,21 +50,31 @@ namespace PachiArmy.Scripts
         }
         private bool TryExplode()
         {
-            return false;
+            if (happiness < HAPPINESS_THRESHOLD) { return false; }
+
+            Explode();
+            Inventory.Money += GameManager.PachiExplosionPayout;
+
+            return true;
         }
         private void Explode()
         {
-
+            BoardManager.RemovePlaceable(this);
+            for (int i = 0; i < GameManager.NumPachisPerExplosion; i++)
+            {
+                BoardManager.AddNewPachimari();
+            }
         }
         private void Pet()
         {
-            happiness++;
+            // Maybe every 10 pets, happiness increments?
+            //happiness++;
         }
 
         // Hover behavior
         public string GetHoverText()
         {
-            uint happinessPercentage = happiness * 100 / HAPPINESS_THRESHOLD;
+            int happinessPercentage = happiness * 100 / HAPPINESS_THRESHOLD;
             string happinessTooltipText = happinessPercentage + "%";
             //if (happinessPercentage > 100)
             //{
@@ -71,18 +82,19 @@ namespace PachiArmy.Scripts
             //}
 
             float hungerPercentage = hunger * 1.0f / MAX_HUNGER;
+            int roundedHungerPercentage = (int)Math.Round(hungerPercentage * 100, 0);
             string hungerTooltipText;
-            if (hungerPercentage > 0.8f)
+            if (hungerPercentage > 0.85f)
             {
-                hungerTooltipText = "<span class='hotpanda-lightblue'>Full! 😊</span>";
+                hungerTooltipText = "<span class='hotpanda-lightblue'>" + roundedHungerPercentage + "% Full! 😊</span>";
             }
             else if (hungerPercentage > 0.5f)
             {
-                hungerTooltipText = "<span class='hotpanda-lightyellow'>Kinda... 😐</span>";
+                hungerTooltipText = "<span class='hotpanda-lightyellow'>" + roundedHungerPercentage + "% Kinda... 😐</span>";
             }
             else if (hungerPercentage > 0.1f)
             {
-                hungerTooltipText = "<span class='hotpanda-orange'>So hungry... 🥺</span>";
+                hungerTooltipText = "<span class='hotpanda-orange'>" + roundedHungerPercentage + "% So hungry... 🥺</span>";
             }
             else
             {
@@ -90,18 +102,19 @@ namespace PachiArmy.Scripts
             }
 
             float thirstPercentage = thirst * 1.0f / MAX_THIRST;
+            int roundedThirstPercentage = (int)Math.Round(thirstPercentage * 100, 0);
             string thirstTooltipText;
-            if (thirstPercentage > 0.8f)
+            if (thirstPercentage > 0.85f)
             {
-                thirstTooltipText = "<span class='hotpanda-lightblue'>Full! 😊</span>";
+                thirstTooltipText = "<span class='hotpanda-lightblue'>" + roundedThirstPercentage + "% Full! 😊</span>";
             }
             else if (thirstPercentage > 0.5f)
             {
-                thirstTooltipText = "<span class='hotpanda-lightyellow'>Kinda... 😐</span>";
+                thirstTooltipText = "<span class='hotpanda-lightyellow'>" + roundedThirstPercentage + "% Kinda... 😐</span>";
             }
             else if (thirstPercentage > 0.1f)
             {
-                thirstTooltipText = "<span class='hotpanda-orange'>So thirsty... 🥺</span>";
+                thirstTooltipText = "<span class='hotpanda-orange'>" + roundedThirstPercentage + "% So thirsty... 🥺</span>";
             }
             else
             {
@@ -134,13 +147,34 @@ namespace PachiArmy.Scripts
         // Tick
         public void ProcessTick()
         {
+            float hungerPercentage = hunger * 1.0f / MAX_HUNGER;
+            float thirstPercentage = thirst * 1.0f / MAX_THIRST;
+            if (thirstPercentage > 0.8f && hungerPercentage > 0.8f)
+            {
+                happiness += GameManager.PachiIdleHappinessChangeOnTickFull;
+            }
+            else if (thirstPercentage > 0.5f && hungerPercentage > 0.5f)
+            {
+                happiness += GameManager.PachiIdleHappinessChangeOnTickNeutral;
+            }
+            else
+            {
+                happiness += GameManager.PachiIdleHappinessChangeOnTickNeedy;
+            }
+
+            hunger += GameManager.PachiIdleHungerChangeOnTick;
+
+            thirst += GameManager.PachiIdleThirstChangeOnTick;
+
             ProcessInteractions();
+
+            happiness = Math.Clamp(happiness, 0, int.MaxValue);
+            hunger = Math.Clamp(hunger, 0, int.MaxValue);
+            thirst = Math.Clamp(thirst, 0, int.MaxValue);
         }
         private void ProcessInteractions()
         {
-            float hungerPercentage = hunger * 1.0f / MAX_HUNGER;
-            float thirstPercentage = thirst * 1.0f / MAX_THIRST;
-            if (hungerPercentage < 0.1f || thirstPercentage < 0.1f)
+            if (hunger <= 0 || thirst <= 0)
             {
                 state = PachiState.Exhausted;
                 return;
@@ -153,19 +187,32 @@ namespace PachiArmy.Scripts
             }
         }
 
-        public void Eat()
+        public bool Eat()
         {
-            hunger += 2;
-            happiness += 1;
+            if (hunger >= MAX_HUNGER) { return false; }
+
+            hunger += GameManager.PachiEatingHungerChangeOnTick;
+            return true;
         }
-        public void Drink()
+        public bool EatSnack(int snackType)
         {
-            thirst += 2;
-            happiness += 1;
+            if (hunger >= MAX_HUNGER) { return false; }
+
+            hunger += GameManager.PachiEatingSnackHungerChangesOnTick.ElementAt(snackType);
+            happiness += GameManager.PachiEatingSnackHappinessChangesOnTick.ElementAt(snackType);
+            return true;
         }
-        public void Play()
+        public bool Drink()
         {
-            happiness += 2;
+            if (thirst >= MAX_THIRST) { return false; }
+
+            thirst += GameManager.PachiDrinkingThirstChangeOnTick;
+            return true;
+        }
+        public bool Play(int toyType)
+        {
+            happiness += GameManager.PachiPlayingHappinessChangesOnTick.ElementAt(toyType);
+            return true;
         }
     }
 }

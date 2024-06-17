@@ -1,3 +1,9 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager
 
-<StoreView />
+@code {
+    protected override void OnInitialized()
+    {
+        NavigationManager.NavigateTo("Horde");
+    }
+}

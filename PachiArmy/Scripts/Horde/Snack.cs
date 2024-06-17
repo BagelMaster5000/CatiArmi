@@ -5,8 +5,8 @@
         public Position Position { get; set; }
         public string Test { get; set; }
 
-        private const uint INITIAL_DURABILITY = 30;
-        private uint durability;
+        private const int INITIAL_DURABILITY = 30;
+        private int durability;
 
         public Snack()
         {
@@ -14,7 +14,14 @@
         }
 
         // Click behavior
-        public void Clicked() { }
+        public void Clicked() => TryTrash();
+        public void TryTrash()
+        {
+            if (durability == 0)
+            {
+                BoardManager.RemovePlaceable(this);
+            }
+        }
 
         // Hover behavior
         public string GetHoverText()
@@ -34,12 +41,13 @@
         }
         public void TryEat(Pachimari invokerPachimari)
         {
-            durability--;
-            invokerPachimari.Eat();
-
-            if (durability <= 0)
+            if (durability > 0)
             {
-                // Destroy
+                bool ate = invokerPachimari.EatSnack(0);
+                if (ate)
+                {
+                    durability--;
+                }
             }
         }
     }

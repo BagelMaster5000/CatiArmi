@@ -2,13 +2,13 @@
 {
     public class FoodFillStoreItem : StoreItem
     {
-        public uint FillAmount;
+        public int FillAmount;
 
         public override bool CanPurchase()
         {
             if (!base.CanPurchase()) { return false; }
 
-            return Inventory.FoodReserve < Inventory.MAX_FOOD_RESERVE;
+            return Inventory.FoodReserve < Inventory.MaxFoodReserve;
         }
 
         public override void TryPurchase()
@@ -17,9 +17,9 @@
 
             base.TryPurchase();
 
-            if (Inventory.MAX_FOOD_RESERVE - Inventory.FoodReserve < FillAmount)
+            if (Inventory.MaxFoodReserve - Inventory.FoodReserve < FillAmount)
             {
-                Inventory.FoodReserve = Inventory.MAX_FOOD_RESERVE;
+                Inventory.FoodReserve = Inventory.MaxFoodReserve;
             }
             else
             {

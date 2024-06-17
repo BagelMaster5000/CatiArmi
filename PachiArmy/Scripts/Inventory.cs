@@ -1,14 +1,16 @@
-﻿namespace PachiArmy.Scripts
+﻿using System.Timers;
+
+namespace PachiArmy.Scripts
 {
     public static class Inventory
     {
-        public static uint Money = 8;
+        public static int Money = GameManager.StartingMoney;
 
-        public const uint MAX_FOOD_RESERVE = 100;
-        public static uint FoodReserve = 0;
+        public static int MaxFoodReserve = GameManager.MaxFoodReserve;
+        public static int FoodReserve = GameManager.StartingFoodReserve;
 
-        public const uint MAX_WATER_RESERVE = 100;
-        public static uint WaterReserve = 0;
+        public static int MaxWaterReserve = GameManager.MaxWaterReserve;
+        public static int WaterReserve = GameManager.StartingWaterReserve;
 
         public static List<Pachimari> StoredPachis = new List<Pachimari>();
 
@@ -20,5 +22,17 @@
         public static Action ResourcesUpdated = delegate { };
         public static void InvokeResourcesUpdated() => ResourcesUpdated?.Invoke();
         public static void ClearResourcesUpdated() => ResourcesUpdated = null;
+
+        private static int _moneyTicker = GameManager.IdleMoneyTickInterval;
+        public static void IdleMoneyGain(Object source, ElapsedEventArgs e)
+        {
+            _moneyTicker--;
+            if (_moneyTicker <= 0)
+            {
+                _moneyTicker = GameManager.IdleMoneyTickInterval;
+                Money += GameManager.IdleMoneyTickAmount;
+                InvokeResourcesUpdated();
+            }
+        }
     }
 }

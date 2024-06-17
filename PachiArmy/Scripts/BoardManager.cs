@@ -2,8 +2,8 @@
 {
     public static class BoardManager
     {
-        public const uint ROWS = 8;
-        public const uint COLS = 8;
+        public const int ROWS = 8;
+        public const int COLS = 8;
 
         public static bool timerStarted = false;
 
@@ -17,19 +17,9 @@
 
         public static void Setup()
         {
-            for (uint i = 0; i < 2; i++)
-            {
-                var pachi = new Pachimari();
-                TryFindOpenSpaceAndPlacePlaceable(pachi);
-            }
-            var foodbowl = new FoodBowl();
-            TryFindOpenSpaceAndPlacePlaceable(foodbowl);
-            var waterBowl = new WaterBowl();
-            TryFindOpenSpaceAndPlacePlaceable(waterBowl);
-            var toy = new Toy();
-            TryFindOpenSpaceAndPlacePlaceable(toy);
-            var snack = new Snack();
-            TryFindOpenSpaceAndPlacePlaceable(snack);
+            AddNewPachimari();
+            AddNewFoodBowl();
+            AddNewWaterBowl();
         }
 
         #region Board
@@ -62,9 +52,9 @@
         {
             placeable.Position = new Position(0, 0);
 
-            for (uint r = 0; r < ROWS; r++)
+            for (int r = 0; r < ROWS; r++)
             {
-                for (uint c = 0; c < COLS; c++)
+                for (int c = 0; c < COLS; c++)
                 {
                     if (!IsSpaceOccupied(r, c))
                     {
@@ -88,10 +78,36 @@
 
             ForceBoardRefresh?.Invoke();
         }
+
+        public static void AddNewPachimari()
+        {
+            var pachi = new Pachimari();
+            TryFindOpenSpaceAndPlacePlaceable(pachi);
+        }
+        public static void AddNewFoodBowl()
+        {
+            var foodbowl = new FoodBowl();
+            TryFindOpenSpaceAndPlacePlaceable(foodbowl);
+        }
+        public static void AddNewWaterBowl()
+        {
+            var waterBowl = new WaterBowl();
+            TryFindOpenSpaceAndPlacePlaceable(waterBowl);
+        }
+        public static void AddNewToy(int toyType)
+        {
+            var toy = new Toy();
+            TryFindOpenSpaceAndPlacePlaceable(toy);
+        }
+        public static void AddNewSnack(int snackType)
+        {
+            var snack = new Snack();
+            TryFindOpenSpaceAndPlacePlaceable(snack);
+        }
         #endregion
 
         #region Helpers
-        public static List<InteractablePlaceable> GetAllAdjacentInteractablePlaceables(uint row, uint col)
+        public static List<InteractablePlaceable> GetAllAdjacentInteractablePlaceables(int row, int col)
         {
             var interactablePlaceables = ActivePlaceables.OfType<InteractablePlaceable>().ToList();
             var adjacentInteractablePlaceables = new List<InteractablePlaceable>();
@@ -172,11 +188,11 @@
             return adjacentInteractablePlaceables;
         }
 
-        public static bool IsSpaceOccupied(uint row, uint col) => occupiedSpaces[row, col];
+        public static bool IsSpaceOccupied(int row, int col) => occupiedSpaces[row, col];
         public static bool GetSpaceOccupied(Position position) => occupiedSpaces[position.Row, position.Col];
-        public static void SetSpaceOccupied(uint row, uint col, bool occupied) => occupiedSpaces[row, col] = occupied;
+        public static void SetSpaceOccupied(int row, int col, bool occupied) => occupiedSpaces[row, col] = occupied;
         public static void SetSpaceOccupied(Position position, bool occupied) => occupiedSpaces[position.Row, position.Col] = occupied;
-        public static Placeable? TryGetPlaceableOnSpace(uint row, uint col) => ActivePlaceables.Find(p => p.Position.Row == row && p.Position.Col == col);
+        public static Placeable? TryGetPlaceableOnSpace(int row, int col) => ActivePlaceables.Find(p => p.Position.Row == row && p.Position.Col == col);
         public static Placeable? TryGetPlaceableOnSpace(Position gridPosition) => ActivePlaceables.Find(p => p.Position.Row == gridPosition.Row && p.Position.Col == gridPosition.Col);
         public static List<Placeable> GetAllActivePlaceables() => ActivePlaceables;
         public static List<Pachimari> GetAllActivePachis() => ActivePlaceables.OfType<Pachimari>().ToList();

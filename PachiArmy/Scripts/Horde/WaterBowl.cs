@@ -3,11 +3,9 @@
     public class WaterBowl : InteractablePlaceable
     {
         public Position Position { get; set; }
-        public string Test { get; set; }
 
-        private const uint MAX_WATER = 50;
-        private uint water;
-        private const uint FILL_INCREMENT = 10;
+        private int water;
+        private const int FILL_INCREMENT = 30;
 
         public WaterBowl()
         {
@@ -21,10 +19,10 @@
         }
         public void Fill()
         {
-            if (water == MAX_WATER) { return; }
-            else if (MAX_WATER - water < FILL_INCREMENT)
+            if (water == GameManager.WaterBowlSize) { return; }
+            else if (GameManager.WaterBowlSize - water < FILL_INCREMENT)
             {
-                uint remainingSpaceInBowl = MAX_WATER - water;
+                int remainingSpaceInBowl = GameManager.WaterBowlSize - water;
                 if (Inventory.WaterReserve >= remainingSpaceInBowl)
                 {
                     water += remainingSpaceInBowl;
@@ -56,7 +54,7 @@
         // Hover behavior
         public string GetHoverText()
         {
-            return "<strong>Fill:</strong> " + water + "/" + MAX_WATER;
+            return "<strong>Fill:</strong> " + water + "/" + GameManager.WaterBowlSize;
         }
 
         public string GetImage()
@@ -73,8 +71,11 @@
         {
             if (water > 0)
             {
-                water--;
-                invokerPachimari.Drink();
+                bool drank = invokerPachimari.Drink();
+                if (drank)
+                {
+                    water--;
+                }
             }
         }
     }

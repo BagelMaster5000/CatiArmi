@@ -4,7 +4,7 @@
     {
         public string Name;
         public string Icon;
-        public uint PachisToUnlock;
+        public int PachisToUnlock;
         public List<StoreItem> ItemsForSale;
 
         public bool TryBuy(StoreItem storeItem)
