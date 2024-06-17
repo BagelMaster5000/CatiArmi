@@ -9,7 +9,7 @@
 
         public bool OutOfStock;
 
-        public bool CanPurchase()
+        public virtual bool CanPurchase()
         {
             return !OutOfStock && Inventory.Money >= Price;
         }

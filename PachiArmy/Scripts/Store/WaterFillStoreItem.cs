@@ -4,17 +4,27 @@
     {
         public uint FillAmount;
 
+        public override bool CanPurchase()
+        {
+            if (!base.CanPurchase()) { return false; }
+
+            return Inventory.WaterReserve < Inventory.MAX_WATER_RESERVE;
+        }
+
         public override void TryPurchase()
         {
-            if (!CanPurchase())
-            {
-                return;
-            }
+            if (!CanPurchase()) { return; }
 
             base.TryPurchase();
 
-            Console.WriteLine("Purchased waterfill!");
-            Inventory.WaterReserve += FillAmount;
+            if (Inventory.MAX_WATER_RESERVE - Inventory.WaterReserve < FillAmount)
+            {
+                Inventory.WaterReserve = Inventory.MAX_WATER_RESERVE;
+            }
+            else
+            {
+                Inventory.WaterReserve += FillAmount;
+            }
         }
     }
 }
