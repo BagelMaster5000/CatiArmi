@@ -38,17 +38,24 @@
                         <Row Padding="Padding.Is2">
                             <Row Padding="Padding.Is2">
                                 <Column ColumnSize="ColumnSize.Is3">
-                                    <DropZone Padding="Padding.Is1" TItem="Placeable" Name="Stored" DropAllowed=@((item) => true)>
-                                        <Image Source="placeholders/chest.png" Height="Height.Rem(5)" />
+                                    <DropZone Padding="Padding.Is1" TItem="Placeable" Name="Storage" DropAllowed=@CanStorePlaceable>
+                                        <Image Source="placeholders/house.png" Height="Height.Rem(5)" />
                                     </DropZone>
                                 </Column>
-                                <Column ColumnSize="ColumnSize.Is9" TextAlignment="TextAlignment.Start">
-                                    <Div Padding="Padding.Is1" />
-                                    <Span>
-                                        <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle" TextSize="TextSize.Large"> </Text>
-                                        <Image Source="placeholders/pachimari-idle.png" Height="Height.Rem(4)" />
-                                        <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle" TextSize="TextSize.Large"> x @Inventory.GetTotalPachiCount()</Text>
-                                    </Span>
+                                <Column ColumnSize="ColumnSize.Is2">
+                                        <Div Padding="Padding.Is2"/>
+                                    <Image Source="placeholders/pachimari-idle.png" Height="Height.Rem(4)" />
+                                </Column>
+                                <Column ColumnSize="ColumnSize.Is7" TextAlignment="TextAlignment.Start">
+                                    <Container>
+                                        <Div Padding="Padding.Is2"/>
+                                        <Div>
+                                            <Text TextSize="TextSize.Large">@Inventory.StoredPachis Catis chilling</Text>
+                                        </Div>
+                                        <Div>
+                                            <Text TextSize="TextSize.Large">in the battle house</Text>
+                                        </Div>
+                                    </Container>
                                 </Column>
                             </Row>
                         </Row>
@@ -93,13 +100,40 @@
 </DropContainer>
 
 @code {
+    public List<Placeable> Placeables { get => BoardManager.GetAllActivePlaceables(); }
+
     protected override void OnInitialized()
     {
         BoardManager.ForceBoardRefresh = () => NavigationManager.NavigateTo("Refresh");
     }
 
+    private Task ObjectMoved(DraggableDroppedEventArgs<Placeable> movePlaceable)
+    {
+        if (movePlaceable.DropZoneName == "Storage")
+        {
+            BoardManager.RemovePlaceable(movePlaceable.Item);
+            Inventory.StoredPachis++;
+            return Task.CompletedTask;
+        }
+
+        var position = Scripts.Position.ParsePositionFromString(movePlaceable.DropZoneName);
+        BoardManager.MovePlaceable(movePlaceable.Item, position);
+
+        return Task.CompletedTask;
+    }
+
     public string GetWinGameButtonClass()
     {
         return (Inventory.GetTotalPachiCount() >= GameManager.PachisToWin) ? "store-link" : "store-link-disabled";
+    }
+
+    public bool CanStorePlaceable(Placeable placeable)
+    {
+        if (typeof(Pachimari).IsAssignableFrom(placeable.GetType()))
+        {
+            return BoardManager.GetAllActivePachis().Count() > 1;
+        }
+
+        return false;
     }
 }

@@ -12,11 +12,11 @@ namespace PachiArmy.Scripts
         public static int MaxWaterReserve = GameManager.MaxWaterReserve;
         public static int WaterReserve = GameManager.StartingWaterReserve;
 
-        public static List<Pachimari> StoredPachis = new List<Pachimari>();
+        public static int StoredPachis = 0;
 
         public static int GetTotalPachiCount()
         {
-            return StoredPachis.Count + BoardManager.GetAllActivePachis().Count;
+            return StoredPachis + BoardManager.GetAllActivePachis().Count;
         }
 
         public static Action ResourcesUpdated = delegate { };
