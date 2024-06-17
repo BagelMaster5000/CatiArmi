@@ -56,18 +56,18 @@
                         @* Store Links *@
                         <Row Padding="Padding.Is2">
                             <Text TextSize="TextSize.ExtraLarge">Store Links</Text>
-                            <ShopLink StoreId="0" StoreName="Pet Store" StoreIcon="placeholders/pachimari-idle.png" PachisToUnlock="0" />
-                            <ShopLink StoreId="1" StoreName="Candy Store" StoreIcon="placeholders/pachimari-idle.png" PachisToUnlock="20" />
-                            <ShopLink StoreId="2" StoreName="Toy Store" StoreIcon="placeholders/pachimari-idle.png" PachisToUnlock="50" />
+                            <ShopLink Store=StoreManager.Stores[0] />
+                            <ShopLink Store=StoreManager.Stores[1] />
+                            <ShopLink Store=StoreManager.Stores[2] />
                         </Row>
 
                         <Div Padding="Padding.Is2" />
 
                         @* Win Game Button *@
                         <Row Padding="Padding.Is2">
-                            <Div Padding="Padding.Is2">
-                                <Text TextSize="TextSize.Small">🔒 0/100 Pachis</Text>
-                                <Div class="clicky-card-link">
+                            <Div Padding="Padding.Is2" Class="text-no-select">
+                                <Text TextSize="TextSize.Small">🔒 @Inventory.GetTotalPachiCount()/@GameManager.PachisToWin Pachis</Text>
+                                <Div Class="@GetWinGameButtonClass()">
                                     <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
                                         <Container>
                                             <Div Padding="Padding.Is3" />
@@ -94,5 +94,10 @@
     protected override void OnInitialized()
     {
         BoardManager.ForceBoardRefresh = () => NavigationManager.NavigateTo("Refresh");
+    }
+
+    public string GetWinGameButtonClass()
+    {
+        return (Inventory.GetTotalPachiCount() >= GameManager.PachisToWin) ? "store-link" : "store-link-disabled";
     }
 }

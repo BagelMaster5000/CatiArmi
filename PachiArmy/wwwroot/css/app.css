@@ -123,6 +123,11 @@ a, .btn-link {
 .hotpanda-darkblue{ color: var(--hotpanda-darkblue); }
 .hotpanda-darkpurple{ color: var(--hotpanda-darkpurple); }
 
+.text-no-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
 
 .clicky-card {
     transition: .2s ease-out;
@@ -279,6 +284,49 @@ a, .btn-link {
     }
 
     .store-item-outofstock:active {
+        border-color: transparent;
+        transition: 0s;
+    }
+
+.store-link {
+    transition: .2s ease-out;
+    border-width: 2px;
+    border: dashed;
+    border-color: transparent;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+    .store-link:hover {
+        opacity: 0.8;
+        border-color: black;
+        transform: scaleX(1.03) scaleY(1);
+    }
+
+    .store-link:active {
+        opacity: 0.5;
+        border-color: transparent;
+        transform: scaleX(0.95) scaleY(0.98);
+        transition: 0s;
+    }
+
+.store-link-disabled {
+    transition: .2s ease-out;
+    border-width: 2px;
+    border: dashed;
+    border-color: transparent;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    background-color: var(--hotpanda-red);
+}
+
+    .store-link-disabled:hover {
+        border-color: red;
+    }
+
+    .store-link-disabled:active {
         border-color: transparent;
         transition: 0s;
     }

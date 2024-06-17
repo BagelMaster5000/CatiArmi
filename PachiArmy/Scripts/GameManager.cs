@@ -9,5 +9,7 @@
             GlobalTimer.StartRefreshTimer();
             GlobalTimer.StartTickTimer();
         }
+
+        public static uint PachisToWin = 100;
     }
 }

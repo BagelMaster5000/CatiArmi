@@ -1,14 +1,14 @@
 ﻿@using PachiArmy.Scripts;
 
-<Div Padding="Padding.Is1">
-    <Text TextSize="TextSize.Small">Open!</Text>
-    <Link onclick="@GameManager.ClearAllDelegateSubscriptions" To="Store">
-    <Div class="clicky-card-link">
+<Div Padding="Padding.Is1" Class="text-no-select">
+    <Text TextSize="TextSize.Small">@GetShopMessage()</Text>
+    <Link onclick="@OnClick" To="Store" Disabled="@(!Store.IsShopAvailable())"> 
+    <Div Class="@GetShopLinkClass()">
         <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
             <Container>
                 <Span>
-                    <Image Source="@StoreIcon" Width="Width.Rem(3)" />
-                    <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@StoreName</Text>
+                    <Image Source="@Store.Icon" Width="Width.Rem(3)" />
+                    <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@Store.Name</Text>
                 </Span>
             </Container>
         </Card>
@@ -18,14 +18,28 @@
 
 @code {
     [Parameter]
-    public string StoreId { get; set; } = default!;
+    public Store Store { get; set; } = default!;
 
-    [Parameter]
-    public string StoreName { get; set; } = default!;
+    public string GetShopMessage()
+    {
+        if (Store.IsShopAvailable())
+        {
+            return "Open!";
+        }
+        else
+        {
+            return "🔒 " + Inventory.GetTotalPachiCount() + " / " + Store.PachisToUnlock + " Pachis";
+        }
+    }
 
-    [Parameter]
-    public string StoreIcon { get; set; } = default!;
+    public string GetShopLinkClass()
+    {
+        return Store.IsShopAvailable() ? "store-link" : "store-link-disabled";
+    }
 
-    [Parameter]
-    public int PachisToUnlock { get; set; } = default!;
+    public void OnClick()
+    {
+        StoreManager.CurStore = Store;
+        GameManager.ClearAllDelegateSubscriptions();
+    }
 }

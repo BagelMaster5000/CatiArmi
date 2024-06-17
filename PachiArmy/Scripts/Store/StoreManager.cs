@@ -12,6 +12,8 @@
                 new Store()
                 {
                     Name = "Placeholder's Pet Store",
+                    Icon = "placeholders/pachimari-idle.png",
+                    PachisToUnlock = 0,
                     ItemsForSale = new List<StoreItem>()
                     {
                         new PlaceableStoreItem { Placeable = new FoodBowl(), Name = "Food Bowl", Icon = "placeholders/pachimari-idle.png", Price = 1, LimitedItem = true },
@@ -24,6 +26,8 @@
                 new Store()
                 {
                     Name = "Placeholder's Candy Store",
+                    Icon = "placeholders/pachimari-idle.png",
+                    PachisToUnlock = 0,
                     ItemsForSale = new List<StoreItem>()
                     {
                         new PlaceableStoreItem { Placeable = new FoodBowl(), Name = "Food Bowl", Icon = "placeholders/pachimari-idle.png", Price = 20, LimitedItem = true },
@@ -36,6 +40,8 @@
                 new Store()
                 {
                     Name = "Placeholder's Toy Store",
+                    Icon = "placeholders/pachimari-idle.png",
+                    PachisToUnlock = 0,
                     ItemsForSale = new List<StoreItem>()
                     {
                         new PlaceableStoreItem { Placeable = new FoodBowl(), Name = "Food Bowl", Icon = "placeholders/pachimari-idle.png", Price = 50, LimitedItem = true },
