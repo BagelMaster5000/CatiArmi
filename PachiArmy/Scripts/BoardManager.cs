@@ -75,6 +75,7 @@
         {
             SetSpaceOccupied(placeable.Position, false);
             ActivePlaceables.Remove(placeable);
+            placeable.Position = new Position(99,99); // This is a scuffed way of removing it from the board. Fix if you have time
 
             ForceBoardRefresh?.Invoke();
         }

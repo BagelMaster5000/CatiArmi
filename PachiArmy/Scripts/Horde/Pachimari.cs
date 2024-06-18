@@ -32,9 +32,9 @@ namespace PachiArmy.Scripts
 
         public Pachimari()
         {
-            happiness = (int)RandomNumberGenerator.GetInt32(5, 10);
-            hunger = (int)RandomNumberGenerator.GetInt32(60, 90);
-            thirst = (int)RandomNumberGenerator.GetInt32(60, 90);
+            happiness = RandomNumberGenerator.GetInt32(5, 10);
+            hunger = RandomNumberGenerator.GetInt32(60, 90);
+            thirst = RandomNumberGenerator.GetInt32(60, 90);
         }
 
         // Click behavior
@@ -53,14 +53,16 @@ namespace PachiArmy.Scripts
             if (happiness < HAPPINESS_THRESHOLD) { return false; }
 
             Explode();
-            Inventory.Money += GameManager.PachiExplosionPayout;
+            Inventory.Money += RandomNumberGenerator.GetInt32(GameManager.PachiExplosionPayoutMin, GameManager.PachiExplosionPayoutMax);
 
             return true;
         }
         private void Explode()
         {
             BoardManager.RemovePlaceable(this);
-            for (int i = 0; i < GameManager.NumPachisPerExplosion; i++)
+
+            int numPachisToCreate = RandomNumberGenerator.GetInt32(GameManager.NumPachisPerExplosionMin, GameManager.NumPachisPerExplosionMax);
+            for (int i = 0; i < numPachisToCreate; i++)
             {
                 BoardManager.AddNewPachimari();
             }
@@ -84,15 +86,15 @@ namespace PachiArmy.Scripts
             float hungerPercentage = hunger * 1.0f / MAX_HUNGER;
             int roundedHungerPercentage = (int)Math.Round(hungerPercentage * 100, 0);
             string hungerTooltipText;
-            if (hungerPercentage > 0.85f)
+            if (hungerPercentage >= GameManager.PachiHungerThresholds[2])
             {
                 hungerTooltipText = "<span class='hotpanda-lightblue'>" + roundedHungerPercentage + "% Full! 😊</span>";
             }
-            else if (hungerPercentage > 0.5f)
+            else if (hungerPercentage >= GameManager.PachiHungerThresholds[1])
             {
                 hungerTooltipText = "<span class='hotpanda-lightyellow'>" + roundedHungerPercentage + "% Kinda... 😐</span>";
             }
-            else if (hungerPercentage > 0.1f)
+            else if (hungerPercentage >= GameManager.PachiHungerThresholds[0])
             {
                 hungerTooltipText = "<span class='hotpanda-orange'>" + roundedHungerPercentage + "% So hungry... 🥺</span>";
             }
@@ -104,15 +106,15 @@ namespace PachiArmy.Scripts
             float thirstPercentage = thirst * 1.0f / MAX_THIRST;
             int roundedThirstPercentage = (int)Math.Round(thirstPercentage * 100, 0);
             string thirstTooltipText;
-            if (thirstPercentage > 0.85f)
+            if (thirstPercentage >= GameManager.PachiThirstThresholds[2])
             {
                 thirstTooltipText = "<span class='hotpanda-lightblue'>" + roundedThirstPercentage + "% Full! 😊</span>";
             }
-            else if (thirstPercentage > 0.5f)
+            else if (thirstPercentage >= GameManager.PachiThirstThresholds[1])
             {
                 thirstTooltipText = "<span class='hotpanda-lightyellow'>" + roundedThirstPercentage + "% Kinda... 😐</span>";
             }
-            else if (thirstPercentage > 0.1f)
+            else if (thirstPercentage >= GameManager.PachiThirstThresholds[0])
             {
                 thirstTooltipText = "<span class='hotpanda-orange'>" + roundedThirstPercentage + "% So thirsty... 🥺</span>";
             }

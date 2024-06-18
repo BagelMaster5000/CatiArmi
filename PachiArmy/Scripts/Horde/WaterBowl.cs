@@ -5,7 +5,6 @@
         public Position Position { get; set; }
 
         private int water;
-        private const int FILL_INCREMENT = 30;
 
         public WaterBowl()
         {
@@ -20,7 +19,7 @@
         public void Fill()
         {
             if (water == GameManager.WaterBowlSize) { return; }
-            else if (GameManager.WaterBowlSize - water < FILL_INCREMENT)
+            else if (GameManager.WaterBowlSize - water < GameManager.WaterBowlFillAmount)
             {
                 int remainingSpaceInBowl = GameManager.WaterBowlSize - water;
                 if (Inventory.WaterReserve >= remainingSpaceInBowl)
@@ -36,10 +35,10 @@
             }
             else
             {
-                if (Inventory.WaterReserve >= FILL_INCREMENT)
+                if (Inventory.WaterReserve >= GameManager.WaterBowlFillAmount)
                 {
-                    water += FILL_INCREMENT;
-                    Inventory.WaterReserve -= FILL_INCREMENT;
+                    water += GameManager.WaterBowlFillAmount;
+                    Inventory.WaterReserve -= GameManager.WaterBowlFillAmount;
                 }
                 else
                 {

@@ -5,7 +5,6 @@
         public Position Position { get; set; }
 
         private int food;
-        private const int FILL_INCREMENT = 30;
 
         public FoodBowl()
         {
@@ -20,7 +19,7 @@
         public void Fill()
         {
             if (food == GameManager.FoodBowlSize) { return; }
-            else if (GameManager.FoodBowlSize - food < FILL_INCREMENT)
+            else if (GameManager.FoodBowlSize - food < GameManager.FoodBowlFillAmount)
             {
                 int remainingSpaceInBowl = GameManager.FoodBowlSize - food;
                 if (Inventory.FoodReserve >= remainingSpaceInBowl)
@@ -36,10 +35,10 @@
             }
             else
             {
-                if (Inventory.FoodReserve >= FILL_INCREMENT)
+                if (Inventory.FoodReserve >= GameManager.FoodBowlFillAmount)
                 {
-                    food += FILL_INCREMENT;
-                    Inventory.FoodReserve -= FILL_INCREMENT;
+                    food += GameManager.FoodBowlFillAmount;
+                    Inventory.FoodReserve -= GameManager.FoodBowlFillAmount;
                 }
                 else
                 {
