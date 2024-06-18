@@ -25,9 +25,20 @@
      </Container>
  </Animate>
 
+ <script>
+     function StartMusic() {
+         var bgm = document.getElementById("BGM");
+         if (!bgm.paused) { 
+         bgm.play();
+         }
+     }
+ </script>
+
  @code {
     void ClickedOnScreen()
     {
+        
+
         PageAnimationManager.NextPageAnimation = Animations.ZoomIn;
         NavigationManager.NavigateTo("Horde");
     }
