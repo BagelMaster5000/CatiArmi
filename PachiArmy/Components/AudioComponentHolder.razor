@@ -1,0 +1,50 @@
+﻿@using PachiArmy.Scripts;
+@inject IJSRuntime JS
+
+@* Music *@
+<audio id="bgm" loop src="placeholders/music.mp3" />
+<script>
+    window.playMusic = () => {
+        var bgm = document.getElementById("bgm");
+        bgm.volume = 0.5;
+        if (bgm.paused) {
+            bgm.play();
+        }
+    }
+</script>
+
+@* Menu SFX *@
+<audio id="pachi-hover" src="placeholders/click.mp3" />
+<audio id="object-hover" src="placeholders/click.mp3" />
+<audio id="message-popup" src="placeholders/click.mp3" />
+<audio id="pachi-exploded" src="placeholders/click.mp3" />
+<audio id="item-purchased" src="placeholders/click.mp3" />
+<audio id="item-failedtopurchase" src="placeholders/click.mp3" />
+<audio id="item-transitionToStore" src="placeholders/click.mp3" />
+<audio id="item-transitionToHorde" src="placeholders/click.mp3" />
+
+@* Foley SFX *@
+<audio id="pachi-idle" src="placeholders/click.mp3" />
+<audio id="pachi-eating" src="placeholders/click.mp3" />
+<audio id="pachi-drinking" src="placeholders/click.mp3" />
+<audio id="pachi-pickup" src="placeholders/click.mp3" />
+<audio id="pachi-placed" src="placeholders/click.mp3" />
+<audio id="pachi-explode" src="placeholders/click.mp3" />
+<audio id="bowl-place" src="placeholders/click.mp3" />
+<audio id="bowl-fillfood" src="placeholders/click.mp3" />
+<audio id="bowl-fillwater" src="placeholders/click.mp3" />
+<audio id="snack-place" src="placeholders/click.mp3" />
+<audio id="snack-destroy" src="placeholders/click.mp3" />
+<audio id="toy-place" src="placeholders/click.mp3" />
+<audio id="toy-destroy" src="placeholders/click.mp3" />
+
+<script>
+    window.playSound = (sound) => { document.getElementById(sound).play(); }
+</script>
+
+@code {
+    protected override void OnInitialized()
+    {
+        AudioManager.InitializeJSRuntime(JS);
+    }
+}

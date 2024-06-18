@@ -4,14 +4,6 @@
 @using PachiArmy.Components
 @using PachiArmy.Scripts;
 
-<script>
-    var bgm = document.getElementById("BGM");
-    bgm.volume = 0.5;
-    if (bgm.paused) {
-        bgm.play();
-    }
-</script>
-
 <Animate Auto Animation="PageAnimationManager.NextPageAnimation">
      <DropContainer TItem="Placeable" Items="Placeables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved">
          <ChildContent>
@@ -118,6 +110,8 @@
             PageAnimationManager.NextPageAnimation = null;
             NavigationManager.NavigateTo("Refresh");
         };
+
+        AudioManager.PlayMusic();
     }
 
     private Task ObjectMoved(DraggableDroppedEventArgs<Placeable> movePlaceable)
