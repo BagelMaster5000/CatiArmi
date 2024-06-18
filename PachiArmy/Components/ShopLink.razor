@@ -1,8 +1,9 @@
 ﻿@using PachiArmy.Scripts;
+@inject NavigationManager NavigationManager
 
 <Div Padding="Padding.Is1" Class="text-no-select">
     <Text TextSize="TextSize.Small">@GetShopMessage()</Text>
-    <Link onclick="@OnClick" To="Store" Disabled="@(!Store.IsShopAvailable())"> 
+    <Link onclick="@NavigateToStore" Disabled="@(!Store.IsShopAvailable())">
     <Div Class="@GetShopLinkClass()">
         <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
             <Container>
@@ -37,9 +38,12 @@
         return Store.IsShopAvailable() ? "store-link" : "store-link-disabled";
     }
 
-    public void OnClick()
+    public void NavigateToStore()
     {
         StoreManager.CurStore = Store;
         GameManager.ClearAllDelegateSubscriptions();
+
+        PageAnimationManager.NextPageAnimation = Animations.FadeLeft;
+        NavigationManager.NavigateTo("Store");
     }
 }

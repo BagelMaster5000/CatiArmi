@@ -1,9 +1,11 @@
 ﻿@page "/Refresh"
+@using PachiArmy.Scripts;
 @inject NavigationManager NavigationManager
 
 @code {
     protected override void OnInitialized()
     {
+        PageAnimationManager.NextPageAnimation = null;
         NavigationManager.NavigateTo("Horde");
     }
 }

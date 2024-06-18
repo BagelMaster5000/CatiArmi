@@ -1,9 +1,11 @@
 ﻿@page "/"
+@using PachiArmy.Scripts;
 @inject NavigationManager NavigationManager
 
 @code {
     protected override void OnInitialized()
     {
+        PageAnimationManager.NextPageAnimation = Animations.Fade;
         NavigationManager.NavigateTo("Title");
     }
 }

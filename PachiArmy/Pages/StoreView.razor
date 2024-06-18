@@ -1,56 +1,67 @@
 ﻿@page "/Store"
 @using PachiArmy.Components
 @using PachiArmy.Scripts;
+@inject NavigationManager NavigationManager
 
-<Container TextAlignment="TextAlignment.Center" Background="Background.Light">
-    @* Header *@
-    <Row Padding="Padding.Is2">
-        <Column ColumnSize="ColumnSize.Is1">
-            <Link onclick="@GameManager.ClearAllDelegateSubscriptions" To="Horde">
-            <Div Class="clicky-card-link">
-                <Card Padding="Padding.Is2" Margin="Margin.Is1">
-                    <CardBody>
-                        <Text>🔙</Text>
-                    </CardBody>
-                </Card>
-            </Div>
-            </Link>
-        </Column>
-        <Column ColumnSize="ColumnSize.Is10">
-            <Div Padding="Padding.Is2" />
-            <Text TextSize="TextSize.Heading1" Padding="Padding.Is2">@StoreManager.CurStore.Name</Text>
-        </Column>
-        <Column ColumnSize="ColumnSize.Is1" />
-    </Row>
+<Animate Auto Animation="PageAnimationManager.NextPageAnimation">
+     <Container TextAlignment="TextAlignment.Center" Background="Background.Light">
+         @* Header *@
+         <Row Padding="Padding.Is2">
+             <Column ColumnSize="ColumnSize.Is2">
+                 <Div Class="clicky-card-link" onclick="@NavigateToHordeView">
+                     <Card Padding="Padding.Is2" Margin="Margin.Is1">
+                         <CardBody>
+                             <Text TextSize="TextSize.ExtraLarge">🔙</Text>
+                         </CardBody>
+                     </Card>
+                 </Div>
+             </Column>
+             <Column ColumnSize="ColumnSize.Is10">
+                 <Div Padding="Padding.Is2" />
+                 <Text TextSize="TextSize.Heading1" Padding="Padding.Is2">@StoreManager.CurStore.Name</Text>
+             </Column>
+             <Column ColumnSize="ColumnSize.Is2" />
+         </Row>
 
-    @* Body *@
-    <Row>
-        <Column ColumnSize="ColumnSize.Is8" Height="Height.Rem(37)">
-            <Image Source="placeholders/Chopper.png" VerticalAlignment="VerticalAlignment.Bottom" />
-        </Column>
-        <Column ColumnSize="ColumnSize.Is4">
-            <Container TextAlignment="TextAlignment.Center" Padding="Padding.Is2">
-                @* Resources *@
-                <ResourcesPanel />
+         @* Body *@
+         <Row>
+             <Column ColumnSize="ColumnSize.Is8" Height="Height.Rem(37)">
+                 <Image Source="placeholders/Chopper.png" VerticalAlignment="VerticalAlignment.Bottom" />
+             </Column>
+             <Column ColumnSize="ColumnSize.Is4">
+                 <Container TextAlignment="TextAlignment.Center" Padding="Padding.Is2">
+                     @* Resources *@
+                     <ResourcesPanel />
 
-                <Div Padding="Padding.Is2" />
+                     <Div Padding="Padding.Is2" />
 
-                @* ShopWindow *@
-                <ShopWindow Store="@StoreManager.CurStore" />
-            </Container>
-        </Column>
-    </Row>
+                     @* ShopWindow *@
+                     <ShopWindow Store="@StoreManager.CurStore" />
+                 </Container>
+             </Column>
+         </Row>
 
-    @* Dialog Box *@
-    <Row Padding="Padding.Is4" Background="Background.Light">
-        <Card Height="Height.Rem(15)">
-            <CardBody style="display: grid; align-items: center;">
-                <Text VerticalAlignment="VerticalAlignment.Middle"TextSize="TextSize.ExtraLarge">
-                    Hello there!
-                    <br/>
-                    My name is Chopper, welcome to my toy store.
-                </Text>
-            </CardBody>
-        </Card>
-    </Row>
-</Container>
+         @* Dialog Box *@
+         <Row Padding="Padding.Is4" Background="Background.Light">
+             <Card Height="Height.Rem(15)">
+                 <CardBody style="display: grid; align-items: center;">
+                     <Text VerticalAlignment="VerticalAlignment.Middle" TextSize="TextSize.ExtraLarge">
+                         Hello there!
+                         <br />
+                         My name is Chopper, welcome to my toy store.
+                     </Text>
+                 </CardBody>
+             </Card>
+         </Row>
+     </Container>
+ </Animate>
+
+ @code {
+    void NavigateToHordeView()
+    {
+        GameManager.ClearAllDelegateSubscriptions();
+
+        PageAnimationManager.NextPageAnimation = Animations.FadeRight;
+        NavigationManager.NavigateTo("Horde");
+    }
+}

@@ -5,7 +5,7 @@
         public Position Position { get; set; }
         public string Test { get; set; }
 
-        private const int INITIAL_DURABILITY = 30;
+        private const int INITIAL_DURABILITY = 5;
         private int durability;
 
         public Snack()

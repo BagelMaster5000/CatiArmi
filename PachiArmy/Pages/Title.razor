@@ -1,30 +1,34 @@
 ﻿@page "/Title"
+@using PachiArmy.Scripts;
 @inject NavigationManager NavigationManager
 
-<Container TextAlignment="TextAlignment.Center" Background="Background.Light" Height="Height.Rem(61)" Class="text-no-select" onclick="@ClickedOnScreen">
-    <Div Height="Height.Rem(16)"></Div>
-    <Text TextSize="TextSize.Heading1">CatiArmi</Text>
-    <br/>
-    <Text TextSize="TextSize.Large" Style="text-decoration: underline;">Credits</Text>
-    <br/>
-    <Text TextSize="TextSize.Large">Sammy Mahmoudi - Team Lead, Programmer</Text>
-    <br/>
-    <Text TextSize="TextSize.Large">Fran - Shopkeep Character Art, Writing</Text>
-    <br/>
-    <Text TextSize="TextSize.Large">Michael Bravo - UI Art</Text>
-    <br/>
-    <Text TextSize="TextSize.Large">Kris Olivares - Menu SFX, Music</Text>
-    <br/>
-    <Text TextSize="TextSize.Large">Chris Hahn - Foley SFX</Text>
-    <br/>
-    <Text TextSize="TextSize.Large">Andy Vo - Victory Illustration</Text>
-    <Div Height="Height.Rem(5)"></Div>
-    <Text TextSize="TextSize.Large" Class="blink_me">Click Anywhere to Start</Text>
-</Container>
+<Animate Auto Animation="PageAnimationManager.NextPageAnimation">
+     <Container TextAlignment="TextAlignment.Center" Background="Background.Light" Height="Height.Rem(61)" Class="text-no-select" onclick="@ClickedOnScreen">
+         <Div Height="Height.Rem(18)"></Div>
+         <Text TextSize="TextSize.Heading1">CatiArmi</Text>
+         <br />
+         <Text TextSize="TextSize.Large" Style="text-decoration: underline;">Credits</Text>
+         <br />
+         <Text TextSize="TextSize.Large">Sammy Mahmoudi - Team Lead, Programmer</Text>
+         <br />
+         <Text TextSize="TextSize.Large">Fran - Shopkeep Character Art, Writing</Text>
+         <br />
+         <Text TextSize="TextSize.Large">Michael Bravo - UI Art</Text>
+         <br />
+         <Text TextSize="TextSize.Large">Kris Olivares - Menu SFX, Music</Text>
+         <br />
+         <Text TextSize="TextSize.Large">Chris Hahn - Foley SFX</Text>
+         <br />
+         <Text TextSize="TextSize.Large">Andy Vo - Victory Illustration</Text>
+         <Div Height="Height.Rem(5)"></Div>
+         <Text TextSize="TextSize.Large" Class="blink_me">Click Anywhere to Start</Text>
+     </Container>
+ </Animate>
 
-@code {
+ @code {
     void ClickedOnScreen()
     {
+        PageAnimationManager.NextPageAnimation = Animations.ZoomIn;
         NavigationManager.NavigateTo("Horde");
     }
 }
