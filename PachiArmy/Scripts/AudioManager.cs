@@ -1,6 +1,6 @@
 ﻿using Microsoft.JSInterop;
 
-namespace PachiArmy.Scripts
+namespace CatiArmi.Scripts
 {
     public static class AudioManager
     {

@@ -1,8 +1,8 @@
 ﻿@page "/Horde"
 @inject NavigationManager NavigationManager
 
-@using PachiArmy.Components
-@using PachiArmy.Scripts;
+@using CatiArmi.Components
+@using CatiArmi.Scripts;
 
 <Animate Auto Animation="PageAnimationManager.NextPageAnimation">
      <DropContainer TItem="Placeable" Items="Placeables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved">

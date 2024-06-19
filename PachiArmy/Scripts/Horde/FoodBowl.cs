@@ -1,4 +1,4 @@
-﻿namespace PachiArmy.Scripts
+﻿namespace CatiArmi.Scripts
 {
     public class FoodBowl : InteractablePlaceable
     {

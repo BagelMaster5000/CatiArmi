@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace PachiArmy.Scripts
+namespace CatiArmi.Scripts
 {
     public class Pachimari : Placeable
     {

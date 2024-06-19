@@ -1,6 +1,6 @@
 ﻿using Blazorise.Animate;
 
-namespace PachiArmy.Scripts
+namespace CatiArmi.Scripts
 {
     public static class PageAnimationManager
     {

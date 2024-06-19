@@ -1,6 +1,6 @@
 ﻿using Timer = System.Timers.Timer;
 
-namespace PachiArmy.Scripts
+namespace CatiArmi.Scripts
 {
     public static class GlobalTimer
     {

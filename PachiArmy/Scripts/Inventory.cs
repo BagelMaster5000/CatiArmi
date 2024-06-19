@@ -1,6 +1,6 @@
 ﻿using System.Timers;
 
-namespace PachiArmy.Scripts
+namespace CatiArmi.Scripts
 {
     public static class Inventory
     {
