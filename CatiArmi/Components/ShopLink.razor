@@ -5,14 +5,21 @@
     <Text TextSize="TextSize.Small">@GetShopMessage()</Text>
     <Link onclick="@NavigateToStore" Disabled="@(!Store.IsShopAvailable())">
     <Div Class="@GetShopLinkClass()">
-        <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
-            <Container>
-                <Span>
-                    <Image Source="@Store.Icon" Width="Width.Rem(3)" />
-                    <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@Store.Name</Text>
-                </Span>
-            </Container>
-        </Card>
+@*         <Container>
+            <Span>
+                <Image Source="@Store.Icon" Width="Width.Rem(3)" />
+                <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@Store.Name</Text>
+            </Span>
+            <Image Source="art/ui/shoplink-active.png" Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100" />
+        </Container> *@
+
+        <Div class="gallery-item">
+            <Image Source="@GetImage()" Width="Width.Rem(16)" Height="Height.Rem(5)" />
+            <Span Class="centered">
+                <Image Source="@GetStoreIcon()" Width="Width.Rem(3)" />
+                <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@GetStoreDisplayName()</Text>
+            </Span>
+        </Div>
     </Div>
     </Link>
 </Div>
@@ -21,7 +28,7 @@
     [Parameter]
     public Store Store { get; set; } = default!;
 
-    public string GetShopMessage()
+    string GetShopMessage()
     {
         if (Store.IsShopAvailable())
         {
@@ -33,9 +40,45 @@
         }
     }
 
-    public string GetShopLinkClass()
+    string GetShopLinkClass()
     {
         return Store.IsShopAvailable() ? "store-link" : "store-link-disabled";
+    }
+
+    string GetImage()
+    {
+        if (Store.IsShopAvailable())
+        {
+            return "art/ui/shoplink-active.png";
+        }
+        else
+        {
+            return "art/ui/shoplink-disabled2.png";
+        }
+    }
+
+    string GetStoreDisplayName()
+    {
+        if (Store.IsShopAvailable())
+        {
+            return Store.DisplayName;
+        }
+        else
+        {
+            return Store.DisplayName;
+        }
+    }
+
+    string GetStoreIcon()
+    {
+        if (Store.IsShopAvailable())
+        {
+            return Store.Icon;
+        }
+        else
+        {
+            return "art/ui/lock.png";
+        }
     }
 
     public void NavigateToStore()

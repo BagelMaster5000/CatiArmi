@@ -12,6 +12,7 @@
                 new Store()
                 {
                     Name = "Placeholder's Pet Store",
+                    DisplayName = "Pet Store",
                     Icon = "placeholders/pachimari-idle.png",
                     PachisToUnlock = 0,
                     ItemsForSale = new List<StoreItem>()
@@ -26,6 +27,7 @@
                 new Store()
                 {
                     Name = "Placeholder's Candy Store",
+                    DisplayName = "Candy Store",
                     Icon = "placeholders/pachimari-idle.png",
                     PachisToUnlock = 20,
                     ItemsForSale = new List<StoreItem>()
@@ -40,6 +42,7 @@
                 new Store()
                 {
                     Name = "Placeholder's Toy Store",
+                    DisplayName = "Toy Store",
                     Icon = "placeholders/pachimari-idle.png",
                     PachisToUnlock = 50,
                     ItemsForSale = new List<StoreItem>()

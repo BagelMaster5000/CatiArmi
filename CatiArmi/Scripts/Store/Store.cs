@@ -3,6 +3,7 @@
     public class Store
     {
         public string Name;
+        public string DisplayName;
         public string Icon;
         public int PachisToUnlock;
         public List<StoreItem> ItemsForSale;

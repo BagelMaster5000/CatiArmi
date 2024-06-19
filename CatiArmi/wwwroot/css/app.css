@@ -297,6 +297,7 @@ a, .btn-link {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    position: relative;
 }
 
     .store-link:hover {
@@ -320,6 +321,7 @@ a, .btn-link {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    position: relative;
 }
 
     .store-link-disabled:hover {
@@ -331,6 +333,13 @@ a, .btn-link {
         transition: 0s;
     }
 
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .blink_me {
     animation: blinker 2s linear infinite;
 }
@@ -339,6 +348,10 @@ a, .btn-link {
     50% {
         opacity: 0;
     }
+}
+
+.a {
+    color: red;
 }
 
 .app {
