@@ -26,7 +26,7 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Build Site
-      working-directory: ./PachiArmi
+      working-directory: ./PachiArmy
       run: dotnet publish --configuration Release --output build
 
     - name: Setup Pages
@@ -35,7 +35,7 @@ jobs:
     - name: Upload Built Site as Pages Artifact
       uses: actions/upload-pages-artifact@v2
       with:
-        path: PachiArmi/build/wwwroot
+        path: PachiArmy/build/wwwroot
 
   deploy:
     environment:
