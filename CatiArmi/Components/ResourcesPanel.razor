@@ -1,26 +1,45 @@
 ﻿@using CatiArmi.Scripts;
 <Row Padding="Padding.Is2">
-    <Column ColumnSize="ColumnSize.Is4" Background="Background.Warning" Padding="Padding.Is2">
+    <Column ColumnSize="ColumnSize.Is4" Padding="Padding.Is2">
+        <Div Padding="Padding.Is2"/>
         <Row Padding="Padding.Is2">
-            <Container>
-                <Image Source="placeholders/coin.png" Width="Width.Is50"></Image>
-            </Container>
-        </Row>
-        <Row Padding="Padding.Is1">
-            <Text>$@Inventory.Money</Text>
+            <Column ColumnSize="ColumnSize.Is5">
+                <Image Source="placeholders/coin.png" Width="Width.Rem(3)" Height="Height.Rem(3)"></Image>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is7">
+                <Div Padding="Padding.Is1"/>
+                <Text TextSize="TextSize.Large">$@Inventory.Money</Text>
+            </Column>
         </Row>
     </Column>
     <Column ColumnSize="ColumnSize.Is8" Background="Background.Light" Padding="Padding.Is2">
         <Div Padding="Padding.Is2" Height="Height.Rem(3)">
-            <Text Height="Height.Is25">Food Reserve</Text>
-            <Progress Value="@((int)Inventory.FoodReserve)" Max="@((int)Inventory.MaxFoodReserve)" Height="Height.Is75" Color="Color.Danger" />
+            @* <Text Height="Height.Is25">Food Reserve</Text> *@
+            <Row Height="Height.Rem(3)">
+                <Column ColumnSize="ColumnSize.Is2">
+                    <Image Source="art/ui/food.png" Height="Height.Rem(2.3)" Width="Width.Rem(2.3)" />
+                </Column>
+                <Column ColumnSize="ColumnSize.Is2">
+                    <Div Class="gallery-item" Padding="Padding.Is1">
+                        <Image Source="art/ui/bar-foodfill.png" Style="@GetFoodFillStyle()" Width="Width.Rem(12)" Height="Height.Rem(1.7)" />
+                        <Image Source="art/ui/bar-outline.png" Width="Width.Rem(12)" Height="Height.Rem(1.7)" />
+                    </Div>
+                </Column>
+            </Row>
         </Div>
-        <Div Padding="Padding.Is1" />
         <Div Padding="Padding.Is2" Height="Height.Rem(3)">
-            <Text Height="Height.Is25">Water Reserve</Text>
-            <Progress Value="@((int)Inventory.WaterReserve)" Max="@((int)Inventory.MaxWaterReserve)" Height="Height.Is75" />
+            <Row Height="Height.Rem(3)">
+                <Column ColumnSize="ColumnSize.Is2">
+                    <Image Source="art/ui/water.png" Height="Height.Rem(2.3)" Width="Width.Rem(2.3)" />
+                </Column>
+                <Column ColumnSize="ColumnSize.Is2">
+                    <Div Class="gallery-item" Padding="Padding.Is1">
+                        <Image Source="art/ui/bar-waterfill.png" Style="@GetWaterFillStyle()" Width="Width.Rem(12)" Height="Height.Rem(1.7)" />
+                        <Image Source="art/ui/bar-outline.png" Width="Width.Rem(12)" Height="Height.Rem(1.7)" />
+                    </Div>
+                </Column>
+            </Row>
         </Div>
-        <Div Padding="Padding.Is2" />
     </Column>
 </Row>
 
@@ -28,5 +47,19 @@
     public ResourcesPanel()
     {
         Inventory.ResourcesUpdated += StateHasChanged;
+    }
+
+    string GetFoodFillStyle()
+    {
+        float foodFillPercentage = Inventory.FoodReserve * 1.0f / Inventory.MaxFoodReserve;
+        string foodFillClipAmount = (foodFillPercentage * 12) + "rem";
+        return "position: absolute; clip: rect(0, " + foodFillClipAmount + ", 2rem, 0);";
+    }
+
+    string GetWaterFillStyle()
+    {
+        float waterFillPercentage = Inventory.WaterReserve * 1.0f / Inventory.MaxWaterReserve;
+        string waterFillClipAmount = (waterFillPercentage * 15) + "rem";
+        return "position: absolute; clip: rect(0, " + waterFillClipAmount + ", 2rem, 0);";
     }
 }

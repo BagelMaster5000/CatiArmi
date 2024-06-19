@@ -1,25 +1,15 @@
 ﻿@using CatiArmi.Scripts;
 @inject NavigationManager NavigationManager
 
-<Div Padding="Padding.Is1" Class="text-no-select">
+<Div Padding="Padding.Is1" Class="text-no-select" TextAlignment="TextAlignment.Center">
     <Text TextSize="TextSize.Small">@GetShopMessage()</Text>
     <Link onclick="@NavigateToStore" Disabled="@(!Store.IsShopAvailable())">
     <Div Class="@GetShopLinkClass()">
-@*         <Container>
-            <Span>
-                <Image Source="@Store.Icon" Width="Width.Rem(3)" />
-                <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@Store.Name</Text>
-            </Span>
-            <Image Source="art/ui/shoplink-active.png" Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100" />
-        </Container> *@
-
-        <Div class="gallery-item">
-            <Image Source="@GetImage()" Width="Width.Rem(16)" Height="Height.Rem(5)" />
-            <Span Class="centered">
-                <Image Source="@GetStoreIcon()" Width="Width.Rem(3)" />
-                <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@GetStoreDisplayName()</Text>
-            </Span>
-        </Div>
+        <Image Source="@GetImage()" Width="Width.Rem(16)" Height="Height.Rem(5)" />
+        <Span Class="centered">
+            <Image Source="@GetStoreIcon()" Width="Width.Rem(3)" />
+            <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@GetStoreDisplayName()</Text>
+        </Span>
     </Div>
     </Link>
 </Div>

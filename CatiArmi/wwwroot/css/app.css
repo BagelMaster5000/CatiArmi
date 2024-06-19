@@ -340,6 +340,12 @@ a, .btn-link {
     transform: translate(-50%, -50%);
 }
 
+.bar-icon {
+    position: absolute;
+    left: 0;
+    transform: translate(50%, 0%);
+}
+
 .blink_me {
     animation: blinker 2s linear infinite;
 }
@@ -348,10 +354,6 @@ a, .btn-link {
     50% {
         opacity: 0;
     }
-}
-
-.a {
-    color: red;
 }
 
 .app {
