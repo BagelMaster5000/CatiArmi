@@ -40,7 +40,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: catiarmi.${{steps.deployment.outputs.page_url}}
+      url: ${{steps.deployment.outputs.page_url}}
 
     runs-on: ubuntu-latest
 
