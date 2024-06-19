@@ -26,8 +26,8 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Build Site
-      working-directory: ./CatiArmi
-      run: dotnet publish --configuration Release --output build
+      working-directory: ./
+      run: dotnet publish --configuration Release build
 
     - name: Setup Pages
       id: pages
