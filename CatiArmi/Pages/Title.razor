@@ -37,10 +37,17 @@
  </script>
 
  @code {
+    protected override void OnInitialized()
+    {
+        Task.Run(async () =>
+        {
+            await Task.Delay(100);
+            PageAnimationManager.NextPageAnimation = Animations.Fade;
+        });
+    }
+
     void ClickedOnScreen()
     {
-        
-
         PageAnimationManager.NextPageAnimation = Animations.ZoomIn;
         NavigationManager.NavigateTo("Horde");
     }

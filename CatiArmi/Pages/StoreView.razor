@@ -57,6 +57,15 @@
  </Animate>
 
  @code {
+    protected override void OnInitialized()
+    {
+        Task.Run(async () =>
+        {
+            await Task.Delay(100);
+            PageAnimationManager.NextPageAnimation = Animations.Fade;
+        });
+    }
+
     void NavigateToHordeView()
     {
         GameManager.ClearAllDelegateSubscriptions();

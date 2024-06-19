@@ -340,3 +340,19 @@ a, .btn-link {
         opacity: 0;
     }
 }
+
+.app {
+    /*    transform: scale(0.8);
+    transform-origin: top;*/
+
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+
+    touch-action: none
+}
+
+/*.page {
+    transform: scale(0.2);
+    transform-origin: top;
+}*/

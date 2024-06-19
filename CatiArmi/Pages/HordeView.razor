@@ -5,7 +5,7 @@
 @using CatiArmi.Scripts;
 
 <Animate Auto Animation="PageAnimationManager.NextPageAnimation">
-     <DropContainer TItem="Placeable" Items="Placeables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved">
+     <DropContainer TItem="Placeable" Items="Placeables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved" @ontouchmove:preventDefault="true" @ontouchcancel:preventDefault="true" Style="touch-action: none">
          <ChildContent>
              <Container TextAlignment="TextAlignment.Center" Background="Background.Light">
                  <Row Padding="Padding.Is2">
@@ -110,6 +110,12 @@
             PageAnimationManager.NextPageAnimation = null;
             NavigationManager.NavigateTo("Refresh");
         };
+
+        Task.Run(async () =>
+        {
+            await Task.Delay(100);
+            PageAnimationManager.NextPageAnimation = Animations.Fade;
+        });
 
         AudioManager.PlayMusic();
     }
