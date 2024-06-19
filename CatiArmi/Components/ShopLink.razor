@@ -2,15 +2,21 @@
 @inject NavigationManager NavigationManager
 
 <Div Padding="Padding.Is1" Class="text-no-select" TextAlignment="TextAlignment.Center">
-    <Text TextSize="TextSize.Small">@GetShopMessage()</Text>
     <Link onclick="@NavigateToStore" Disabled="@(!Store.IsShopAvailable())">
-    <Div Class="@GetShopLinkClass()">
-        <Image Source="@GetImage()" Width="Width.Rem(16)" Height="Height.Rem(5)" />
-        <Span Class="centered">
-            <Image Source="@GetStoreIcon()" Width="Width.Rem(3)" />
-            <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@GetStoreDisplayName()</Text>
-        </Span>
-    </Div>
+    <Container Width="Width.Is75" Class="@GetShopLinkClass()">
+        <Image Source="@GetImage()" Width="Width.Is100" Height="Height.Rem(5)" />
+        <Row Class="centered" Width="Width.Rem(13)">
+            <Column ColumnSize="ColumnSize.Is5">
+                <Image Source="@GetStoreIcon()" Height="Height.Rem(3.5)" />
+            </Column>
+            <Column ColumnSize="ColumnSize.Is7" TextAlignment="TextAlignment.Start">
+                <Div Padding="Padding.Is1" />
+                <Text VerticalAlignment="VerticalAlignment.Bottom">@GetStoreDisplayName()</Text>
+                <br />
+                <Text VerticalAlignment="VerticalAlignment.Top" TextSize="TextSize.ExtraSmall">@GetShopMessage()</Text>
+            </Column>
+        </Row>
+    </Container>
     </Link>
 </Div>
 
@@ -26,7 +32,7 @@
         }
         else
         {
-            return "🔒 " + Inventory.GetTotalPachiCount() + " / " + Store.PachisToUnlock + " Pachis";
+            return Inventory.GetTotalPachiCount() + " / " + Store.PachisToUnlock + " Catis";
         }
     }
 

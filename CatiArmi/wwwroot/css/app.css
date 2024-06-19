@@ -337,7 +337,7 @@ a, .btn-link {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-45%, -50%);
 }
 
 .bar-icon {
@@ -350,6 +350,16 @@ a, .btn-link {
     animation: blinker 2s linear infinite;
 }
 
+.barracks {
+    background-image: url("/art/ui/barracks-closed.png"); /* Initial background image */
+    background-size: cover; /* Cover the entire area of the element */
+    transition: background-image 0s;
+}
+
+.barracks-hover {
+    background-image: url("/art/ui/barracks-open.png"); /* Change on hover */
+}
+    
 @keyframes blinker {
     50% {
         opacity: 0;

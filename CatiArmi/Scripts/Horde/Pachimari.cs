@@ -62,7 +62,7 @@ namespace CatiArmi.Scripts
         {
             BoardManager.RemovePlaceable(this);
 
-            int numPachisToCreate = RandomNumberGenerator.GetInt32(GameManager.NumPachisPerExplosionMin, GameManager.NumPachisPerExplosionMax);
+            int numPachisToCreate = RandomNumberGenerator.GetInt32(GameManager.NumPachisPerExplosionMin, GameManager.NumPachisPerExplosionMax + 1);
             for (int i = 0; i < numPachisToCreate; i++)
             {
                 BoardManager.AddNewPachimari();

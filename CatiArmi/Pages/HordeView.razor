@@ -36,59 +36,44 @@
                             <ResourcesPanel />
 
                             @* Pachi Count *@
-                            <Row Padding="Padding.Is2">
-                                <Row Padding="Padding.Is2">
-                                    <Column ColumnSize="ColumnSize.Is3">
-                                        <DropZone Padding="Padding.Is1" TItem="Placeable" Name="Storage" DropAllowed=@CanStorePlaceable>
-                                            <Image Source="art/ui/barracks-closed.png" Height="Height.Rem(5)" />
-                                        </DropZone>
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is2">
-                                        <Div Padding="Padding.Is2" />
-                                        <Image Source="placeholders/pachimari-idle.png" Height="Height.Rem(4)" />
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is7" TextAlignment="TextAlignment.Start">
-                                        <Container>
-                                            <Div Padding="Padding.Is2" />
-                                            <Div>
-                                                <Text TextSize="TextSize.Large">@Inventory.StoredPachis Catis chilling</Text>
-                                            </Div>
-                                            <Div>
-                                                <Text TextSize="TextSize.Large">in the battle house</Text>
-                                            </Div>
-                                        </Container>
-                                    </Column>
-                                </Row>
+                            <Row>
+                                <Container TextAlignment="TextAlignment.Center" Width="Width.Is50">
+                                    <DropZone Height="Height.Rem(9)" Padding="Padding.Is1" TItem="Placeable" Name="Storage" DropAllowed=@CanStorePlaceable Class="barracks" DropAllowedClass="barracks-hover" DropNotAllowedClass="barracks-hover" />
+                                </Container>
+                                <Div Padding="Padding.Is1" />
+                                <Text TextSize="TextSize.Large">@Inventory.StoredPachis Catis in battle barracks</Text>
                             </Row>
 
+                            <Div Padding="Padding.Is1" />
+
                             @* Store Links *@
-                            <Row Padding="Padding.Is2">
-                                <Text TextSize="TextSize.ExtraLarge">Store Links</Text>
+                            <Row>
+                                <Text TextSize="TextSize.ExtraLarge" Style="text-decoration: underline">Store Links</Text>
                                 <ShopLink Store=StoreManager.Stores[0] />
                                 <ShopLink Store=StoreManager.Stores[1] />
                                 <ShopLink Store=StoreManager.Stores[2] />
                             </Row>
 
-                            <Div Padding="Padding.Is2" />
+                            <Div Padding="Padding.Is1" />
 
                             @* Win Game Button *@
-                            <Row Padding="Padding.Is2">
-                                <Div Padding="Padding.Is2" Class="text-no-select">
-                                    <Text TextSize="TextSize.Small">🔒 @Inventory.GetTotalPachiCount()/@GameManager.PachisToWin Pachis</Text>
-                                    <Link Disabled="true">
-                                    <Div Class="@GetWinGameButtonClass()">
-                                        <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
-                                            <Container>
-                                                <Div Padding="Padding.Is3" />
-                                                <Text Padding="Padding.Is2" Margin="Margin.Is2" VerticalAlignment="VerticalAlignment.Middle" TextSize="TextSize.Large">
-                                                    ⭐ Take over the world ⭐
-                                                </Text>
-                                                <Div Padding="Padding.Is3" />
-                                            </Container>
-                                        </Card>
-                                    </Div>
-                                    </Link>
-                                </Div>
+                            <Row>
+                                <Link Disabled="true">
+                                <Container Width="Width.Is100" Class="@GetWinButtonLinkClass()">
+                                    <Image Source="@GetWinButtonImage()" Width="Width.Is100" Height="Height.Rem(8)" />
+                                    <Row Class="centered" Width="Width.Rem(18)">
+                                        <Column ColumnSize="ColumnSize.Is4" TextAlignment="TextAlignment.End">
+                                            <Image Source="art/ui/catiexplosion.png" Height="Height.Rem(5)" />
+                                        </Column>
+                                        <Column ColumnSize="ColumnSize.Is8" TextAlignment="TextAlignment.Start">
+                                            <Div Padding="Padding.Is2" />
+                                            <Text TextSize="TextSize.Large" VerticalAlignment="VerticalAlignment.Middle">Take over world</Text>
+                                            <br />
+                                            <Text TextSize="TextSize.Small">@GetWinButtonMessage()</Text>
+                                        </Column>
+                                    </Row>
+                                </Container>
+                                </Link>
                             </Row>
                         </Container>
                     </Column>
@@ -106,7 +91,8 @@
 
     protected override void OnInitialized()
     {
-        BoardManager.ForceBoardRefresh = () => {
+        BoardManager.ForceBoardRefresh = () =>
+        {
             PageAnimationManager.NextPageAnimation = null;
             NavigationManager.NavigateTo("Refresh");
         };
@@ -159,5 +145,34 @@
         }
 
         return false;
+    }
+
+    string GetWinButtonLinkClass()
+    {
+        return (Inventory.GetTotalPachiCount() >= GameManager.PachisToWin) ? "store-link" : "store-link-disabled";
+    }
+
+    string GetWinButtonImage()
+    {
+        if (Inventory.GetTotalPachiCount() >= GameManager.PachisToWin)
+        {
+            return "art/ui/winbutton-active.png";
+        }
+        else
+        {
+            return "art/ui/winbutton-disabled.png";
+        }
+    }
+
+    string GetWinButtonMessage()
+    {
+        if (Inventory.GetTotalPachiCount() >= GameManager.PachisToWin)
+        {
+            return "Catis are ready!";
+        }
+        else
+        {
+            return Inventory.GetTotalPachiCount() + " / " + GameManager.PachisToWin + " Catis";
+        }
     }
 }
