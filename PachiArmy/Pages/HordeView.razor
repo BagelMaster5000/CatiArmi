@@ -126,7 +126,18 @@
         var position = Scripts.Position.ParsePositionFromString(movePlaceable.DropZoneName);
         BoardManager.MovePlaceable(movePlaceable.Item, position);
 
+        if (typeof(Pachimari).IsAssignableFrom(movePlaceable.Item.GetType())) { AudioManager.PlaySound("pachi-place"); }
+        else if (typeof(FoodBowl).IsAssignableFrom(movePlaceable.Item.GetType())) { AudioManager.PlaySound("bowl-place"); }
+        else if (typeof(WaterBowl).IsAssignableFrom(movePlaceable.Item.GetType())) { AudioManager.PlaySound("bowl-place"); }
+        else if (typeof(Snack).IsAssignableFrom(movePlaceable.Item.GetType())) { AudioManager.PlaySound("snack-place"); }
+        else if (typeof(Toy).IsAssignableFrom(movePlaceable.Item.GetType())) { AudioManager.PlaySound("toy-place"); }
+
+
         return Task.CompletedTask;
+    }
+
+    private void Dragged(Placeable placeable)
+    {
     }
 
     public string GetWinGameButtonClass()

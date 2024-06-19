@@ -5,6 +5,7 @@
         public Position Position { get; set; }
 
         public void Clicked();
+        public void Hovered();
         public string GetImage();
         public string GetHoverText();
     }

@@ -4,16 +4,13 @@
     {
         public int SnackType;
 
-        public override void TryPurchase()
+        public override bool TryPurchase()
         {
-            if (!CanPurchase())
-            {
-                return;
-            }
-
-            base.TryPurchase();
+            if (!base.TryPurchase()) { return false; }
 
             BoardManager.AddNewSnack(SnackType);
+
+            return true;
         }
     }
 }

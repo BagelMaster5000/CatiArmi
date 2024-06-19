@@ -20,10 +20,17 @@
             if (durability == 0)
             {
                 BoardManager.RemovePlaceable(this);
+
+                AudioManager.PlaySound("snack-destroy");
             }
         }
 
         // Hover behavior
+        public void Hovered()
+        {
+            AudioManager.PlaySound("object-hover");
+        }
+
         public string GetHoverText()
         {
             return "<strong>Remaining:</strong> " + durability;
@@ -47,6 +54,8 @@
                 if (ate)
                 {
                     durability--;
+
+                    invokerPachimari.SetState(Pachimari.PachiState.Eating);
                 }
             }
         }

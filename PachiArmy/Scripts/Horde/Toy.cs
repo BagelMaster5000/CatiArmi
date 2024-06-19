@@ -20,10 +20,17 @@
             if (durability == 0)
             {
                 BoardManager.RemovePlaceable(this);
+                
+                AudioManager.PlaySound("toy-destroy");
             }
         }
 
         // Hover behavior
+        public void Hovered()
+        {
+            AudioManager.PlaySound("object-hover");
+        }
+
         public string GetHoverText()
         {
             return "<strong>Durability:</strong> " + durability + "/" + INITIAL_DURABILITY;
@@ -47,6 +54,8 @@
                 if (played)
                 {
                     durability--;
+
+                    invokerPachimari.SetState(Pachimari.PachiState.Playing);
                 }
             }
         }

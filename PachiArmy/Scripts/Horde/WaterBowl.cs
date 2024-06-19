@@ -48,9 +48,16 @@
             }
 
             Inventory.InvokeResourcesUpdated();
+
+            AudioManager.PlaySound("bowl-waterfill");
         }
 
         // Hover behavior
+        public void Hovered()
+        {
+            AudioManager.PlaySound("object-hover");
+        }
+
         public string GetHoverText()
         {
             return "<strong>Fill:</strong> " + water + "/" + GameManager.WaterBowlSize;
@@ -74,6 +81,8 @@
                 if (drank)
                 {
                     water--;
+
+                    invokerPachimari.SetState(Pachimari.PachiState.Drinking);
                 }
             }
         }

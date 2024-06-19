@@ -14,11 +14,13 @@
             return !OutOfStock && Inventory.Money >= Price;
         }
 
-        public virtual void TryPurchase()
+        public virtual bool TryPurchase()
         {
             if (!CanPurchase())
             {
-                return;
+                AudioManager.PlaySound("item-failedtopurchase");
+
+                return false;
             }
 
             Inventory.Money -= Price;
@@ -27,6 +29,10 @@
             {
                 OutOfStock = true;
             }
+
+            AudioManager.PlaySound("item-purchased");
+
+            return true;
         }
     }
 }

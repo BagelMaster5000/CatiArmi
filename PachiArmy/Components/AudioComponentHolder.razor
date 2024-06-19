@@ -7,39 +7,116 @@
     window.playMusic = () => {
         var bgm = document.getElementById("bgm");
         bgm.volume = 0.5;
-        if (bgm.paused) {
-            bgm.play();
-        }
+        // if (bgm.paused) {
+        //     bgm.play();
+        // }
     }
 </script>
 
-@* Menu SFX *@
-<audio id="pachi-hover" src="placeholders/click.mp3" />
-<audio id="object-hover" src="placeholders/click.mp3" />
-<audio id="message-popup" src="placeholders/click.mp3" />
-<audio id="pachi-exploded" src="placeholders/click.mp3" />
-<audio id="item-purchased" src="placeholders/click.mp3" />
-<audio id="item-failedtopurchase" src="placeholders/click.mp3" />
-<audio id="item-transitionToStore" src="placeholders/click.mp3" />
-<audio id="item-transitionToHorde" src="placeholders/click.mp3" />
-
-@* Foley SFX *@
-<audio id="pachi-idle" src="placeholders/click.mp3" />
-<audio id="pachi-eating" src="placeholders/click.mp3" />
-<audio id="pachi-drinking" src="placeholders/click.mp3" />
-<audio id="pachi-pickup" src="placeholders/click.mp3" />
-<audio id="pachi-placed" src="placeholders/click.mp3" />
-<audio id="pachi-explode" src="placeholders/click.mp3" />
-<audio id="bowl-place" src="placeholders/click.mp3" />
-<audio id="bowl-fillfood" src="placeholders/click.mp3" />
-<audio id="bowl-fillwater" src="placeholders/click.mp3" />
-<audio id="snack-place" src="placeholders/click.mp3" />
-<audio id="snack-destroy" src="placeholders/click.mp3" />
-<audio id="toy-place" src="placeholders/click.mp3" />
-<audio id="toy-destroy" src="placeholders/click.mp3" />
-
+<audio id="sound0" />
+<audio id="sound1" />
+<audio id="sound2" />
+<audio id="sound3" />
 <script>
-    window.playSound = (sound) => { document.getElementById(sound).play(); }
+    const sounds = [
+    @* Menu SFX *@
+        { name: "pachi-hover", filePath: "audio/menu/hover-pachi.mp3" },
+        { name: "object-hover", filePath: "audio/silence.mp3" },
+        { name: "message-popup", filePath: "audio/menu/popup.mp3" },
+        { name: "pachi-exploded", filePath: "audio/silence.mp3" },
+        { name: "item-purchased", filePath: "audio/menu/purchase-success.mp3" },
+        { name: "item-failedtopurchase", filePath: "audio/menu/purchase-fail.mp3" },
+        { name: "transitionToStore", filePath: "audio/menu/transition-right.mp3" },
+        { name: "transitionToHorde", filePath: "audio/menu/transition-left.mp3" },
+
+    @* Foley SFX *@
+        { name: "pachi-idle", filePath: "audio/silence.mp3" },
+        { name: "pachi-eating", filePath: "audio/foley/pachi-eat.mp3" },
+        { name: "pachi-drinking", filePath: "audio/foley/pachi-drink.mp3" },
+        { name: "pachi-pickup", filePath: "audio/foley/pachi-pickup.mp3" },
+        { name: "pachi-place", filePath: "audio/foley/pachi-place.mp3" },
+        { name: "pachi-explode", filePath: "audio/foley/pachi-explode.mp3" },
+        { name: "bowl-place", filePath: "audio/foley/bowl-place.mp3" },
+        { name: "bowl-foodfill", filePath: "audio/foley/bowl-foodfill.mp3" },
+        { name: "bowl-waterfill", filePath: "audio/foley/bowl-waterfill.mp3" },
+        { name: "snack-place", filePath: "audio/foley/snack-place.mp3" },
+        { name: "snack-destroy", filePath: "audio/foley/toy-destroy.mp3" },
+        { name: "toy-place", filePath: "audio/foley/toy-place.mp3" },
+        { name: "toy-destroy", filePath: "audio/foley/toy-destroy.mp3" },
+    ];
+
+    var curSoundPlayer = 0;
+    const totalSoundPlayers = 4;
+
+    var soundDisabledTimer = 0;
+
+    var pachiIdleDisabledTimer = 0;
+    var pachiEatDisabledTimer = 0;
+    var pachiDrinkDisabledTimer = 0;
+    var pachiPlayDisabledTimer = 0;
+
+    window.playSound = (sound) => {
+        // Don't play foley sounds if not on the horde view
+        var pathname = window.location.pathname;
+        if (pathname !== "/Horde" && isFoleySound(sound)) {
+            return;
+        }
+
+        // Don't play any sounds if soundDisabledTimer is active
+        if (soundDisabledTimer > Date.now()) {
+            return;
+        }
+
+        // Don't play pachi interaction sound if the same one already played this tick
+        if (sound === "pachi-idle" && pachiIdleDisabledTimer > Date.now()) { return; }
+        else if (sound === "pachi-eating" && pachiEatDisabledTimer > Date.now()) { return; }
+        else if (sound === "pachi-drinking" && pachiDrinkDisabledTimer > Date.now()) { return; }
+        else if (sound === "pachi-playing" && pachiPlayDisabledTimer > Date.now()) { return; }
+
+        var soundPlayer = document.getElementById("sound" + curSoundPlayer);
+        soundPlayer.src = sounds.find(s => s.name === sound).filePath;
+        soundPlayer.play();
+
+        // Set soundDisabledTimer when placing an object
+        if (isPlacedSound(sound)) {
+            soundDisabledTimer = Date.now() + 200;
+        }
+
+        // Prevent identical overlapping pachi interaction sounds
+        if (sound === "pachi-idle") { pachiIdleDisabledTimer = Date.now() + 200; }
+        else if (sound === "pachi-eating") { pachiEatDisabledTimer = Date.now() + 200; }
+        else if (sound === "pachi-drinking") { pachiDrinkDisabledTimer = Date.now() + 200; }
+        else if (sound === "pachi-playing") { pachiPlayDisabledTimer = Date.now() + 200; }
+
+        // Use object pooling for audio components so sounds layer
+        curSoundPlayer++;
+        if (curSoundPlayer >= totalSoundPlayers) {
+            curSoundPlayer = 0;
+        }
+    }
+
+    function isPlacedSound(sound) {
+        return sound === "pachi-place" ||
+            sound === "bowl-place" ||
+            sound === "snack-place" ||
+            sound === "toy-place";
+    }
+
+    function isFoleySound(sound) {
+        return sound === "pachi-idle" ||
+            sound === "pachi-eating" ||
+            sound === "pachi-drinking" ||
+            sound === "pachi-pickup" ||
+            sound === "pachi-place" ||
+            sound === "pachi-explode" ||
+            sound === "bowl-place" ||
+            sound === "bowl-foodfill" ||
+            sound === "bowl-waterfill" ||
+            sound === "snack-place" ||
+            sound === "snack-destroy" ||
+            sound === "toy-place" ||
+            sound === "toy-destroy";
+    }
 </script>
 
 @code {

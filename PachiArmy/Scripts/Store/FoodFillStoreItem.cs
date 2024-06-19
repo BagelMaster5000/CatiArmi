@@ -11,11 +11,9 @@
             return Inventory.FoodReserve < Inventory.MaxFoodReserve;
         }
 
-        public override void TryPurchase()
+        public override bool TryPurchase()
         {
-            if (!CanPurchase()) { return; }
-
-            base.TryPurchase();
+            if (!base.TryPurchase()) { return false; }
 
             if (Inventory.MaxFoodReserve - Inventory.FoodReserve < FillAmount)
             {
@@ -25,6 +23,8 @@
             {
                 Inventory.FoodReserve += FillAmount;
             }
+
+            return true;
         }
     }
 }

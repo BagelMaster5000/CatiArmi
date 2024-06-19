@@ -2,16 +2,13 @@
 {
     public class FoodBowlStoreItem : StoreItem
     {
-        public override void TryPurchase()
+        public override bool TryPurchase()
         {
-            if (!CanPurchase())
-            {
-                return;
-            }
-
-            base.TryPurchase();
+            if (!base.TryPurchase()) { return false; }
 
             BoardManager.AddNewFoodBowl();
+
+            return true;
         }
     }
 }

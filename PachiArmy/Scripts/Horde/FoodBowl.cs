@@ -9,6 +9,8 @@
         public FoodBowl()
         {
             food = 0;
+
+            AudioManager.PlaySound("bowl-place");
         }
 
         // Click behavior
@@ -48,9 +50,16 @@
             }
 
             Inventory.InvokeResourcesUpdated();
+
+            AudioManager.PlaySound("bowl-foodfill");
         }
 
         // Hover behavior
+        public void Hovered()
+        {
+            AudioManager.PlaySound("object-hover");
+        }
+
         public string GetHoverText()
         {
             return "<strong>Fill:</strong> " + food + "/" + GameManager.FoodBowlSize;
@@ -74,6 +83,8 @@
                 if (ate)
                 {
                     food--;
+
+                    invokerPachimari.SetState(Pachimari.PachiState.Eating);
                 }
             }
         }

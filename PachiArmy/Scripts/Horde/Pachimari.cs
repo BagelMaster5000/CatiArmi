@@ -8,7 +8,7 @@ namespace PachiArmy.Scripts
     {
         public Position Position { get; set; }
 
-        enum PachiState
+        public enum PachiState
         {
             Idle,
             Eating,
@@ -17,7 +17,8 @@ namespace PachiArmy.Scripts
             Exhausted,
             Pet
         }
-        private PachiState state;
+        private PachiState previousState = PachiState.Idle;
+        public PachiState state = PachiState.Idle;
 
         const int HAPPINESS_THRESHOLD = 100;
         public int happiness;
@@ -66,14 +67,24 @@ namespace PachiArmy.Scripts
             {
                 BoardManager.AddNewPachimari();
             }
+
+            AudioManager.PlaySound("pachi-explode");
+            AudioManager.PlaySound("pachi-exploded");
         }
         private void Pet()
         {
+            AudioManager.PlaySound("pachi-hover");
+
             // Maybe every 10 pets, happiness increments?
             //happiness++;
         }
 
         // Hover behavior
+        public void Hovered()
+        {
+            AudioManager.PlaySound("pachi-hover");
+        }
+
         public string GetHoverText()
         {
             int happinessPercentage = happiness * 100 / HAPPINESS_THRESHOLD;
@@ -183,9 +194,27 @@ namespace PachiArmy.Scripts
             }
 
             var interactablePlaceables = BoardManager.GetAllAdjacentInteractablePlaceables(Position.Row, Position.Col);
+            state = PachiState.Idle;
             foreach (var placeable in interactablePlaceables)
             {
                 placeable.PachiInteract(this);
+            }
+
+            switch (state)
+            {
+                case PachiState.Idle: AudioManager.PlaySound("pachi-idle"); break;
+                case PachiState.Eating: AudioManager.PlaySound("pachi-eating"); break;
+                case PachiState.Drinking: AudioManager.PlaySound("pachi-drinking"); break;
+                case PachiState.Playing: AudioManager.PlaySound("pachi-playing"); break;
+            }
+
+            previousState = state;
+        }
+        public void SetState(PachiState setState)
+        {
+            if (state == PachiState.Idle || setState != previousState)
+            {
+                state = setState;
             }
         }
 

@@ -3,7 +3,7 @@
 @using System.Timers;
 
 <Tooltip Text="@Placeable.GetHoverText()" Multiline=true Fade=true FadeDuration="70">
-    <Div class="pachimari gallery-item" onclick="@Placeable.Clicked" TextAlignment="TextAlignment.Center">
+    <Div class="pachimari gallery-item" onclick="@Placeable.Clicked" onmouseover="@Placeable.Hovered" TextAlignment="TextAlignment.Center">
         <Image Source="@Placeable.GetImage()" Width="Width.Is100" Height="Height.Is50" />
     </Div>
 </Tooltip>

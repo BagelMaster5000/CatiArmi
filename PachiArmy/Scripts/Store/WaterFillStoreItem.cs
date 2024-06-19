@@ -11,11 +11,9 @@
             return Inventory.WaterReserve < Inventory.MaxWaterReserve;
         }
 
-        public override void TryPurchase()
+        public override bool TryPurchase()
         {
-            if (!CanPurchase()) { return; }
-
-            base.TryPurchase();
+            if (!base.TryPurchase()) { return false; }
 
             if (Inventory.MaxWaterReserve - Inventory.WaterReserve < FillAmount)
             {
@@ -25,6 +23,8 @@
             {
                 Inventory.WaterReserve += FillAmount;
             }
+
+            return true;
         }
     }
 }
