@@ -84,6 +84,10 @@ namespace CatiArmi.Scripts
                 {
                     numRevives++;
                     numPetsToRevive = GameManager.PachiNumPetsToRevive * (numRevives + 1);
+
+                    state = PachiState.Idle;
+                    hunger = GameManager.PachiHungerRestoreOnRevive;
+                    thirst = GameManager.PachiThirstRestoreOnRevive;
                 }
             }
             else
@@ -117,7 +121,7 @@ namespace CatiArmi.Scripts
             float hungerPercentage = hunger * 1.0f / MAX_HUNGER;
             int roundedHungerPercentage = (int)Math.Round(hungerPercentage * 100, 0);
             string hungerTooltipText;
-            if (hungerPercentage >= GameManager.PachiHungerThresholds[2])
+            if (hungerPercentage >= GameManager.PachiHungerThresholds[0])
             {
                 hungerTooltipText = "<span class='hotpanda-lightblue'>" + roundedHungerPercentage + "% Full! 😊</span>";
             }
@@ -125,7 +129,7 @@ namespace CatiArmi.Scripts
             {
                 hungerTooltipText = "<span class='hotpanda-lightyellow'>" + roundedHungerPercentage + "% Kinda... 😐</span>";
             }
-            else if (hungerPercentage >= GameManager.PachiHungerThresholds[0])
+            else if (hungerPercentage >= GameManager.PachiHungerThresholds[2])
             {
                 hungerTooltipText = "<span class='hotpanda-orange'>" + roundedHungerPercentage + "% So hungry... 🥺</span>";
             }
@@ -137,7 +141,7 @@ namespace CatiArmi.Scripts
             float thirstPercentage = thirst * 1.0f / MAX_THIRST;
             int roundedThirstPercentage = (int)Math.Round(thirstPercentage * 100, 0);
             string thirstTooltipText;
-            if (thirstPercentage >= GameManager.PachiThirstThresholds[2])
+            if (thirstPercentage >= GameManager.PachiThirstThresholds[0])
             {
                 thirstTooltipText = "<span class='hotpanda-lightblue'>" + roundedThirstPercentage + "% Full! 😊</span>";
             }
@@ -145,7 +149,7 @@ namespace CatiArmi.Scripts
             {
                 thirstTooltipText = "<span class='hotpanda-lightyellow'>" + roundedThirstPercentage + "% Kinda... 😐</span>";
             }
-            else if (thirstPercentage >= GameManager.PachiThirstThresholds[0])
+            else if (thirstPercentage >= GameManager.PachiThirstThresholds[2])
             {
                 thirstTooltipText = "<span class='hotpanda-orange'>" + roundedThirstPercentage + "% So thirsty... 🥺</span>";
             }
