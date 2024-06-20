@@ -215,6 +215,7 @@ namespace CatiArmi.Scripts
         public static Placeable? TryGetPlaceableOnSpace(Position gridPosition) => ActivePlaceables.Find(p => p.Position.Row == gridPosition.Row && p.Position.Col == gridPosition.Col);
         public static List<Placeable> GetAllActivePlaceables() => ActivePlaceables;
         public static List<Pachimari> GetAllActivePachis() => ActivePlaceables.OfType<Pachimari>().ToList();
+        public static bool IsBoardFull() => ActivePlaceables.Count >= ROWS * COLS;
         #endregion
     }
 }
