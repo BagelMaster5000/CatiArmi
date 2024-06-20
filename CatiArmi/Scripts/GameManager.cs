@@ -29,6 +29,7 @@
         public static int PachiIdleHappinessChangeOnTickFull = 2;
         public static int PachiIdleHappinessChangeOnTickNeutral = 1;
         public static int PachiIdleHappinessChangeOnTickNeedy = -1;
+        public static int PachiIdleHappinessChangeOnTickDead = -5;
         public static int PachiIdleHungerChangeOnTick = -1;
         public static int PachiIdleThirstChangeOnTick = -1;
         public static int PachiEatingHungerChangeOnTick = 3;
@@ -36,8 +37,12 @@
         public static List<int> PachiPlayingHappinessChangesOnTick = new List<int>() { 4, 5, 6 };
         public static List<int> PachiEatingSnackHungerChangesOnTick = new List<int>() { 6, 6, 7 };
         public static List<int> PachiEatingSnackHappinessChangesOnTick = new List<int>() { 1, 2, 3 };
-        public static List<float> PachiHungerThresholds = new List<float>() { 0.1f, 0.4f, 0.8f};
-        public static List<float> PachiThirstThresholds = new List<float>() { 0.1f, 0.4f, 0.8f};
+        public static List<float> PachiHungerThresholds = new List<float>() { 0.8f, 0.5f, 0};
+        public static List<float> PachiThirstThresholds = new List<float>() { 0.8f, 0.5f, 0};
+        public static int PachiNumPetsToRevive = 3;
+        public static int PachiHungerRestoreOnRevive = 20;
+        public static int PachiThirstRestoreOnRevive = 20;
+        public static int PachiNumPetsToIncrementHappiness = 10;
 
         public static int FoodBowlSize = 80;
         public static int FoodBowlFillAmount = 40;

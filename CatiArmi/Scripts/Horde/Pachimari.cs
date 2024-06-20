@@ -30,6 +30,11 @@ namespace CatiArmi.Scripts
         const int MAX_THIRST = 100;
         private int thirst;
 
+        private int numPetsToRevive = GameManager.PachiNumPetsToRevive;
+        private int numRevives = 0;
+
+        private int numPetsToIncrementHappiness = GameManager.PachiNumPetsToIncrementHappiness;
+
         public Pachimari()
         {
             happiness = RandomNumberGenerator.GetInt32(5, 10);
@@ -72,10 +77,26 @@ namespace CatiArmi.Scripts
         }
         private void Pet()
         {
-            AudioManager.PlaySound("pachi-hover");
+            if (state == PachiState.Exhausted)
+            {
+                numPetsToRevive--;
+                if (numPetsToRevive <= 0)
+                {
+                    numRevives++;
+                    numPetsToRevive = GameManager.PachiNumPetsToRevive * (numRevives + 1);
+                }
+            }
+            else
+            {
+                numPetsToIncrementHappiness--;
+                if (numPetsToIncrementHappiness <= 0)
+                {
+                    numPetsToIncrementHappiness = GameManager.PachiNumPetsToIncrementHappiness;
+                    happiness++;
+                }
+            }
 
-            // Maybe every 10 pets, happiness increments?
-            //happiness++;
+            AudioManager.PlaySound("pachi-hover");
         }
 
         // Hover behavior
@@ -161,13 +182,17 @@ namespace CatiArmi.Scripts
         {
             float hungerPercentage = hunger * 1.0f / MAX_HUNGER;
             float thirstPercentage = thirst * 1.0f / MAX_THIRST;
-            if (thirstPercentage > 0.8f && hungerPercentage > 0.8f)
+            if (thirstPercentage > GameManager.PachiThirstThresholds[0] && hungerPercentage > GameManager.PachiHungerThresholds[0])
             {
                 happiness += GameManager.PachiIdleHappinessChangeOnTickFull;
             }
-            else if (thirstPercentage > 0.5f && hungerPercentage > 0.5f)
+            else if (thirstPercentage > GameManager.PachiThirstThresholds[1] && hungerPercentage > GameManager.PachiHungerThresholds[1])
             {
                 happiness += GameManager.PachiIdleHappinessChangeOnTickNeutral;
+            }
+            else if (thirstPercentage > GameManager.PachiThirstThresholds[2] && hungerPercentage > GameManager.PachiHungerThresholds[2])
+            {
+                happiness += GameManager.PachiIdleHappinessChangeOnTickNeedy;
             }
             else
             {
@@ -186,7 +211,7 @@ namespace CatiArmi.Scripts
         }
         private void ProcessInteractions()
         {
-            if (hunger <= 0 || thirst <= 0)
+            if (hunger <= GameManager.PachiThirstThresholds[2] || thirst <= GameManager.PachiHungerThresholds[2])
             {
                 state = PachiState.Exhausted;
                 return;
