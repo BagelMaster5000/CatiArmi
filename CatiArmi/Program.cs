@@ -16,6 +16,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 // Startup
 GlobalTimer.StartTickTimer();
 GlobalTimer.TickTimer.Elapsed += Inventory.IdleMoneyGain;
+GlobalTimer.TickTimer.Elapsed += BoardManager.PachiTicks;
 GlobalTimer.StartRefreshTimer();
 StoreManager.Setup();
 BoardManager.Setup();

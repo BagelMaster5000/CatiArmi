@@ -1,4 +1,7 @@
-﻿namespace CatiArmi.Scripts
+﻿using CatiArmi.Pages;
+using System.Timers;
+
+namespace CatiArmi.Scripts
 {
     public static class BoardManager
     {
@@ -14,6 +17,9 @@
         public static Action ForceBoardRefresh = delegate { };
         public static void InvokeForceBoardRefresh() => ForceBoardRefresh?.Invoke();
         public static void ClearForceBoardRefresh() => ForceBoardRefresh = null;
+
+        public static Action PachiTick = delegate { };
+        public static void InvokePachiTick() => PachiTick?.Invoke();
 
         public static void Setup()
         {
@@ -106,6 +112,18 @@
             TryFindOpenSpaceAndPlacePlaceable(snack);
         }
         #endregion
+
+
+        public static void PachiTicks(Object source, ElapsedEventArgs e)
+        {
+            List<Pachimari> pachimaris = GetAllActivePachis();
+            foreach (Pachimari p in pachimaris)
+            {
+                p.ProcessTick();
+            }
+
+            InvokePachiTick();
+        }
 
         #region Helpers
         public static List<InteractablePlaceable> GetAllAdjacentInteractablePlaceables(int row, int col)

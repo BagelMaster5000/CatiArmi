@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.Metrics;
 using System.Security.Cryptography;
+using System.Timers;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CatiArmi.Scripts
@@ -28,8 +29,6 @@ namespace CatiArmi.Scripts
 
         const int MAX_THIRST = 100;
         private int thirst;
-
-        public bool ConnectedToTickTimer = false;
 
         public Pachimari()
         {

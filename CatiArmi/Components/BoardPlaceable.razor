@@ -12,27 +12,8 @@
     [Parameter]
     public Placeable Placeable { get; set; } = default!;
 
-    protected override void OnInitialized()
+    public BoardPlaceable()
     {
-        if (typeof(Pachimari).IsAssignableFrom(Placeable.GetType()) && !((Pachimari)Placeable).ConnectedToTickTimer)
-        {
-            ((Pachimari)Placeable).ConnectedToTickTimer = true;
-            GlobalTimer.TickTimer.Elapsed += Tick;
-        }
-        GlobalTimer.RefreshTimer.Elapsed += Refresh;
-    }
-
-    public void Tick(Object source, ElapsedEventArgs e)
-    {
-        if (typeof(Pachimari).IsAssignableFrom(Placeable.GetType()))
-        {
-            ((Pachimari)Placeable).ProcessTick();
-            StateHasChanged();
-        }
-    }
-
-    public void Refresh(Object source, ElapsedEventArgs e)
-    {
-        StateHasChanged();
+        BoardManager.PachiTick += StateHasChanged;
     }
 }
