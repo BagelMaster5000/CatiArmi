@@ -1,4 +1,4 @@
-﻿using CatiArmi.Pages;
+﻿﻿using CatiArmi.Pages;
 using System.Timers;
 
 namespace CatiArmi.Scripts
@@ -58,15 +58,24 @@ namespace CatiArmi.Scripts
         {
             placeable.Position = new Position(0, 0);
 
+            // Set up the places to check
+            int[] randomRows = { 0, 1, 2, 3, 4, 5, 6, 7 };
+            int[] randomCols = { 0, 1, 2, 3, 4, 5, 6, 7 };
+
+            // Randomly pick a spot on the board continuously till an open one is found
+            randomRows = RandomizeWithOrderByAndRandom(randomRows);
             for (int r = 0; r < ROWS; r++)
             {
+                randomCols = RandomizeWithOrderByAndRandom(randomCols);
+
                 for (int c = 0; c < COLS; c++)
                 {
-                    if (!IsSpaceOccupied(r, c))
+                    // Check the spot
+                    if (!IsSpaceOccupied(randomRows[r], randomCols[c]))
                     {
-                        placeable.Position.Row = r;
-                        placeable.Position.Col = c;
-                        SetSpaceOccupied(r, c, true);
+                        placeable.Position.Row = randomRows[r];
+                        placeable.Position.Col = randomCols[c];
+                        SetSpaceOccupied(randomRows[r], randomRows[c], true);
                         ActivePlaceables.Add(placeable);
 
                         return true;
@@ -77,11 +86,58 @@ namespace CatiArmi.Scripts
             return false;
         }
 
+        public static bool TryFindOpenSpaceAndPlacePlaceable(Placeable placeable, int row, int col)
+        {
+            placeable.Position = new Position(0, 0);
+
+            // Set up the places to check
+            int distance = 2; // Can be changed as you please (or put in some kind of funky loop)
+
+            int[] randomRows = new int[distance * 2 + 1];
+            int[] randomCols = new int[distance * 2 + 1];
+
+            int i = 0;
+            for (int d = -distance; d < distance + 1; d++)
+            {
+                randomRows[i] = row + d;
+                randomCols[i] = col + d;
+                i++;
+            }
+
+            // Randomly pick a spot on the board continuously till an open one is found
+            randomRows = RandomizeWithOrderByAndRandom(randomRows);
+            for (int r = 0; r < randomRows.Length; r++)
+            {
+                randomCols = RandomizeWithOrderByAndRandom(randomCols);
+
+                for (int c = 0; c < randomCols.Length; c++)
+                {
+                    // Make sure we don't go out of bounds nor use the center spot
+                    if (randomRows[r] == row && randomCols[c] == col) continue;
+                    else if (randomRows[r] < 0 || randomRows[r] >= ROWS) continue;
+                    else if (randomCols[c] < 0 || randomCols[c] >= COLS) continue;
+                    // Check the spot
+                    else if (!IsSpaceOccupied(randomRows[r], randomCols[c]))
+                    {
+                        placeable.Position.Row = randomRows[r];
+                        placeable.Position.Col = randomCols[c];
+                        SetSpaceOccupied(randomRows[r], randomRows[c], true);
+                        ActivePlaceables.Add(placeable);
+
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static int[] RandomizeWithOrderByAndRandom(int[] array) => array.OrderBy(x => Random.Shared.Next()).ToArray(); // I got this off the internet (me being LAZY (sobs))
+
         public static void RemovePlaceable(Placeable placeable)
         {
             SetSpaceOccupied(placeable.Position, false);
             ActivePlaceables.Remove(placeable);
-            placeable.Position = new Position(99,99); // This is a scuffed way of removing it from the board. Fix if you have time
+            placeable.Position = new Position(99, 99); // This is a scuffed way of removing it from the board. Fix if you have time
 
             ForceBoardRefresh?.Invoke();
         }
