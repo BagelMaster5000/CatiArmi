@@ -75,7 +75,7 @@ namespace CatiArmi.Scripts
                     {
                         placeable.Position.Row = randomRows[r];
                         placeable.Position.Col = randomCols[c];
-                        SetSpaceOccupied(randomRows[r], randomRows[c], true);
+                        SetSpaceOccupied(randomRows[r], randomCols[c], true);
                         ActivePlaceables.Add(placeable);
 
                         return true;
