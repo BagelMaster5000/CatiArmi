@@ -58,15 +58,24 @@ namespace CatiArmi.Scripts
         {
             placeable.Position = new Position(0, 0);
 
+            // Set up the places to check
+            int[] randomRows = { 0, 1, 2, 3, 4, 5, 6, 7 };
+            int[] randomCols = { 0, 1, 2, 3, 4, 5, 6, 7 };
+
+            // Randomly pick a spot on the board continuously till an open one is found
+            randomRows = RandomizeWithOrderByAndRandom(randomRows);
             for (int r = 0; r < ROWS; r++)
             {
+                randomCols = RandomizeWithOrderByAndRandom(randomCols);
+
                 for (int c = 0; c < COLS; c++)
                 {
-                    if (!IsSpaceOccupied(r, c))
+                    // Check the spot
+                    if (!IsSpaceOccupied(randomRows[r], randomCols[c]))
                     {
-                        placeable.Position.Row = r;
-                        placeable.Position.Col = c;
-                        SetSpaceOccupied(r, c, true);
+                        placeable.Position.Row = randomRows[r];
+                        placeable.Position.Col = randomCols[c];
+                        SetSpaceOccupied(randomRows[r], randomRows[c], true);
                         ActivePlaceables.Add(placeable);
 
                         return true;
@@ -77,11 +86,66 @@ namespace CatiArmi.Scripts
             return false;
         }
 
+        public static int[] RandomizeWithOrderByAndRandom(int[] array) => array.OrderBy(x => Random.Shared.Next()).ToArray(); // I got this off the internet (me being LAZY (sobs))
+        public static (int, int)[] RandomizeWithOrderByAndRandom((int, int)[] array) => array.OrderBy(x => Random.Shared.Next()).ToArray();
+
+        public static bool TryFindOpenSpaceAndPlacePlaceable(Placeable placeable, int row, int col)
+        {
+            placeable.Position = new Position(0, 0);
+
+            (int r, int c)[] randomSpots;
+
+            for (int distance = 1; distance < ROWS; distance++)
+            {
+                // Set up the places to check
+                randomSpots = RandomizeWithOrderByAndRandom(getSpotsAroundWithDistance(row, col, distance).ToArray());
+
+                // Randomly pick a spot on the board continuously till an open one is found
+                for (int i = 0; i < randomSpots.Length; i++)
+                {
+                    // Check the spot
+                    if (!IsSpaceOccupied(randomSpots[i].r, randomSpots[i].c))
+                    {
+                        placeable.Position.Row = randomSpots[i].r;
+                        placeable.Position.Col = randomSpots[i].c;
+                        SetSpaceOccupied(randomSpots[i].r, randomSpots[i].c, true);
+                        ActivePlaceables.Add(placeable);
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private static List<(int, int)> getSpotsAroundWithDistance(int row, int col, int distance)
+        {
+            List<(int r, int c)> spots = new List<(int r, int c)>();
+            if (distance < 0) distance = -distance; // Don't allow negative distances
+
+            for (int r = -distance; r < distance + 1; r++)
+            {
+                if (row + r < 0 || row + r >= ROWS) continue; // Don't go out of bounds
+
+                for (int c = -distance; c < distance + 1; c++)
+                {
+                    if (r == 0 && c == 0) continue; // Don't use row or col in this list
+                    else if (col + c < 0 || col + c >= COLS) continue; // Don't go out of bounds
+
+                    if (r == distance || r == -distance || c == distance || c == -distance) //Grab only spots that use the distance value in the coordinate
+                        spots.Add((row + r, col + c));
+                }
+            }
+
+            return spots;
+        }
+
         public static void RemovePlaceable(Placeable placeable)
         {
             SetSpaceOccupied(placeable.Position, false);
             ActivePlaceables.Remove(placeable);
-            placeable.Position = new Position(99,99); // This is a scuffed way of removing it from the board. Fix if you have time
+            placeable.Position = new Position(99, 99); // This is a scuffed way of removing it from the board. Fix if you have time
 
             ForceBoardRefresh?.Invoke();
         }
