@@ -64,13 +64,13 @@ namespace CatiArmi.Scripts
         }
         private void Explode()
         {
-            BoardManager.RemovePlaceable(this);
-
             int numPachisToCreate = RandomNumberGenerator.GetInt32(GameManager.NumPachisPerExplosionMin, GameManager.NumPachisPerExplosionMax + 1);
             for (int i = 0; i < numPachisToCreate; i++)
             {
-                BoardManager.AddNewPachimari();
+                BoardManager.AddNewPachimari(Position);
             }
+
+            BoardManager.RemovePlaceable(this);
 
             AudioManager.PlaySound("pachi-explode");
             AudioManager.PlaySound("pachi-exploded");

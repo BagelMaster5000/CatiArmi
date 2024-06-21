@@ -155,6 +155,11 @@ namespace CatiArmi.Scripts
             var pachi = new Pachimari();
             TryFindOpenSpaceAndPlacePlaceable(pachi);
         }
+        public static void AddNewPachimari(Position position)
+        {
+            var pachi = new Pachimari();
+            TryFindOpenSpaceAndPlacePlaceable(pachi, position.Row, position.Col);
+        }
         public static void AddNewFoodBowl()
         {
             var foodbowl = new FoodBowl();
