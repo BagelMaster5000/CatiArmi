@@ -2,14 +2,14 @@
 @inject IJSRuntime JS
 
 @* Music *@
-<audio id="bgm" loop src="placeholders/music.mp3" />
+<audio id="bgm" loop src="audio/music.mp3" />
 <script>
     window.playMusic = () => {
         var bgm = document.getElementById("bgm");
         bgm.volume = 0.5;
-        // if (bgm.paused) {
-        //     bgm.play();
-        // }
+        if (bgm.paused) {
+            bgm.play();
+        }
     }
 </script>
 

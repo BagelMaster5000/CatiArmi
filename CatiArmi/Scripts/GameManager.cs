@@ -13,7 +13,7 @@
         // Balancing
         public static int PachisToWin = 100;
 
-        public static int StartingMoney = 20;
+        public static int StartingMoney = 999;
         public static int MaxFoodReserve = 200;
         public static int StartingFoodReserve = 100;
         public static int MaxWaterReserve = 250;
