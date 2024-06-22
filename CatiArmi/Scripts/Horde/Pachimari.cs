@@ -74,17 +74,18 @@ namespace CatiArmi.Scripts
         {
             if (state == PachiState.Exhausted) { return; }
 
+            Position storedPosition = Position;
+            BoardManager.RemovePlaceable(this);
+
             int numPachisToCreate = RandomNumberGenerator.GetInt32(GameManager.NumPachisPerExplosionMin, GameManager.NumPachisPerExplosionMax + 1);
             for (int i = 0; i < numPachisToCreate; i++)
             {
-                bool pachiPlacedOnBoard = BoardManager.AddNewPachimari(Position);
+                bool pachiPlacedOnBoard = BoardManager.AddNewPachimari(storedPosition);
                 if (!pachiPlacedOnBoard)
                 {
                     Inventory.StoredPachis++;
                 }
             }
-
-            BoardManager.RemovePlaceable(this);
 
             AudioManager.PlaySound("pachi-explode");
             AudioManager.PlaySound("pachi-exploded");

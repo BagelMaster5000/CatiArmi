@@ -121,6 +121,16 @@ namespace CatiArmi.Scripts
                 }
             }
 
+            if (!IsSpaceOccupied(row, col))
+            {
+                placeable.Position.Row = row;
+                placeable.Position.Col = col;
+                SetSpaceOccupied(row, col, true);
+                ActivePlaceables.Add(placeable);
+
+                return true;
+            }
+
             return false;
         }
 
