@@ -39,6 +39,8 @@
 
     void ClickedOnScreen()
     {
+        GameManager.InitializeTimers();
+
         PageAnimationManager.NextPageAnimation = Animations.ZoomIn;
         NavigationManager.NavigateTo("Horde");
     }

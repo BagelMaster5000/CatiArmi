@@ -73,7 +73,7 @@
 
     void NavigateToHordeView()
     {
-        GameManager.InitializeTimers();
+        GameManager.ResetTimers();
 
         PageAnimationManager.NextPageAnimation = Animations.FadeRight;
         NavigationManager.NavigateTo("Horde");

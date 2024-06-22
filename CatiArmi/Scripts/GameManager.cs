@@ -6,6 +6,18 @@ namespace CatiArmi.Scripts
     {
         public static void InitializeTimers()
         {
+            ResetTimers();
+            GlobalTimer.TickTimer.Elapsed += Inventory.IdleMoneyGain;
+            GlobalTimer.TickTimer.Elapsed += BoardManager.PachiTicks;
+            GlobalTimer.RefreshTimer.Elapsed += (Object source, ElapsedEventArgs e) => BoardManager.BoardRefresh?.Invoke();
+            GlobalTimer.StartRefreshTimer();
+            GlobalTimer.StartTickTimer();
+            StoreManager.Setup();
+            BoardManager.Setup();
+        }
+
+        public static void ResetTimers()
+        {
             BoardManager.ClearForceBoardRefresh();
             BoardManager.ClearPachiTick();
             BoardManager.ClearBoardRefresh();

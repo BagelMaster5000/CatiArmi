@@ -14,17 +14,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 
-// Startup
-GameManager.InitializeTimers();
-GlobalTimer.TickTimer.Elapsed += Inventory.IdleMoneyGain;
-GlobalTimer.TickTimer.Elapsed += BoardManager.PachiTicks;
-GlobalTimer.RefreshTimer.Elapsed += (Object source, ElapsedEventArgs e) => BoardManager.BoardRefresh?.Invoke();
-GlobalTimer.StartRefreshTimer();
-GlobalTimer.StartTickTimer();
-StoreManager.Setup();
-BoardManager.Setup();
-
-
 // Blazorise
 builder.Services
     .AddBlazorise(options =>
