@@ -13,6 +13,15 @@
 
         public override bool TryPurchase()
         {
+            if (Inventory.FoodReserve >= Inventory.MaxFoodReserve)
+            {
+                StoreManager.InvokeSpeechFullResource();
+
+                AudioManager.PlaySound("item-failedtopurchase");
+
+                return false;
+            }
+
             if (!base.TryPurchase()) { return false; }
 
             if (Inventory.MaxFoodReserve - Inventory.FoodReserve < FillAmount)

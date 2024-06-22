@@ -13,6 +13,12 @@
 
         public override bool TryPurchase()
         {
+            if (Inventory.WaterReserve >= Inventory.MaxWaterReserve)
+            {
+                StoreManager.InvokeSpeechFullResource();
+                return false;
+            }
+
             if (!base.TryPurchase()) { return false; }
 
             if (Inventory.MaxWaterReserve - Inventory.WaterReserve < FillAmount)

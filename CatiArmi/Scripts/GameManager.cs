@@ -9,6 +9,7 @@ namespace CatiArmi.Scripts
             BoardManager.ClearForceBoardRefresh();
             BoardManager.ClearPachiTick();
             BoardManager.ClearBoardRefresh();
+            StoreManager.ClearStoreRefresh();
             Inventory.ClearResourcesUpdated();
         }
 

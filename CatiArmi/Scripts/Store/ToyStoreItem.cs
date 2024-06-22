@@ -8,6 +8,8 @@
         {
             if (BoardManager.IsBoardFull())
             {
+                StoreManager.InvokeSpeechNoSpace();
+
                 return false;
             }
 

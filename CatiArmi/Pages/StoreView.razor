@@ -46,9 +46,7 @@
              <Card Height="Height.Rem(15)">
                  <CardBody style="display: grid; align-items: center;">
                      <Text VerticalAlignment="VerticalAlignment.Middle" TextSize="TextSize.ExtraLarge">
-                         Hello there!
-                         <br />
-                         My name is Chopper, welcome to my toy store.
+                         @StoreManager.CurStore.CurSpeech
                      </Text>
                  </CardBody>
              </Card>
@@ -64,6 +62,13 @@
             await Task.Delay(100);
             PageAnimationManager.NextPageAnimation = Animations.Fade;
         });
+    }
+
+    public StoreView()
+    {
+        StoreManager.InvokeSpeechEnteredStore();
+
+        StoreManager.StoreRefresh += StateHasChanged;
     }
 
     void NavigateToHordeView()

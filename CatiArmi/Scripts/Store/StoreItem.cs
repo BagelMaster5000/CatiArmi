@@ -18,6 +18,8 @@
         {
             if (!CanPurchase())
             {
+                StoreManager.InvokeSpeechCouldntAfford();
+
                 AudioManager.PlaySound("item-failedtopurchase");
 
                 return false;
@@ -29,6 +31,8 @@
             {
                 OutOfStock = true;
             }
+
+            StoreManager.InvokeSpeechPurchased();
 
             AudioManager.PlaySound("item-purchased");
 

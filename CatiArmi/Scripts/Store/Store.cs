@@ -6,12 +6,15 @@
         public string DisplayName;
         public string Icon;
         public int PachisToUnlock;
+
         public List<StoreItem> ItemsForSale;
 
-        public bool TryBuy(StoreItem storeItem)
-        {
-            return false;
-        }
+        public string CurSpeech = "";
+        public List<string> SpeechGreetings;
+        public List<string> SpeechPurchased;
+        public List<string> SpeechCantAfford;
+        public List<string> SpeechFullResource;
+        public List<string> SpeechNoSpace;
 
         public bool IsShopAvailable()
         {
