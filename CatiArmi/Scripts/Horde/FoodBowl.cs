@@ -21,6 +21,7 @@
         public void Fill()
         {
             if (food == GameManager.FoodBowlSize) { return; }
+            else if (Inventory.FoodReserve == 0) { return; }
             else if (GameManager.FoodBowlSize - food < GameManager.FoodBowlFillAmount)
             {
                 int remainingSpaceInBowl = GameManager.FoodBowlSize - food;

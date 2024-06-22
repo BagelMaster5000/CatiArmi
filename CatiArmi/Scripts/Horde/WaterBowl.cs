@@ -19,6 +19,7 @@
         public void Fill()
         {
             if (water == GameManager.WaterBowlSize) { return; }
+            else if (Inventory.WaterReserve == 0) { return; }
             else if (GameManager.WaterBowlSize - water < GameManager.WaterBowlFillAmount)
             {
                 int remainingSpaceInBowl = GameManager.WaterBowlSize - water;
