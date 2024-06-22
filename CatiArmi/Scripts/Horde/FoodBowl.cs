@@ -67,7 +67,20 @@
 
         public string GetImage()
         {
-            return "placeholders/foodbowl.png";
+            float fillPercentage = food * 1.0f / GameManager.FoodBowlSize;
+
+            if (fillPercentage > 0.7f)
+            {
+                return "art/board/foodbowl-full.png";
+            }
+            else if (fillPercentage > 0f)
+            {
+                return "art/board/foodbowl-half.png";
+            }
+            else
+            {
+                return "art/board/foodbowl-empty.png";
+            }
         }
 
         // Pachi interaction

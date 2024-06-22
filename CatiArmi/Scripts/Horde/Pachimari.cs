@@ -16,10 +16,12 @@ namespace CatiArmi.Scripts
             Drinking,
             Playing,
             Exhausted,
-            Pet
         }
         private PachiState previousState = PachiState.Idle;
         public PachiState state = PachiState.Idle;
+
+        private int colorVariant = 0;
+        const int MAX_COLOR_VARIANTS = 3;
 
         const int HAPPINESS_THRESHOLD = 100;
         public int happiness;
@@ -35,11 +37,14 @@ namespace CatiArmi.Scripts
 
         private int numPetsToIncrementHappiness = GameManager.PachiNumPetsToIncrementHappiness;
 
+        private DateTime pachiPetTime = DateTime.Now;
+
         public Pachimari()
         {
             happiness = RandomNumberGenerator.GetInt32(5, 10);
             hunger = RandomNumberGenerator.GetInt32(60, 90);
             thirst = RandomNumberGenerator.GetInt32(60, 90);
+            colorVariant = RandomNumberGenerator.GetInt32(0, MAX_COLOR_VARIANTS);
         }
 
         // Click behavior
@@ -92,6 +97,9 @@ namespace CatiArmi.Scripts
             }
             else
             {
+                pachiPetTime = DateTime.Now.AddSeconds(0.2f);
+                BoardManager.BoardRefresh?.Invoke();
+
                 numPetsToIncrementHappiness--;
                 if (numPetsToIncrementHappiness <= 0)
                 {
@@ -169,15 +177,25 @@ namespace CatiArmi.Scripts
 
         public string GetImage()
         {
+            if (pachiPetTime > DateTime.Now)
+            {
+                return "art/board/cati-pet-var" + (colorVariant + 1) + ".png";
+            }
+
             switch (state)
             {
-                case PachiState.Idle: return "placeholders/pachimari-idle.png";
-                case PachiState.Eating: return "placeholders/pachimari-eating.png";
-                case PachiState.Drinking: return "placeholders/pachimari-drinking.png";
-                case PachiState.Playing: return "placeholders/pachimari-playing.png";
-                case PachiState.Exhausted: return "placeholders/pachimari-exhausted.png";
-                case PachiState.Pet: return "placeholders/pachimari-pet.png";
-                default: return "placeholders/pachimari-idle.png";
+                case PachiState.Idle:
+                    return "art/board/cati-idle-var" + (colorVariant + 1) + ".png";
+                case PachiState.Eating: 
+                    return "art/board/cati-eating-var" + (colorVariant + 1) + ".png";
+                case PachiState.Drinking: 
+                    return "art/board/cati-drinking-var" + (colorVariant + 1) + ".png";
+                case PachiState.Playing: 
+                    return "art/board/cati-playing-var" + (colorVariant + 1) + ".png";
+                case PachiState.Exhausted: 
+                    return "art/board/cati-exhausted-var" + (colorVariant + 1) + ".png";
+                default:
+                    return "art/board/cati-idle-var" + (colorVariant + 1) + ".png";
             }
         }
 

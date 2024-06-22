@@ -14,6 +14,8 @@
 
     public BoardPlaceable()
     {
+        // These re-subscribe each time you leave and re-enter the horde view. This can be an issue.
         BoardManager.PachiTick += StateHasChanged;
+        BoardManager.BoardRefresh += StateHasChanged;
     }
 }

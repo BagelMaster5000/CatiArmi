@@ -80,7 +80,7 @@
     public void NavigateToStore()
     {
         StoreManager.CurStore = Store;
-        GameManager.ClearAllDelegateSubscriptions();
+        GameManager.InitializeTimers();
 
         PageAnimationManager.NextPageAnimation = Animations.FadeLeft;
         NavigationManager.NavigateTo("Store");

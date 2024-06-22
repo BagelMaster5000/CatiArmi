@@ -68,7 +68,7 @@
 
     void NavigateToHordeView()
     {
-        GameManager.ClearAllDelegateSubscriptions();
+        GameManager.InitializeTimers();
 
         PageAnimationManager.NextPageAnimation = Animations.FadeRight;
         NavigationManager.NavigateTo("Horde");

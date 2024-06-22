@@ -3,14 +3,21 @@
     public class Snack : InteractablePlaceable
     {
         public Position Position { get; set; }
-        public string Test { get; set; }
 
         private const int INITIAL_DURABILITY = 5;
         private int durability;
 
+        public int Variant = 0;
+
         public Snack()
         {
             durability = INITIAL_DURABILITY;
+        }
+
+        public Snack(int setVariant)
+        {
+            durability = INITIAL_DURABILITY;
+            Variant = setVariant;
         }
 
         // Click behavior
@@ -38,7 +45,7 @@
 
         public string GetImage()
         {
-            return "placeholders/snack.png";
+            return "art/board/snack-" + (Variant + 1) + ".png";
         }
 
         // Pachi interaction

@@ -8,9 +8,17 @@
         private const int INITIAL_DURABILITY = 30;
         private int durability;
 
+        public int Variant;
+
         public Toy()
         {
             durability = INITIAL_DURABILITY;
+        }
+
+        public Toy(int setVariant)
+        {
+            durability = INITIAL_DURABILITY;
+            Variant = setVariant;
         }
 
         // Click behavior
@@ -38,7 +46,7 @@
 
         public string GetImage()
         {
-            return "placeholders/toy.png";
+            return "art/board/toy-" + (Variant + 1) + ".png";
         }
 
         // Pachi interaction

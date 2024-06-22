@@ -20,6 +20,11 @@ namespace CatiArmi.Scripts
 
         public static Action PachiTick = delegate { };
         public static void InvokePachiTick() => PachiTick?.Invoke();
+        public static void ClearPachiTick() => PachiTick = null;
+
+        public static Action BoardRefresh = delegate { };
+        public static void InvokeBoardRefresh() => BoardRefresh?.Invoke();
+        public static void ClearBoardRefresh() => BoardRefresh = null;
 
         public static void Setup()
         {
@@ -170,14 +175,14 @@ namespace CatiArmi.Scripts
             var waterBowl = new WaterBowl();
             TryFindOpenSpaceAndPlacePlaceable(waterBowl);
         }
-        public static void AddNewToy(int toyType)
+        public static void AddNewToy(int variant)
         {
-            var toy = new Toy();
+            var toy = new Toy(variant);
             TryFindOpenSpaceAndPlacePlaceable(toy);
         }
-        public static void AddNewSnack(int snackType)
+        public static void AddNewSnack(int variant)
         {
-            var snack = new Snack();
+            var snack = new Snack(variant);
             TryFindOpenSpaceAndPlacePlaceable(snack);
         }
         #endregion

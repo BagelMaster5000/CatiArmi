@@ -1,13 +1,15 @@
-﻿namespace CatiArmi.Scripts
+﻿using System.Timers;
+
+namespace CatiArmi.Scripts
 {
     public static class GameManager
     {
-        public static void ClearAllDelegateSubscriptions()
+        public static void InitializeTimers()
         {
             BoardManager.ClearForceBoardRefresh();
+            BoardManager.ClearPachiTick();
+            BoardManager.ClearBoardRefresh();
             Inventory.ClearResourcesUpdated();
-            GlobalTimer.StartRefreshTimer();
-            //GlobalTimer.StartTickTimer();
         }
 
         // Balancing
@@ -26,10 +28,10 @@
         public static int PachiExplosionPayoutMax = 20;
         public static int NumPachisPerExplosionMin = 2;
         public static int NumPachisPerExplosionMax = 3;
-        public static int PachiIdleHappinessChangeOnTickFull = 2;
-        public static int PachiIdleHappinessChangeOnTickNeutral = 1;
-        public static int PachiIdleHappinessChangeOnTickNeedy = -1;
-        public static int PachiIdleHappinessChangeOnTickDead = -5;
+        public static int PachiIdleHappinessChangeOnTickFull = 20;
+        public static int PachiIdleHappinessChangeOnTickNeutral = 20;
+        public static int PachiIdleHappinessChangeOnTickNeedy = 20;
+        public static int PachiIdleHappinessChangeOnTickDead = 20;
         public static int PachiIdleHungerChangeOnTick = -1;
         public static int PachiIdleThirstChangeOnTick = -1;
         public static int PachiEatingHungerChangeOnTick = 3;

@@ -65,7 +65,20 @@
 
         public string GetImage()
         {
-            return "placeholders/waterbowl.png";
+            float fillPercentage = water * 1.0f / GameManager.WaterBowlSize;
+
+            if (fillPercentage > 0.7f)
+            {
+                return "art/board/waterbowl-full.png";
+            }
+            else if (fillPercentage > 0f)
+            {
+                return "art/board/waterbowl-half.png";
+            }
+            else
+            {
+                return "art/board/waterbowl-empty.png";
+            }
         }
 
         // Pachi interaction
