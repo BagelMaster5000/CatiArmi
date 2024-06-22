@@ -39,6 +39,9 @@ namespace CatiArmi.Scripts
 
         private DateTime pachiPetTime = DateTime.Now;
 
+        private float pachiInteractDuration = GameManager.TickTimeSeconds * 0.75f;
+        private DateTime pachiInteractTime = DateTime.Now;
+
         public Pachimari()
         {
             happiness = RandomNumberGenerator.GetInt32(5, 10);
@@ -186,12 +189,33 @@ namespace CatiArmi.Scripts
             {
                 case PachiState.Idle:
                     return "art/board/cati-idle-var" + (colorVariant + 1) + ".png";
-                case PachiState.Eating: 
-                    return "art/board/cati-eating-var" + (colorVariant + 1) + ".png";
+                case PachiState.Eating:
+                    if (pachiInteractTime > DateTime.Now)
+                    {
+                        return "art/board/cati-eating-var" + (colorVariant + 1) + ".png";
+                    }
+                    else
+                    {
+                        return "art/board/cati-idle-var" + (colorVariant + 1) + ".png";
+                    }
                 case PachiState.Drinking: 
-                    return "art/board/cati-drinking-var" + (colorVariant + 1) + ".png";
+                    if (pachiInteractTime > DateTime.Now)
+                    {
+                        return "art/board/cati-drinking-var" + (colorVariant + 1) + ".png";
+                    }
+                    else
+                    {
+                        return "art/board/cati-idle-var" + (colorVariant + 1) + ".png";
+                    }
                 case PachiState.Playing: 
-                    return "art/board/cati-playing-var" + (colorVariant + 1) + ".png";
+                    if (pachiInteractTime > DateTime.Now)
+                    {
+                        return "art/board/cati-playing-var" + (colorVariant + 1) + ".png";
+                    }
+                    else
+                    {
+                        return "art/board/cati-idle-var" + (colorVariant + 1) + ".png";
+                    }
                 case PachiState.Exhausted: 
                     return "art/board/cati-exhausted-var" + (colorVariant + 1) + ".png";
                 default:
@@ -261,6 +285,8 @@ namespace CatiArmi.Scripts
             if (state == PachiState.Idle || setState != previousState)
             {
                 state = setState;
+
+                pachiInteractTime = DateTime.Now.AddSeconds(pachiInteractDuration);
             }
         }
 
