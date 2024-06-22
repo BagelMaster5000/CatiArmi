@@ -72,6 +72,8 @@ namespace CatiArmi.Scripts
         }
         private void Explode()
         {
+            if (state == PachiState.Exhausted) { return; }
+
             int numPachisToCreate = RandomNumberGenerator.GetInt32(GameManager.NumPachisPerExplosionMin, GameManager.NumPachisPerExplosionMax + 1);
             for (int i = 0; i < numPachisToCreate; i++)
             {
