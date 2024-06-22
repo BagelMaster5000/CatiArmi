@@ -155,35 +155,35 @@ namespace CatiArmi.Scripts
             ForceBoardRefresh?.Invoke();
         }
 
-        public static void AddNewPachimari()
+        public static bool AddNewPachimari()
         {
             var pachi = new Pachimari();
-            TryFindOpenSpaceAndPlacePlaceable(pachi);
+            return TryFindOpenSpaceAndPlacePlaceable(pachi);
         }
-        public static void AddNewPachimari(Position position)
+        public static bool AddNewPachimari(Position position)
         {
             var pachi = new Pachimari();
-            TryFindOpenSpaceAndPlacePlaceable(pachi, position.Row, position.Col);
+            return TryFindOpenSpaceAndPlacePlaceable(pachi, position.Row, position.Col);
         }
-        public static void AddNewFoodBowl()
+        public static bool AddNewFoodBowl()
         {
             var foodbowl = new FoodBowl();
-            TryFindOpenSpaceAndPlacePlaceable(foodbowl);
+            return TryFindOpenSpaceAndPlacePlaceable(foodbowl);
         }
-        public static void AddNewWaterBowl()
+        public static bool AddNewWaterBowl()
         {
             var waterBowl = new WaterBowl();
-            TryFindOpenSpaceAndPlacePlaceable(waterBowl);
+            return TryFindOpenSpaceAndPlacePlaceable(waterBowl);
         }
-        public static void AddNewToy(int variant)
+        public static bool AddNewToy(int variant)
         {
             var toy = new Toy(variant);
-            TryFindOpenSpaceAndPlacePlaceable(toy);
+            return TryFindOpenSpaceAndPlacePlaceable(toy);
         }
-        public static void AddNewSnack(int variant)
+        public static bool AddNewSnack(int variant)
         {
             var snack = new Snack(variant);
-            TryFindOpenSpaceAndPlacePlaceable(snack);
+            return TryFindOpenSpaceAndPlacePlaceable(snack);
         }
         #endregion
 
