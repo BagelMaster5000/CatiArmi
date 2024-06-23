@@ -7,7 +7,7 @@
 <Animate Auto Animation="PageAnimationManager.NextPageAnimation">
      <DropContainer TItem="Placeable" Items="Placeables" ItemsFilter="@((item, dropZone) => item.Position.ToString() == dropZone)" ItemDropped="@ObjectMoved" @ontouchmove:preventDefault="true" @ontouchcancel:preventDefault="true" Style="touch-action: none">
          <ChildContent>
-             <Container TextAlignment="TextAlignment.Center" Background="Background.Light">
+             <Container TextAlignment="TextAlignment.Center">
                  <Row Padding="Padding.Is2">
                      <Column ColumnSize="ColumnSize.Is1" />
                      <Column ColumnSize="ColumnSize.Is10">
@@ -18,17 +18,19 @@
                  </Row>
                  <Row>
                      <Column ColumnSize="ColumnSize.Is8">
-                         @for (int r = 0; r < 8; r++)
+                         <Div Border="Border.Is2" Style="border-color: black">
+                        @for (int r = 0; r < 8; r++)
                         {
                             var row = r.ToString();
                             <Div class="d-flex">
                                 @for (int c = 0; c < 8; c++)
                                 {
                                     var col = c.ToString();
-                                    <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is1" Height="Height.Rem(6.8)" Width="Width.Rem(6.8)" />
+                                        <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is2" Style="border-color: black" Height="Height.Rem(6.8)" Width="Width.Rem(6.8)" />
                                 }
                             </Div>
                         }
+                         </Div>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is4">
                         <Container TextAlignment="TextAlignment.Center" Padding="Padding.Is2">
@@ -40,11 +42,10 @@
                                 <Container TextAlignment="TextAlignment.Center" Width="Width.Is50">
                                     <DropZone Height="Height.Rem(10)" Padding="Padding.Is1" TItem="Placeable" Name="Storage" DropAllowed=@CanStorePlaceable Class="barracks" DropAllowedClass="barracks-hover" DropNotAllowedClass="barracks-hover" />
                                 </Container>
-                                <Div Padding="Padding.Is1" />
-                                <Text TextSize="TextSize.Large">@Inventory.StoredPachis Catis in battle barracks</Text>
+                                <Text TextSize="TextSize.Medium">@Inventory.StoredPachis Catis in battle barracks</Text>
                             </Row>
 
-                            <Div Padding="Padding.Is1" />
+                            <Div Padding="Padding.Is2" />
 
                             @* Store Links *@
                             <Row>
