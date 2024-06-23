@@ -131,18 +131,22 @@ a, .btn-link {
 }
 
 .clicky-card {
+    --b: 2px; /* thickness of the border */
+    --c: transparent; /* color of the border */
+    --w: 20px; /* width of border */
+
     transition: .2s ease-out;
-    border-width: 2px;
-    border: dashed;
-    border-color: transparent;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    border: var(--b) solid #0000; /* space for the border */
+    --_g: #0000 90deg,var(--c) 0;
+    --_p: var(--w) var(--w) border-box no-repeat;
+    background: conic-gradient(from 90deg at top var(--b) left var(--b),var(--_g)) 0 0 / var(--_p), conic-gradient(from 180deg at top var(--b) right var(--b),var(--_g)) 100% 0 / var(--_p), conic-gradient(from 0deg at bottom var(--b) left var(--b),var(--_g)) 0 100% / var(--_p), conic-gradient(from -90deg at bottom var(--b) right var(--b),var(--_g)) 100% 100% / var(--_p);
+    position: relative;
 }
 
     .clicky-card:hover {
+        --c: var(--hotpanda-darkblue); /* color of the border */
+
         opacity: 0.8;
-        border-color: black;
         transform: scaleX(1.03) scaleY(1);
     }
 
@@ -154,18 +158,22 @@ a, .btn-link {
     }
 
 .clicky-card-link {
+    --b: 2px; /* thickness of the border */
+    --c: transparent; /* color of the border */
+    --w: 20px; /* width of border */
+
     transition: .2s ease-out;
-    border-width: 2px;
-    border: dashed;
-    border-color: transparent;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    border: var(--b) solid #0000; /* space for the border */
+    --_g: #0000 90deg,var(--c) 0;
+    --_p: var(--w) var(--w) border-box no-repeat;
+    background: conic-gradient(from 90deg at top var(--b) left var(--b),var(--_g)) 0 0 / var(--_p), conic-gradient(from 180deg at top var(--b) right var(--b),var(--_g)) 100% 0 / var(--_p), conic-gradient(from 0deg at bottom var(--b) left var(--b),var(--_g)) 0 100% / var(--_p), conic-gradient(from -90deg at bottom var(--b) right var(--b),var(--_g)) 100% 100% / var(--_p);
+    position: relative;
 }
 
     .clicky-card-link:hover {
+        --c: var(--hotpanda-darkblue); /* color of the border */
+
         opacity: 0.8;
-        border-color: dodgerblue;
         transform: scaleX(1.03) scaleY(1);
     }
 
@@ -228,20 +236,23 @@ a, .btn-link {
 }
 
 .store-item {
+    --b: 2px; /* thickness of the border */
+    --c: transparent; /* color of the border */
+    --w: 20px; /* width of border */
+
     transition: .2s ease-out;
-    border-width: 2px;
-    border: dashed;
-    border-color: transparent;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    border: var(--b) solid #0000; /* space for the border */
+    --_g: #0000 90deg,var(--c) 0;
+    --_p: var(--w) var(--w) border-box no-repeat;
+    background: conic-gradient(from 90deg at top var(--b) left var(--b),var(--_g)) 0 0 / var(--_p), conic-gradient(from 180deg at top var(--b) right var(--b),var(--_g)) 100% 0 / var(--_p), conic-gradient(from 0deg at bottom var(--b) left var(--b),var(--_g)) 0 100% / var(--_p), conic-gradient(from -90deg at bottom var(--b) right var(--b),var(--_g)) 100% 100% / var(--_p);
     position: relative;
     color: white;
 }
 
     .store-item:hover {
+        --c: var(--hotpanda-darkblue); /* color of the border */
+
         opacity: 0.8;
-        border-color: black;
         transform: scaleX(1.03) scaleY(1);
     }
 
@@ -253,18 +264,21 @@ a, .btn-link {
     }
 
 .store-item-disabled {
+    --b: 2px; /* thickness of the border */
+    --c: transparent; /* color of the border */
+    --w: 20px; /* width of border */
+
     transition: .2s ease-out;
-    border-width: 2px;
-    border: dashed;
-    border-color: transparent;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    border: var(--b) solid #0000; /* space for the border */
+    --_g: #0000 90deg,var(--c) 0;
+    --_p: var(--w) var(--w) border-box no-repeat;
+    background: conic-gradient(from 90deg at top var(--b) left var(--b),var(--_g)) 0 0 / var(--_p), conic-gradient(from 180deg at top var(--b) right var(--b),var(--_g)) 100% 0 / var(--_p), conic-gradient(from 0deg at bottom var(--b) left var(--b),var(--_g)) 0 100% / var(--_p), conic-gradient(from -90deg at bottom var(--b) right var(--b),var(--_g)) 100% 100% / var(--_p);
     position: relative;
+    color: white;
 }
 
     .store-item-disabled:hover {
-        border-color: red;
+        --c: var(--hotpanda-red); /* color of the border */
     }
 
     .store-item-disabled:active {
@@ -273,18 +287,21 @@ a, .btn-link {
     }
 
 .store-item-outofstock {
+    --b: 2px; /* thickness of the border */
+    --c: transparent; /* color of the border */
+    --w: 20px; /* width of border */
+
     transition: .2s ease-out;
-    border-width: 2px;
-    border: dashed;
-    border-color: transparent;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    border: var(--b) solid #0000; /* space for the border */
+    --_g: #0000 90deg,var(--c) 0;
+    --_p: var(--w) var(--w) border-box no-repeat;
+    background: conic-gradient(from 90deg at top var(--b) left var(--b),var(--_g)) 0 0 / var(--_p), conic-gradient(from 180deg at top var(--b) right var(--b),var(--_g)) 100% 0 / var(--_p), conic-gradient(from 0deg at bottom var(--b) left var(--b),var(--_g)) 0 100% / var(--_p), conic-gradient(from -90deg at bottom var(--b) right var(--b),var(--_g)) 100% 100% / var(--_p);
     position: relative;
+    color: white;
 }
 
     .store-item-outofstock:hover {
-        border-color: grey;
+        --c: var(--hotpanda-lightblue); /* color of the border */
     }
 
     .store-item-outofstock:active {
@@ -293,19 +310,22 @@ a, .btn-link {
     }
 
 .store-link {
+    --b: 2px; /* thickness of the border */
+    --c: transparent; /* color of the border */
+    --w: 20px; /* width of border */
+
     transition: .2s ease-out;
-    border-width: 2px;
-    border: dashed;
-    border-color: transparent;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    border: var(--b) solid #0000; /* space for the border */
+    --_g: #0000 90deg,var(--c) 0;
+    --_p: var(--w) var(--w) border-box no-repeat;
+    background: conic-gradient(from 90deg at top var(--b) left var(--b),var(--_g)) 0 0 / var(--_p), conic-gradient(from 180deg at top var(--b) right var(--b),var(--_g)) 100% 0 / var(--_p), conic-gradient(from 0deg at bottom var(--b) left var(--b),var(--_g)) 0 100% / var(--_p), conic-gradient(from -90deg at bottom var(--b) right var(--b),var(--_g)) 100% 100% / var(--_p);
     position: relative;
 }
 
     .store-link:hover {
+        --c: var(--hotpanda-darkblue); /* color of the border */
+
         opacity: 0.8;
-        border-color: black;
         transform: scaleX(1.03) scaleY(1);
     }
 
@@ -317,18 +337,22 @@ a, .btn-link {
     }
 
 .store-link-disabled {
+    --b: 2px; /* thickness of the border */
+    --c: transparent; /* color of the border */
+    --w: 20px; /* width of border */
+
     transition: .2s ease-out;
-    border-width: 2px;
-    border: dashed;
-    border-color: transparent;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    border: var(--b) solid #0000; /* space for the border */
+    --_g: #0000 90deg,var(--c) 0;
+    --_p: var(--w) var(--w) border-box no-repeat;
+    background: conic-gradient(from 90deg at top var(--b) left var(--b),var(--_g)) 0 0 / var(--_p), conic-gradient(from 180deg at top var(--b) right var(--b),var(--_g)) 100% 0 / var(--_p), conic-gradient(from 0deg at bottom var(--b) left var(--b),var(--_g)) 0 100% / var(--_p), conic-gradient(from -90deg at bottom var(--b) right var(--b),var(--_g)) 100% 100% / var(--_p);
     position: relative;
 }
 
     .store-link-disabled:hover {
-        border-color: grey;
+        --c: var(--hotpanda-lightblue); /* color of the border */
+
+        opacity: 0.8;
     }
 
     .store-link-disabled:active {
