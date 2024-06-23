@@ -59,7 +59,7 @@
 
                             @* Win Game Button *@
                             <Row>
-                                <Container Width="Width.Is100" Class="@GetWinButtonLinkClass()" @onclick="@NavigateToVictoryView" Padding="Padding.Is1">
+                                <Container Width="Width.Is100" Class="@GetWinButtonLinkClass()" @onclick="@TryNavigateToVictoryView" Padding="Padding.Is1">
                                     <Image Source="@GetWinButtonImage()" Width="Width.Is100" Height="Height.Rem(8)" />
                                     <Row Class="centered" Width="Width.Rem(18)">
                                         <Column ColumnSize="ColumnSize.Is4" TextAlignment="TextAlignment.End">
@@ -180,8 +180,10 @@
         return Inventory.GetTotalPachiCount() < GameManager.PachisToWin;
     }
 
-    public void NavigateToVictoryView()
+    void TryNavigateToVictoryView()
     {
+        if (GetWinButtonDisabled()) { return; }
+
         GameManager.ResetTimers();
 
         PageAnimationManager.NextPageAnimation = Animations.ZoomIn;
