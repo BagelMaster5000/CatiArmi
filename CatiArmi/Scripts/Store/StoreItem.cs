@@ -16,7 +16,16 @@
 
         public virtual bool TryPurchase()
         {
-            if (!CanPurchase())
+            if (OutOfStock)
+            {
+                StoreManager.InvokeSpeechSoldOut();
+
+                AudioManager.PlaySound("item-failedtopurchase");
+
+                return false;
+            }
+
+            if (Inventory.Money < Price)
             {
                 StoreManager.InvokeSpeechCouldntAfford();
 

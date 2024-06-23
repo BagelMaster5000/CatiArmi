@@ -9,17 +9,7 @@ h1:focus {
     outline: none;
 }
 
-a, .btn-link {
-    color: #0071c1;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+-webkit-user-select: none.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
@@ -124,17 +114,12 @@ a, .btn-link {
 .hotpanda-darkblue{ color: var(--hotpanda-darkblue); }
 .hotpanda-darkpurple{ color: var(--hotpanda-darkpurple); }
 
-.text-no-select {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-}
-
 .clicky-card {
-    --b: 2px; /* thickness of the border */
+    --b: 5px; /* thickness of the border */
     --c: transparent; /* color of the border */
     --w: 20px; /* width of border */
 
+    border-radius: 5px;
     transition: .2s ease-out;
     border: var(--b) solid #0000; /* space for the border */
     --_g: #0000 90deg,var(--c) 0;
@@ -144,7 +129,7 @@ a, .btn-link {
 }
 
     .clicky-card:hover {
-        --c: var(--hotpanda-darkblue); /* color of the border */
+        --c: var(--hotpanda-darkpurple); /* color of the border */
 
         opacity: 0.8;
         transform: scaleX(1.03) scaleY(1);
@@ -158,10 +143,11 @@ a, .btn-link {
     }
 
 .clicky-card-link {
-    --b: 2px; /* thickness of the border */
+    --b: 5px; /* thickness of the border */
     --c: transparent; /* color of the border */
     --w: 20px; /* width of border */
 
+    border-radius: 5px;
     transition: .2s ease-out;
     border: var(--b) solid #0000; /* space for the border */
     --_g: #0000 90deg,var(--c) 0;
@@ -171,7 +157,7 @@ a, .btn-link {
 }
 
     .clicky-card-link:hover {
-        --c: var(--hotpanda-darkblue); /* color of the border */
+        --c: var(--hotpanda-darkpurple); /* color of the border */
 
         opacity: 0.8;
         transform: scaleX(1.03) scaleY(1);
@@ -236,10 +222,11 @@ a, .btn-link {
 }
 
 .store-item {
-    --b: 2px; /* thickness of the border */
+    --b: 5px; /* thickness of the border */
     --c: transparent; /* color of the border */
     --w: 20px; /* width of border */
 
+    border-radius: 5px;
     transition: .2s ease-out;
     border: var(--b) solid #0000; /* space for the border */
     --_g: #0000 90deg,var(--c) 0;
@@ -250,7 +237,7 @@ a, .btn-link {
 }
 
     .store-item:hover {
-        --c: var(--hotpanda-darkblue); /* color of the border */
+        --c: var(--hotpanda-darkpurple); /* color of the border */
 
         opacity: 0.8;
         transform: scaleX(1.03) scaleY(1);
@@ -264,10 +251,11 @@ a, .btn-link {
     }
 
 .store-item-disabled {
-    --b: 2px; /* thickness of the border */
+    --b: 5px; /* thickness of the border */
     --c: transparent; /* color of the border */
     --w: 20px; /* width of border */
 
+    border-radius: 5px;
     transition: .2s ease-out;
     border: var(--b) solid #0000; /* space for the border */
     --_g: #0000 90deg,var(--c) 0;
@@ -287,10 +275,11 @@ a, .btn-link {
     }
 
 .store-item-outofstock {
-    --b: 2px; /* thickness of the border */
+    --b: 5px; /* thickness of the border */
     --c: transparent; /* color of the border */
     --w: 20px; /* width of border */
 
+    border-radius: 5px;
     transition: .2s ease-out;
     border: var(--b) solid #0000; /* space for the border */
     --_g: #0000 90deg,var(--c) 0;
@@ -310,10 +299,11 @@ a, .btn-link {
     }
 
 .store-link {
-    --b: 2px; /* thickness of the border */
+    --b: 5px; /* thickness of the border */
     --c: transparent; /* color of the border */
     --w: 20px; /* width of border */
 
+    border-radius: 5px;
     transition: .2s ease-out;
     border: var(--b) solid #0000; /* space for the border */
     --_g: #0000 90deg,var(--c) 0;
@@ -323,7 +313,7 @@ a, .btn-link {
 }
 
     .store-link:hover {
-        --c: var(--hotpanda-darkblue); /* color of the border */
+        --c: var(--hotpanda-darkpurple); /* color of the border */
 
         opacity: 0.8;
         transform: scaleX(1.03) scaleY(1);
@@ -337,10 +327,11 @@ a, .btn-link {
     }
 
 .store-link-disabled {
-    --b: 2px; /* thickness of the border */
+    --b: 5px; /* thickness of the border */
     --c: transparent; /* color of the border */
     --w: 20px; /* width of border */
 
+    border-radius: 5px;
     transition: .2s ease-out;
     border: var(--b) solid #0000; /* space for the border */
     --_g: #0000 90deg,var(--c) 0;
@@ -415,7 +406,9 @@ a, .btn-link {
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
 
-    touch-action: none
+    touch-action: none;
+
+    color: var(--hotpanda-yellow);
 }
 
 body {

@@ -12,6 +12,7 @@
         public string CurSpeech = "";
         public List<string> SpeechGreetings;
         public List<string> SpeechPurchased;
+        public List<string> SpeechSoldOut;
         public List<string> SpeechCantAfford;
         public List<string> SpeechFullResource;
         public List<string> SpeechNoSpace;

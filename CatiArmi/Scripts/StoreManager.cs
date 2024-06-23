@@ -15,6 +15,7 @@ namespace CatiArmi.Scripts
         {
             Greeting,
             Purchased,
+            Soldout,
             CantAfford,
             FullResource,
             NoSpace,
@@ -50,6 +51,12 @@ namespace CatiArmi.Scripts
                         "Purchased1",
                         "Purchased2",
                         "Purchased3",
+                    },
+                    SpeechSoldOut = new List<string>()
+                    {
+                        "SoldOut1",
+                        "SoldOut2",
+                        "SoldOut3",
                     },
                     SpeechCantAfford = new List<string>()
                     {
@@ -96,6 +103,12 @@ namespace CatiArmi.Scripts
                         "Purchased1",
                         "Purchased2",
                         "Purchased3",
+                    },
+                    SpeechSoldOut = new List<string>()
+                    {
+                        "SoldOut1",
+                        "SoldOut2",
+                        "SoldOut3",
                     },
                     SpeechCantAfford = new List<string>()
                     {
@@ -144,6 +157,12 @@ namespace CatiArmi.Scripts
                         "Purchased2",
                         "Purchased3",
                     },
+                    SpeechSoldOut = new List<string>()
+                    {
+                        "SoldOut1",
+                        "SoldOut2",
+                        "SoldOut3",
+                    },
                     SpeechCantAfford = new List<string>()
                     {
                         "Can'tAfford1",
@@ -182,6 +201,17 @@ namespace CatiArmi.Scripts
             {
                 CurStore.CurSpeech = CurStore.SpeechPurchased[RandomNumberGenerator.GetInt32(0, CurStore.SpeechPurchased.Count)];
                 CurDialogState = DialogState.Purchased;
+            }
+
+            InvokeStoreRefresh();
+        }
+
+        public static void InvokeSpeechSoldOut()
+        {
+            if (CurDialogState != DialogState.Soldout)
+            {
+                CurStore.CurSpeech = CurStore.SpeechSoldOut[RandomNumberGenerator.GetInt32(0, CurStore.SpeechSoldOut.Count)];
+                CurDialogState = DialogState.Soldout;
             }
 
             InvokeStoreRefresh();
