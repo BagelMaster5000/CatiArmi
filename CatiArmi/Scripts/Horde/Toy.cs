@@ -26,7 +26,7 @@
             if (durability == 0)
             {
                 BoardManager.RemovePlaceable(this);
-                
+
                 AudioManager.PlaySound("toy-destroy");
             }
         }
@@ -39,21 +39,25 @@
 
         public string GetHoverText()
         {
-            string extraText = "<br/>";
-            switch (Variant)
+            string extraText = "";
+            if (durability > 0)
             {
-                case 0:
-                    extraText +=
-                        "<span class='hotpanda-lightblue'>+Happiness</span><br/>";
-                    break;
-                case 1:
-                    extraText +=
-                        "<span class='hotpanda-lightyellow'>++Happiness</span><br/>";
-                    break;
-                case 2:
-                    extraText +=
-                        "<span class='hotpanda-lightyellow'>+++Happiness</span><br/>";
-                    break;
+                extraText = "<br/>";
+                switch (Variant)
+                {
+                    case 0:
+                        extraText +=
+                            "<span class='hotpanda-lightblue'>+Happiness</span><br/>";
+                        break;
+                    case 1:
+                        extraText +=
+                            "<span class='hotpanda-lightyellow'>++Happiness</span><br/>";
+                        break;
+                    case 2:
+                        extraText +=
+                            "<span class='hotpanda-lightyellow'>+++Happiness</span><br/>";
+                        break;
+                }
             }
 
             return "<div style='text-align: center'>" +
@@ -63,7 +67,14 @@
 
         public string GetImage()
         {
-            return "art/board/toy-" + (Variant + 1) + ".png";
+            if (durability > 0)
+            {
+                return "art/board/toy-" + (Variant + 1) + ".png";
+            }
+            else
+            {
+                return "art/board/brokentoy.png";
+            }
         }
 
         // Pachi interaction

@@ -1,4 +1,6 @@
-﻿namespace CatiArmi.Scripts
+﻿using System.Net.NetworkInformation;
+
+namespace CatiArmi.Scripts
 {
     public class Snack : InteractablePlaceable
     {
@@ -39,38 +41,43 @@
 
         public string GetHoverText()
         {
-            string extraText = "<br/>";
-            switch (Variant)
+            string extraText = "";
+            if (durability > 0)
             {
-                case 0:
-                    extraText +=
-                        "<span class='hotpanda-lightyellow'>++Hunger</span><br/>";
-                    break;
-                case 1:
-                    extraText +=
-                        "<span class='hotpanda-lightblue'>+Hunger</span><br/>" +
-                        "<span class='hotpanda-lightblue'>+Happiness</span>";
-                    break;
-                case 2:
-                    extraText +=
-                        "<span class='hotpanda-lightblue'>+Hunger</span><br/>" +
-                        "<span class='hotpanda-lightyellow'>++Happiness</span>";
-                    break;
-                case 3:
-                    extraText +=
-                        "<span class='hotpanda-lightyellow'>++Hunger</span><br/>" +
-                        "<span class='hotpanda-lightyellow'>++Happiness</span>";
-                    break;
-                case 4:
-                    extraText +=
-                        "<span class='hotpanda-lightyellow'>+++Hunger</span><br/>" +
-                        "<span class='hotpanda-lightyellow'>++Happiness</span>";
-                    break;
-                case 5:
-                    extraText +=
-                        "<span class='hotpanda-lightyellow'>+++Hunger</span><br/>" +
-                        "<span class='hotpanda-lightyellow'>+++Happiness</span>";
-                    break;
+                extraText = "<br/>";
+                switch (Variant)
+                {
+                    case 0:
+                        extraText +=
+                            "<span class='hotpanda-lightblue'>++Hunger</span><br/>" +
+                            "<span class='hotpanda-lightblue'>+Happiness</span>";
+                        break;
+                    case 1:
+                        extraText +=
+                            "<span class='hotpanda-lightblue'>+Hunger</span><br/>" +
+                            "<span class='hotpanda-lightblue'>+Happiness</span>";
+                        break;
+                    case 2:
+                        extraText +=
+                            "<span class='hotpanda-lightblue'>+Hunger</span><br/>" +
+                            "<span class='hotpanda-lightyellow'>+Happiness</span>";
+                        break;
+                    case 3:
+                        extraText +=
+                            "<span class='hotpanda-lightyellow'>+Hunger</span><br/>" +
+                            "<span class='hotpanda-lightyellow'>++Happiness</span>";
+                        break;
+                    case 4:
+                        extraText +=
+                            "<span class='hotpanda-lightyellow'>+++Hunger</span><br/>" +
+                            "<span class='hotpanda-lightyellow'>++Happiness</span>";
+                        break;
+                    case 5:
+                        extraText +=
+                            "<span class='hotpanda-lightyellow'>+++Hunger</span><br/>" +
+                            "<span class='hotpanda-lightyellow'>+++Happiness</span>";
+                        break;
+                }
             }
 
             return "<div style='text-align: center'>" +
@@ -80,7 +87,14 @@
 
         public string GetImage()
         {
-            return "art/board/snack-" + (Variant + 1) + ".png";
+            if (durability > 0)
+            {
+                return "art/board/snack-" + (Variant + 1) + ".png";
+            }
+            else
+            {
+                return "art/board/finishedsnack.png";
+            }
         }
 
         // Pachi interaction

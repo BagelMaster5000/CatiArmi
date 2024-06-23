@@ -28,7 +28,7 @@ namespace CatiArmi.Scripts
         // Balancing
         public static int PachisToWin = 100;
 
-        public static int StartingMoney = 999;
+        public static int StartingMoney = 25;
         public static int MaxFoodReserve = 200;
         public static int StartingFoodReserve = 100;
         public static int MaxWaterReserve = 250;
@@ -63,9 +63,9 @@ namespace CatiArmi.Scripts
         public static int WaterBowlFillAmount = 40;
 
         public static List<int> SnackCosts = new List<int>() { 3, 6, 7, 8, 15, 25 };
-        public static List<int> SnackDurabilities = new List<int>() { 25, 15, 10, 15, 35, 45 };
-        public static List<int> PachiEatingSnackHungerChangesOnTick = new List<int>() { 5, 2, 3, 4, 10, 10 };
-        public static List<int> PachiEatingSnackHappinessChangesOnTick = new List<int>() { 1, 4, 4, 4, 4, 10 };
+        public static List<int> SnackDurabilities = new List<int>() { 25, 10, 15, 15, 35, 45 };
+        public static List<int> PachiEatingSnackHungerChangesOnTick = new List<int>() { 5, 2, 2, 3, 10, 10 };
+        public static List<int> PachiEatingSnackHappinessChangesOnTick = new List<int>() { 1, 1, 1, 2, 3, 4 };
 
         public static List<int> ToyCosts = new List<int>() { 10, 15, 20 };
         public static List<int> ToyDurabilities = new List<int>() { 30, 35, 40 };

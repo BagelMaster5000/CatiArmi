@@ -80,7 +80,7 @@ namespace CatiArmi.Scripts
                 {
                     Name = "Placeholder's Candy Store",
                     DisplayName = "Candy Store",
-                    Icon = "placeholders/pachimari-idle.png",
+                    Icon = "art/ui/shopgraphic-candystore.png",
                     PachisToUnlock = 20,
                     ItemsForSale = new List<StoreItem>()
                     {
@@ -130,7 +130,7 @@ namespace CatiArmi.Scripts
                 {
                     Name = "Placeholder's Toy Store",
                     DisplayName = "Toy Store",
-                    Icon = "placeholders/pachimari-idle.png",
+                    Icon = "art/ui/shopgraphic-toystore.png",
                     PachisToUnlock = 50,
                     ItemsForSale = new List<StoreItem>()
                     {
