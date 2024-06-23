@@ -23,7 +23,7 @@ namespace CatiArmi.Scripts
         private int colorVariant = 0;
         const int MAX_COLOR_VARIANTS = 3;
 
-        const int HAPPINESS_THRESHOLD = 100;
+        public const int HAPPINESS_THRESHOLD = 100;
         public int happiness;
 
         const int MAX_HUNGER = 100;

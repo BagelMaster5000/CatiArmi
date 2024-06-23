@@ -26,7 +26,7 @@
                                 @for (int c = 0; c < 8; c++)
                                 {
                                     var col = c.ToString();
-                                        <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is2" Style="border-color: black" Height="Height.Rem(6.8)" Width="Width.Rem(6.8)" />
+                                    <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is2" Style="border-color: black" Height="Height.Rem(6.8)" Width="Width.Rem(6.8)" />
                                 }
                             </Div>
                         }

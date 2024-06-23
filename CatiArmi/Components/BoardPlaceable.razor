@@ -5,6 +5,14 @@
 <Tooltip Text="@Placeable.GetHoverText()" Multiline=true Fade=true FadeDuration="70">
     <Div class="pachimari gallery-item" onclick="@Placeable.Clicked" onmouseover="@Placeable.Hovered" TextAlignment="TextAlignment.Center">
         <Image Source="@Placeable.GetImage()" Width="Width.Is100" Height="Height.Is50" />
+        @if (GetStarVisible())
+        {
+            <Div Class="centered-placeable" Width="Width.Is100" Height="Height.Is100">
+                <Column ColumnSize="ColumnSize.Is3">
+                    <Image Source="placeholders/status-star.png" Width="Width.Is100" />
+                </Column>
+            </Div>
+        }
     </Div>
 </Tooltip>
 
@@ -16,5 +24,16 @@
     {
         BoardManager.PachiTick += StateHasChanged;
         BoardManager.BoardRefresh += StateHasChanged;
+    }
+
+    bool GetStarVisible()
+    {
+        if (typeof(Pachimari).IsAssignableFrom(Placeable.GetType()))
+        {
+            Pachimari pachi = (Pachimari)Placeable;
+            return pachi.happiness > Pachimari.HAPPINESS_THRESHOLD;
+        }
+
+        return false;
     }
 }
