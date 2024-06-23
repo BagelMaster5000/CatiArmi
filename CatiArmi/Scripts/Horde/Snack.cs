@@ -4,19 +4,18 @@
     {
         public Position Position { get; set; }
 
-        private const int INITIAL_DURABILITY = 5;
         private int durability;
 
         public int Variant = 0;
 
         public Snack()
         {
-            durability = INITIAL_DURABILITY;
+            durability = GameManager.SnackDurabilities[Variant];
         }
 
         public Snack(int setVariant)
         {
-            durability = INITIAL_DURABILITY;
+            durability = GameManager.SnackDurabilities[Variant];
             Variant = setVariant;
         }
 
@@ -40,7 +39,43 @@
 
         public string GetHoverText()
         {
-            return "<strong>Remaining:</strong> " + durability;
+            string extraText = "<br/>";
+            switch (Variant)
+            {
+                case 0:
+                    extraText +=
+                        "<span class='hotpanda-lightyellow'>++Hunger</span><br/>";
+                    break;
+                case 1:
+                    extraText +=
+                        "<span class='hotpanda-lightblue'>+Hunger</span><br/>" +
+                        "<span class='hotpanda-lightblue'>+Happiness</span>";
+                    break;
+                case 2:
+                    extraText +=
+                        "<span class='hotpanda-lightblue'>+Hunger</span><br/>" +
+                        "<span class='hotpanda-lightyellow'>++Happiness</span>";
+                    break;
+                case 3:
+                    extraText +=
+                        "<span class='hotpanda-lightyellow'>++Hunger</span><br/>" +
+                        "<span class='hotpanda-lightyellow'>++Happiness</span>";
+                    break;
+                case 4:
+                    extraText +=
+                        "<span class='hotpanda-lightyellow'>+++Hunger</span><br/>" +
+                        "<span class='hotpanda-lightyellow'>++Happiness</span>";
+                    break;
+                case 5:
+                    extraText +=
+                        "<span class='hotpanda-lightyellow'>+++Hunger</span><br/>" +
+                        "<span class='hotpanda-lightyellow'>+++Happiness</span>";
+                    break;
+            }
+
+            return "<div style='text-align: center'>" +
+                "<strong>Remaining:</strong> " + durability + extraText +
+                "</div>";
         }
 
         public string GetImage()
@@ -57,7 +92,7 @@
         {
             if (durability > 0)
             {
-                bool ate = invokerPachimari.EatSnack(0);
+                bool ate = invokerPachimari.EatSnack(Variant);
                 if (ate)
                 {
                     durability--;

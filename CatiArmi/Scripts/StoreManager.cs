@@ -39,7 +39,7 @@ namespace CatiArmi.Scripts
                         new WaterBowlStoreItem { Name = "Water Bowl", Price = 25, LimitedItem = true },
                         new FoodFillStoreItem(50) { Name = "Food Fill", Price = 5, LimitedItem = false },
                         new WaterFillStoreItem(50) { Name = "Water Fill", Price = 5, LimitedItem = false },
-                        new SnackStoreItem(0) { Name = "Fish Snack", Price = 3, LimitedItem = false },
+                        new SnackStoreItem(0) { Name = "Fish Snack", Price = GameManager.SnackCosts[0], LimitedItem = false },
                     },
                     SpeechGreetings = new List<string>()
                     {
@@ -86,10 +86,10 @@ namespace CatiArmi.Scripts
                     {
                         new FoodBowlStoreItem { Name = "Food Bowl", Price = 40, LimitedItem = true },
                         new WaterBowlStoreItem { Name = "Water Bowl", Price = 40, LimitedItem = true },
-                        new SnackStoreItem(1) { Name = "Kitty Pop", Price = 6, LimitedItem = false },
-                        new SnackStoreItem(2) { Name = "Trippy Treat", Price = 7, LimitedItem = false },
-                        new ToyStoreItem(0) { Name = "Teaser Toy", Price = 10, LimitedItem = false },
-                        new SnackStoreItem(3) { Name = "Toe Beans", Price = 8, LimitedItem = false },
+                        new SnackStoreItem(1) { Name = "Kitty Pop", Price = GameManager.SnackCosts[1], LimitedItem = false },
+                        new SnackStoreItem(2) { Name = "Trippy Treat", Price = GameManager.SnackCosts[2], LimitedItem = false },
+                        new ToyStoreItem(0) { Name = "Teaser Toy", Price = GameManager.ToyCosts[0], LimitedItem = false },
+                        new SnackStoreItem(3) { Name = "Toe Beans", Price = GameManager.SnackCosts[3], LimitedItem = false },
                     },
                     SpeechGreetings = new List<string>()
                     {
@@ -136,10 +136,10 @@ namespace CatiArmi.Scripts
                     {
                         new FoodBowlStoreItem { Name = "Food Bowl", Price = 60, LimitedItem = true },
                         new WaterBowlStoreItem { Name = "Water Bowl", Price = 60, LimitedItem = true },
-                        new ToyStoreItem(1) { Name = "Yarn Ball", Price = 20, LimitedItem = false },
-                        new ToyStoreItem(2) { Name = "Funny Mouse", Price = 25, LimitedItem = false },
-                        new SnackStoreItem(4) { Name = "Gravy Stix", Price = 10, LimitedItem = false },
-                        new SnackStoreItem(5) { Name = "Soft Food Can", Price = 15, LimitedItem = false },
+                        new ToyStoreItem(1) { Name = "Yarn Ball", Price = GameManager.ToyCosts[1], LimitedItem = false },
+                        new ToyStoreItem(2) { Name = "Funny Mouse", Price = GameManager.ToyCosts[2], LimitedItem = false },
+                        new SnackStoreItem(4) { Name = "Gravy Stix", Price = GameManager.SnackCosts[4], LimitedItem = false },
+                        new SnackStoreItem(5) { Name = "Soft Food Can", Price = GameManager.SnackCosts[5], LimitedItem = false },
                         //new PlaceableStoreItem { Placeable = new Pachimari(), Name = "Da golden pachi", Icon = "placeholders/pachimari-idle.png", Price = 999, LimitedItem = false },
                     },
                     SpeechGreetings = new List<string>()

@@ -3,21 +3,19 @@
     public class Toy : InteractablePlaceable
     {
         public Position Position { get; set; }
-        public string Test { get; set; }
 
-        private const int INITIAL_DURABILITY = 30;
         private int durability;
 
         public int Variant;
 
         public Toy()
         {
-            durability = INITIAL_DURABILITY;
+            durability = GameManager.ToyDurabilities[Variant];
         }
 
         public Toy(int setVariant)
         {
-            durability = INITIAL_DURABILITY;
+            durability = GameManager.ToyDurabilities[Variant];
             Variant = setVariant;
         }
 
@@ -41,7 +39,26 @@
 
         public string GetHoverText()
         {
-            return "<strong>Durability:</strong> " + durability + "/" + INITIAL_DURABILITY;
+            string extraText = "<br/>";
+            switch (Variant)
+            {
+                case 0:
+                    extraText +=
+                        "<span class='hotpanda-lightblue'>+Happiness</span><br/>";
+                    break;
+                case 1:
+                    extraText +=
+                        "<span class='hotpanda-lightyellow'>++Happiness</span><br/>";
+                    break;
+                case 2:
+                    extraText +=
+                        "<span class='hotpanda-lightyellow'>+++Happiness</span><br/>";
+                    break;
+            }
+
+            return "<div style='text-align: center'>" +
+                "<strong>Durability:</strong> " + durability + "/" + GameManager.ToyDurabilities[Variant] + extraText +
+                "</div>";
         }
 
         public string GetImage()
@@ -58,7 +75,7 @@
         {
             if (durability > 0)
             {
-                bool played = invokerPachimari.Play(0);
+                bool played = invokerPachimari.Play(Variant);
                 if (played)
                 {
                     durability--;
