@@ -14,7 +14,8 @@
         public List<string> SpeechPurchased;
         public List<string> SpeechSoldOut;
         public List<string> SpeechCantAfford;
-        public List<string> SpeechFullResource;
+        public List<string> SpeechFullFood;
+        public List<string> SpeechFullWater;
         public List<string> SpeechNoSpace;
 
         public bool IsShopAvailable()

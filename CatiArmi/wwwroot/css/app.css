@@ -372,6 +372,13 @@ h1:focus {
     transform: translate(-52%, -50%);
 }
 
+.centered-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .bar-icon {
     position: absolute;
     left: 0;

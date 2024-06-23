@@ -12,7 +12,7 @@ namespace CatiArmi.Scripts
         public static int MaxWaterReserve = GameManager.MaxWaterReserve;
         public static int WaterReserve = GameManager.StartingWaterReserve;
 
-        public static int StoredPachis = 0;
+        public static int StoredPachis = 200;
 
         public static int GetTotalPachiCount()
         {

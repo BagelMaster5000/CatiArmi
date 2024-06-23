@@ -17,7 +17,8 @@ namespace CatiArmi.Scripts
             Purchased,
             Soldout,
             CantAfford,
-            FullResource,
+            FullFood,
+            FullWater,
             NoSpace,
         };
         public static DialogState CurDialogState = DialogState.Greeting;
@@ -42,39 +43,37 @@ namespace CatiArmi.Scripts
                     },
                     SpeechGreetings = new List<string>()
                     {
-                        "Greetings1",
-                        "Greetings2",
-                        "Greetings3",
+                        "Oh hello! Almost didn’t see you there!",
+                        "You look like the compassionate type… er… I think…",
+                        "You look like a nice guy! Or gal… I need new glasses…",
                     },
                     SpeechPurchased = new List<string>()
                     {
-                        "Purchased1",
-                        "Purchased2",
-                        "Purchased3",
+                        "You would never use all these finite resources for evil... right?",
+                        "I trust you to make the right decision…",
+                        "With great resources, comes great responsibility!",
                     },
                     SpeechSoldOut = new List<string>()
                     {
                         "SoldOut1",
-                        "SoldOut2",
-                        "SoldOut3",
                     },
                     SpeechCantAfford = new List<string>()
                     {
-                        "Can'tAfford1",
-                        "Can'tAfford2",
-                        "Can'tAfford3",
+                        "I can’t operate this place without any coin!",
+                        "I would give handouts… if I could afford to…",
+                        "I would just give you this for free but, inflation you know?",
                     },
-                    SpeechFullResource = new List<string>()
+                    SpeechFullFood = new List<string>()
                     {
-                        "FullResource1",
-                        "FullResource2",
-                        "FullResource3",
+                        "I don’t think I can pour any more food into that container, it’ll overflow!",
+                    },
+                    SpeechFullWater = new List<string>()
+                    {
+                        "I can’t pour any more water into that container, it’ll overflow!",
                     },
                     SpeechNoSpace = new List<string>()
                     {
-                        "NoSpace1",
-                        "NoSpace2",
-                        "NoSpace3",
+                        "Oh shoot! Looks like you’re out of space.",
                     },
                 },
                 new Store()
@@ -94,39 +93,37 @@ namespace CatiArmi.Scripts
                     },
                     SpeechGreetings = new List<string>()
                     {
-                        "Greetings1",
-                        "Greetings2",
-                        "Greetings3",
+                        "On candy stripe legs… softly through the shadow… stealing past the windows… looking for the victim… shhh…. OH! Haha, I didn’t see you there.",
+                        "Excuse me, I’m looking for customers with extravagant taste, have you seen any around?",
+                        "I can refuse service to anyone who doesn’t look rich enough to shop here, but I’ll make an exception for you~",
                     },
                     SpeechPurchased = new List<string>()
                     {
-                        "Purchased1",
-                        "Purchased2",
-                        "Purchased3",
+                        "Bring me a bit more coin next time, I’ll throw in something sweet. <3",
+                        "Commision more sophisticated confectionaries next time, I’m a very busy bee.",
+                        "You should bee less frugal next time.",
                     },
                     SpeechSoldOut = new List<string>()
                     {
                         "SoldOut1",
-                        "SoldOut2",
-                        "SoldOut3",
                     },
                     SpeechCantAfford = new List<string>()
                     {
-                        "Can'tAfford1",
-                        "Can'tAfford2",
-                        "Can'tAfford3",
+                        "You can’t afford that, honey~",
+                        "You look a little light on coin for my taste.",
+                        "My sweets are a bit more… refined.",
                     },
-                    SpeechFullResource = new List<string>()
+                    SpeechFullFood = new List<string>()
                     {
-                        "FullResource1",
-                        "FullResource2",
-                        "FullResource3",
+                        "FullFood1",
+                    },
+                    SpeechFullWater = new List<string>()
+                    {
+                        "FullWater1",
                     },
                     SpeechNoSpace = new List<string>()
                     {
-                        "NoSpace1",
-                        "NoSpace2",
-                        "NoSpace3",
+                        "Perhaps investing in a bit more space would suit you.",
                     },
                 },
                 new Store()
@@ -147,39 +144,37 @@ namespace CatiArmi.Scripts
                     },
                     SpeechGreetings = new List<string>()
                     {
-                        "Greetings1",
-                        "Greetings2",
-                        "Greetings3",
+                        "[The meek salamander befuddles you with his shockingly intoxicating voice] Why hello there, traveler! Welcome to my shop!",
+                        "Ah yes, I see you’re a seasoned veteran!",
+                        "[You notice brutality behind the salamander’s beady eyes]",
                     },
                     SpeechPurchased = new List<string>()
                     {
-                        "Purchased1",
-                        "Purchased2",
-                        "Purchased3",
+                        "Good luck out there soldier.",
+                        "It’s refreshing to see folks with bravery in their hearts!",
+                        "You made the right choice doing business with me.",
                     },
                     SpeechSoldOut = new List<string>()
                     {
                         "SoldOut1",
-                        "SoldOut2",
-                        "SoldOut3",
                     },
                     SpeechCantAfford = new List<string>()
                     {
-                        "Can'tAfford1",
-                        "Can'tAfford2",
-                        "Can'tAfford3",
+                        "Sorry soldier, those are for the tough guys.",
+                        "You look a bit weak to be handling that one.",
+                        "Looks a bit too heavy for you at the moment.",
                     },
-                    SpeechFullResource = new List<string>()
+                    SpeechFullFood = new List<string>()
                     {
-                        "FullResource1",
-                        "FullResource2",
-                        "FullResource3",
+                        "FullFood1",
+                    },
+                    SpeechFullWater = new List<string>()
+                    {
+                        "FullWater1",
                     },
                     SpeechNoSpace = new List<string>()
                     {
-                        "NoSpace1",
-                        "NoSpace2",
-                        "NoSpace3",
+                        "Your battlefield is crowded already.",
                     },
                 },
             };
@@ -228,12 +223,23 @@ namespace CatiArmi.Scripts
             InvokeStoreRefresh();
         }
 
-        public static void InvokeSpeechFullResource()
+        public static void InvokeSpeechFullFood()
         {
-            if (CurDialogState != DialogState.FullResource)
+            if (CurDialogState != DialogState.FullFood)
             {
-                CurStore.CurSpeech = CurStore.SpeechFullResource[RandomNumberGenerator.GetInt32(0, CurStore.SpeechFullResource.Count)];
-                CurDialogState = DialogState.FullResource;
+                CurStore.CurSpeech = CurStore.SpeechFullFood[RandomNumberGenerator.GetInt32(0, CurStore.SpeechFullFood.Count)];
+                CurDialogState = DialogState.FullFood;
+            }
+
+            InvokeStoreRefresh();
+        }
+
+        public static void InvokeSpeechFullWater()
+        {
+            if (CurDialogState != DialogState.FullWater)
+            {
+                CurStore.CurSpeech = CurStore.SpeechFullWater[RandomNumberGenerator.GetInt32(0, CurStore.SpeechFullWater.Count)];
+                CurDialogState = DialogState.FullWater;
             }
 
             InvokeStoreRefresh();

@@ -2,8 +2,7 @@
 @inject NavigationManager NavigationManager
 
 <Div TextAlignment="TextAlignment.Center">
-    <Link onclick="@NavigateToStore" Disabled="@(!Store.IsShopAvailable())">
-    <Container Width="Width.Is75" Class="@GetShopLinkClass()" Padding="Padding.Is1">
+    <Container Width="Width.Is75" Class="@GetShopLinkClass()" @onclick="@NavigateToStore" Padding="Padding.Is1">
         <Image Source="@GetImage()" Width="Width.Is100" Height="Height.Rem(5)" />
         <Row Class="centered" Width="Width.Rem(14.5)">
             <Column ColumnSize="ColumnSize.Is5">
@@ -17,7 +16,6 @@
             </Column>
         </Row>
     </Container>
-    </Link>
 </Div>
 
 @code {

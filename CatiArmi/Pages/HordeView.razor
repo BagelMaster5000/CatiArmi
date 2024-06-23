@@ -59,8 +59,7 @@
 
                             @* Win Game Button *@
                             <Row>
-                                <Link Disabled="true">
-                                <Container Width="Width.Is100" Class="@GetWinButtonLinkClass()">
+                                <Container Width="Width.Is100" Class="@GetWinButtonLinkClass()" @onclick="@NavigateToVictoryView" Padding="Padding.Is1">
                                     <Image Source="@GetWinButtonImage()" Width="Width.Is100" Height="Height.Rem(8)" />
                                     <Row Class="centered" Width="Width.Rem(18)">
                                         <Column ColumnSize="ColumnSize.Is4" TextAlignment="TextAlignment.End">
@@ -74,7 +73,6 @@
                                         </Column>
                                     </Row>
                                 </Container>
-                                </Link>
                             </Row>
                         </Container>
                     </Column>
@@ -175,5 +173,21 @@
         {
             return Inventory.GetTotalPachiCount() + " / " + GameManager.PachisToWin + " Catis";
         }
+    }
+
+    bool GetWinButtonDisabled()
+    {
+        return Inventory.GetTotalPachiCount() < GameManager.PachisToWin;
+    }
+
+    public void NavigateToVictoryView()
+    {
+        GameManager.ResetTimers();
+
+        PageAnimationManager.NextPageAnimation = Animations.ZoomIn;
+        NavigationManager.NavigateTo("Victory");
+
+        AudioManager.StopMusic();
+        AudioManager.PlaySound("transitionToStore");
     }
 }

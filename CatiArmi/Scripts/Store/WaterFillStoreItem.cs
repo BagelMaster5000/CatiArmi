@@ -22,7 +22,7 @@
         {
             if (Inventory.WaterReserve >= Inventory.MaxWaterReserve)
             {
-                StoreManager.InvokeSpeechFullResource();
+                StoreManager.InvokeSpeechFullWater();
                 return false;
             }
 

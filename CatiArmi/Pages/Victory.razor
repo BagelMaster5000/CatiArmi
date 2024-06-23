@@ -1,0 +1,39 @@
+﻿@page "/Victory"
+@inject NavigationManager NavigationManager
+
+@using CatiArmi.Scripts;
+
+<Animate Auto Animation="PageAnimationManager.NextPageAnimation">
+     <Container TextAlignment="TextAlignment.Center" Padding="Padding.Is2">
+         <Text TextSize="TextSize.Heading1">YOU WIN!</Text>
+         <br />
+         <Text TextSize="TextSize.ExtraLarge">Your cati army has taken over the world!</Text>
+     </Container>
+     <Container TextAlignment="TextAlignment.Center" Padding="Padding.Is2">
+         <Image Source="art/victory.png" Width="Width.Is100" />
+     </Container>
+@*      <Container TextAlignment="TextAlignment.Center" Width="Width.Rem(13)" Padding="Padding.Is2">
+         <Div Class="clicky-card-link" @onclick="@NavigateToTitleView" Padding="Padding.Is1">
+             <Text TextSize="TextSize.Large" VerticalAlignment="VerticalAlignment.Middle">Back to Title</Text>
+         </Div>
+     </Container> *@
+ </Animate>
+
+ @code {
+    protected override void OnInitialized()
+    {
+        Task.Run(async () =>
+        {
+            await Task.Delay(100);
+            PageAnimationManager.NextPageAnimation = Animations.Fade;
+        });
+    }
+
+    public void NavigateToTitleView()
+    {
+        GameManager.ResetTimers();
+
+        PageAnimationManager.NextPageAnimation = Animations.Fade;
+        NavigationManager.NavigateTo("Title");
+    }
+}

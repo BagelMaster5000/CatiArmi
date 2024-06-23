@@ -22,7 +22,7 @@
         {
             if (Inventory.FoodReserve >= Inventory.MaxFoodReserve)
             {
-                StoreManager.InvokeSpeechFullResource();
+                StoreManager.InvokeSpeechFullFood();
 
                 AudioManager.PlaySound("item-failedtopurchase");
 

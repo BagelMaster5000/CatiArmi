@@ -15,6 +15,11 @@ namespace CatiArmi.Scripts
             Task.Run(async () => await JS.InvokeVoidAsync("playMusic"));
         }
 
+        public static void StopMusic()
+        {
+            Task.Run(async () => await JS.InvokeVoidAsync("stopMusic"));
+        }
+
         public static void PlaySound(string sound)
         {
             Task.Run(async () => await JS.InvokeVoidAsync("playSound", sound));

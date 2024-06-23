@@ -11,6 +11,12 @@
             bgm.play();
         }
     }
+
+    window.stopMusic = () => {
+        var bgm = document.getElementById("bgm");
+        bgm.pause();
+        bgm.currentTime = 0;
+    }
 </script>
 
 <audio id="sound0" />
