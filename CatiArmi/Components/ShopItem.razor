@@ -1,15 +1,21 @@
 ﻿@using CatiArmi.Scripts;
 
-<Div Padding="Padding.Is1">
-    <Div Class="@GetShopItemClass()" onclick="@TryPurchaseWrapper">
-        <Card Padding="Padding.Is2" Margin="Margin.Is1" Width="Width.Max100">
-            <Container>
-                <Span>
-                    <Image Source="@Item.Icon" Width="Width.Rem(3)" />
-                    <Text Padding="Padding.Is2" VerticalAlignment="VerticalAlignment.Middle">@Item.Name  $@Item.Price</Text>
-                </Span>
-            </Container>
-        </Card>
+<Div>
+    <Div Class="@GetShopItemClass()" onclick="@TryPurchaseWrapper" Padding="Padding.Is1">
+        <Image Source="@GetImage()" TextAlignment="TextAlignment.Center" Width="Width.Is100" Height="Height.Rem(5)" />
+        <Row Class="centered-shopitem" Width="Width.Rem(16.5)">
+            <Column ColumnSize="ColumnSize.Is3">
+                <Image Source="@Item.Icon" Width="Width.Rem(3)" />
+            </Column>
+            <Column ColumnSize="ColumnSize.Is6" TextAlignment="TextAlignment.Start">
+                <Div Padding="Padding.Is2" />
+                <Text VerticalAlignment="VerticalAlignment.Top">@Item.Name</Text>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is3" TextAlignment="TextAlignment.End">
+                <Div Padding="Padding.Is2" />
+                <Text VerticalAlignment="VerticalAlignment.Top" Italic>$@Item.Price</Text>
+            </Column>
+        </Row>
     </Div>
 </Div>
 
@@ -40,5 +46,21 @@
         Item.TryPurchase();
 
         Inventory.InvokeResourcesUpdated();
+    }
+
+    string GetImage()
+    {
+        if (Item.OutOfStock)
+        {
+            return "art/ui/shopbutton-outofstock.png";
+        }
+        else if (Item.CanPurchase())
+        {
+            return "art/ui/shopbutton-canpurchase.png";
+        }
+        else
+        {
+            return "art/ui/shopbutton-cantpurchase.png";
+        }
     }
 }

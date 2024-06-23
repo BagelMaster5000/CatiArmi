@@ -4,6 +4,13 @@
     {
         public int FillAmount;
 
+        public WaterFillStoreItem(int setFillAmount)
+        {
+            FillAmount = setFillAmount;
+
+            Icon = "art/ui/water.png";
+        }
+
         public override bool CanPurchase()
         {
             if (!base.CanPurchase()) { return false; }

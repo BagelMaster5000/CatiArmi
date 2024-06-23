@@ -33,11 +33,11 @@ namespace CatiArmi.Scripts
                     PachisToUnlock = 0,
                     ItemsForSale = new List<StoreItem>()
                     {
-                        new FoodBowlStoreItem { Name = "Food Bowl", Icon = "placeholders/pachimari-idle.png", Price = 25, LimitedItem = true },
-                        new WaterBowlStoreItem { Name = "Water Bowl", Icon = "placeholders/pachimari-idle.png", Price = 25, LimitedItem = true },
-                        new FoodFillStoreItem { FillAmount = 50, Name = "50u Food Fill", Icon = "placeholders/pachimari-idle.png", Price = 5, LimitedItem = false },
-                        new WaterFillStoreItem { FillAmount = 50, Name = "50u Water Fill", Icon = "placeholders/pachimari-idle.png", Price = 5, LimitedItem = false },
-                        new SnackStoreItem { SnackType = 0, Name = "Scooby Snack 1", Icon = "placeholders/pachimari-idle.png", Price = 3, LimitedItem = false },
+                        new FoodBowlStoreItem { Name = "Food Bowl", Price = 25, LimitedItem = true },
+                        new WaterBowlStoreItem { Name = "Water Bowl", Price = 25, LimitedItem = true },
+                        new FoodFillStoreItem(50) { Name = "50u Food Fill", Price = 5, LimitedItem = false },
+                        new WaterFillStoreItem(50) { Name = "50u Water Fill", Price = 5, LimitedItem = false },
+                        new SnackStoreItem(0) { Name = "Fish Snack", Price = 3, LimitedItem = false },
                     },
                     SpeechGreetings = new List<string>()
                     {
@@ -78,11 +78,12 @@ namespace CatiArmi.Scripts
                     PachisToUnlock = 20,
                     ItemsForSale = new List<StoreItem>()
                     {
-                        new FoodBowlStoreItem { Name = "Food Bowl", Icon = "placeholders/pachimari-idle.png", Price = 40, LimitedItem = true },
-                        new WaterBowlStoreItem { Name = "Water Bowl", Icon = "placeholders/pachimari-idle.png", Price = 40, LimitedItem = true },
-                        new SnackStoreItem { SnackType = 1, Name = "Scooby Snack 2", Icon = "placeholders/pachimari-idle.png", Price = 3, LimitedItem = false },
-                        new SnackStoreItem { SnackType = 2, Name = "Scooby Snack 3", Icon = "placeholders/pachimari-idle.png", Price = 3, LimitedItem = false },
-                        new ToyStoreItem {ToyType = 0, Name = "Toy 1", Icon = "placeholders/pachimari-idle.png", Price = 3, LimitedItem = false },
+                        new FoodBowlStoreItem { Name = "Food Bowl", Price = 40, LimitedItem = true },
+                        new WaterBowlStoreItem { Name = "Water Bowl", Price = 40, LimitedItem = true },
+                        new SnackStoreItem(1) { Name = "Kitty Pop", Price = 3, LimitedItem = false },
+                        new SnackStoreItem(2) { Name = "Trippy Treat", Price = 3, LimitedItem = false },
+                        new ToyStoreItem(0) { Name = "Teaser Toy", Price = 3, LimitedItem = false },
+                        new SnackStoreItem(3) { Name = "Toe Beans", Price = 3, LimitedItem = false },
                     },
                     SpeechGreetings = new List<string>()
                     {
@@ -123,10 +124,12 @@ namespace CatiArmi.Scripts
                     PachisToUnlock = 50,
                     ItemsForSale = new List<StoreItem>()
                     {
-                        new FoodBowlStoreItem { Name = "Food Bowl", Icon = "placeholders/pachimari-idle.png", Price = 60, LimitedItem = true },
-                        new WaterBowlStoreItem { Name = "Water Bowl", Icon = "placeholders/pachimari-idle.png", Price = 60, LimitedItem = true },
-                        new ToyStoreItem { ToyType = 1, Name = "Toy 2", Icon = "placeholders/pachimari-idle.png", Price = 3, LimitedItem = false },
-                        new ToyStoreItem { ToyType = 2, Name = "Toy 3", Icon = "placeholders/pachimari-idle.png", Price = 3, LimitedItem = false },
+                        new FoodBowlStoreItem { Name = "Food Bowl", Price = 60, LimitedItem = true },
+                        new WaterBowlStoreItem { Name = "Water Bowl", Price = 60, LimitedItem = true },
+                        new ToyStoreItem(1) { Name = "Funny Mouse", Price = 3, LimitedItem = false },
+                        new ToyStoreItem(2) { Name = "Yarn Ball", Price = 3, LimitedItem = false },
+                        new SnackStoreItem(4) { Name = "Gravy Stix", Price = 3, LimitedItem = false },
+                        new SnackStoreItem(5) { Name = "Soft Food Can", Price = 3, LimitedItem = false },
                         //new PlaceableStoreItem { Placeable = new Pachimari(), Name = "Da golden pachi", Icon = "placeholders/pachimari-idle.png", Price = 999, LimitedItem = false },
                     },
                     SpeechGreetings = new List<string>()

@@ -234,6 +234,8 @@ a, .btn-link {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    position: relative;
+    color: white;
 }
 
     .store-item:hover {
@@ -257,7 +259,7 @@ a, .btn-link {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
-    background-color: var(--hotpanda-red);
+    position: relative;
 }
 
     .store-item-disabled:hover {
@@ -277,7 +279,7 @@ a, .btn-link {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
-    background-color: darkgrey;
+    position: relative;
 }
 
     .store-item-outofstock:hover {
@@ -340,6 +342,20 @@ a, .btn-link {
     transform: translate(-45%, -50%);
 }
 
+.centered-shopitem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-46%, -50%);
+}
+
+.centered-shopwindow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-52%, -50%);
+}
+
 .bar-icon {
     position: absolute;
     left: 0;
@@ -375,6 +391,13 @@ a, .btn-link {
     user-select: none; /* Standard syntax */
 
     touch-action: none
+}
+
+body {
+    background-image: url("/art/background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 /*.page {

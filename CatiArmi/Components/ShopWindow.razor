@@ -1,13 +1,23 @@
 ﻿@using CatiArmi.Scripts;
 
-<Card Padding="Padding.Is2" Margin="Margin.Is2">
-    <Div style="overflow-y: auto" Height="Height.Rem(24)" Padding="Padding.Is2">
+<Div Padding="Padding.Is2" Margin="Margin.Is2" style="position: relative;">
+    <Image Source="art/ui/shopwindow.png" Width="Width.Is100" Height="Height.Rem(24)"/>
+    <Div Class="centered-shopwindow" style="overflow-y: auto" Height="Height.Rem(21.5)" Width="Width.Rem(21)" Padding="Padding.Is2">
+        @foreach (StoreItem item in Store.ItemsForSale)
+        {
+            <ShopItem Item="@item" />
+        }
+    </Div>
+</Div>
+
+@* <Card Padding="Padding.Is2" Margin="Margin.Is2">
+    <Div style="overflow-y: auto" Height="Height.Rem(24)" Padding="Padding.Is3">
         @foreach (StoreItem item in Store.ItemsForSale)
         {
             <ShopItem Item="@item"/>
         }
     </Div>
-</Card>
+</Card> *@
 
 @code {
     [Parameter]

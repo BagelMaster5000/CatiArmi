@@ -4,6 +4,13 @@
     {
         public int FillAmount;
 
+        public FoodFillStoreItem(int setFillAmount)
+        {
+            FillAmount = setFillAmount;
+
+            Icon = "art/ui/food.png";
+        }
+
         public override bool CanPurchase()
         {
             if (!base.CanPurchase()) { return false; }

@@ -4,6 +4,13 @@
     {
         public int ToyType;
 
+        public ToyStoreItem(int setToyType)
+        {
+            ToyType = setToyType;
+
+            Icon = "art/board/toy-" + (ToyType + 1) + ".png";
+        }
+
         public override bool TryPurchase()
         {
             if (BoardManager.IsBoardFull())

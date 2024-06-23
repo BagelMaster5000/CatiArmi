@@ -2,6 +2,11 @@
 {
     public class WaterBowlStoreItem : StoreItem
     {
+        public WaterBowlStoreItem()
+        {
+            Icon = "art/board/waterbowl-empty.png";
+        }
+
         public override bool TryPurchase()
         {
             if (BoardManager.IsBoardFull())

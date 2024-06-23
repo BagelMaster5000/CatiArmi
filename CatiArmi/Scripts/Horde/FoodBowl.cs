@@ -51,6 +51,7 @@
             }
 
             Inventory.InvokeResourcesUpdated();
+            BoardManager.BoardRefresh?.Invoke();
 
             AudioManager.PlaySound("bowl-foodfill");
         }
