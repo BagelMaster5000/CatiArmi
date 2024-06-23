@@ -55,7 +55,7 @@ namespace CatiArmi.Scripts
                     },
                     SpeechSoldOut = new List<string>()
                     {
-                        "SoldOut1",
+                        "I don’t have that in stock.",
                     },
                     SpeechCantAfford = new List<string>()
                     {
@@ -100,17 +100,17 @@ namespace CatiArmi.Scripts
                     SpeechPurchased = new List<string>()
                     {
                         "Bring me a bit more coin next time, I’ll throw in something sweet. <3",
-                        "Commision more sophisticated confectionaries next time, I’m a very busy bee.",
-                        "You should bee less frugal next time.",
+                        "I’m sure you’ll find my candies to bee… exquisite.",
+                        "All my customers have the finest taste, even you.",
                     },
                     SpeechSoldOut = new List<string>()
                     {
-                        "SoldOut1",
+                        "Would sell you more of that, but you bought all I have in stock.",
                     },
                     SpeechCantAfford = new List<string>()
                     {
                         "You can’t afford that, honey~",
-                        "You look a little light on coin for my taste.",
+                        "I don’t do favors, sweetie.",
                         "My sweets are a bit more… refined.",
                     },
                     SpeechFullFood = new List<string>()
@@ -156,7 +156,7 @@ namespace CatiArmi.Scripts
                     },
                     SpeechSoldOut = new List<string>()
                     {
-                        "SoldOut1",
+                        "Fresh out of that.",
                     },
                     SpeechCantAfford = new List<string>()
                     {
