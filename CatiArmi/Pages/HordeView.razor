@@ -11,14 +11,15 @@
                  <Row Padding="Padding.Is2">
                      <Column ColumnSize="ColumnSize.Is1" />
                      <Column ColumnSize="ColumnSize.Is10">
-                         <Div Padding="Padding.Is2" />
-                         <Text TextSize="TextSize.Heading1" Padding="Padding.Is2">CatiArmi</Text>
+                         <Div Padding="Padding.Is1" />
+                         <Image Source="art/logo.png" Height="Height.Rem(5)" Padding="Padding.Is1" />
+                         <Div Padding="Padding.Is1" />
                      </Column>
                      <Column ColumnSize="ColumnSize.Is1" />
                  </Row>
                  <Row>
                      <Column ColumnSize="ColumnSize.Is8">
-                         <Div Border="Border.Is2" Style="border-color: black">
+                         <Div Class="grid-base">
                         @for (int r = 0; r < 8; r++)
                         {
                             var row = r.ToString();
@@ -26,7 +27,7 @@
                                 @for (int c = 0; c < 8; c++)
                                 {
                                     var col = c.ToString();
-                                    <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Background="Background.White" Border="Border.Is2" Style="border-color: black" Height="Height.Rem(6.8)" Width="Width.Rem(6.8)" />
+                                    <DropZone Padding="Padding.Is1" TItem="Placeable" Name="@($"{row} {col}")" DropAllowed=@((item) => true) Class="grid-tile" Height="Height.Rem(6.8)" Width="Width.Rem(6.8)" />
                                 }
                             </Div>
                         }

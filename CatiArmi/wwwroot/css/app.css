@@ -432,6 +432,20 @@ body {
     background-size: cover;
 }
 
+.grid-tile {
+    background-color: var(--hotpanda-lightyellow);
+    border-width: 2px;
+    border-style: inset;
+    border-color: var(--hotpanda-lightyellow);
+}
+
+.grid-base {
+    border-width: 2px;
+    border-style: outset;
+    border-radius: 3px;
+    border-color: var(--hotpanda-lightyellow);
+}
+
 /*.page {
     transform: scale(0.2);
     transform-origin: top;

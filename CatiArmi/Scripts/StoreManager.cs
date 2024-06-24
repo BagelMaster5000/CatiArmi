@@ -45,7 +45,7 @@ namespace CatiArmi.Scripts
                         new SnackStoreItem(0) { Name = "Fish Snack", Price = GameManager.SnackCosts[0], LimitedItem = false },
                     },
                     ShopKeepIdleImage = "art/shopkeeps/shopkeep1-idle.png",
-                    ShopKeepHappyImage = "art/shopkeeps/shopkeep1-idle.png",
+                    ShopKeepHappyImage = "art/shopkeeps/shopkeep1-happy.png",
                     SpeechGreetings = new List<string>()
                     {
                         "Oh hello! Almost didn’t see you there!",
@@ -97,12 +97,12 @@ namespace CatiArmi.Scripts
                         new SnackStoreItem(3) { Name = "Toe Beans", Price = GameManager.SnackCosts[3], LimitedItem = false },
                     },
                     ShopKeepIdleImage = "art/shopkeeps/shopkeep2-idle.png",
-                    ShopKeepHappyImage = "art/shopkeeps/shopkeep2-idle.png",
+                    ShopKeepHappyImage = "art/shopkeeps/shopkeep2-happy.png",
                     SpeechGreetings = new List<string>()
                     {
-                        "On candy stripe legs… softly through the shadow… stealing past the windows… looking for the victim… shhh…. OH! Haha, I didn’t see you there.",
+                        "On candy stripe legs… softly through the shadow… stealing past the windows… looking for the victim… shhh…. OH! I didn’t see you there.",
                         "Excuse me, I’m looking for customers with extravagant taste, have you seen any around?",
-                        "I can refuse service to anyone who doesn’t look rich enough to shop here, but I’ll make an exception for you~",
+                        "I met a knight the other day with the most sultry voice, have you seen him around?",
                     },
                     SpeechPurchased = new List<string>()
                     {
@@ -150,7 +150,7 @@ namespace CatiArmi.Scripts
                         //new PlaceableStoreItem { Placeable = new Pachimari(), Name = "Da golden pachi", Icon = "placeholders/pachimari-idle.png", Price = 999, LimitedItem = false },
                     },
                     ShopKeepIdleImage = "art/shopkeeps/shopkeep3-idle.png",
-                    ShopKeepHappyImage = "art/shopkeeps/shopkeep3-idle.png",
+                    ShopKeepHappyImage = "art/shopkeeps/shopkeep3-happy.png",
                     SpeechGreetings = new List<string>()
                     {
                         "[The meek salamander befuddles you with his shockingly intoxicating voice] Why hello there, traveler! Welcome to my shop!",
