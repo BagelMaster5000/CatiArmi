@@ -9,7 +9,9 @@
 
         public List<StoreItem> ItemsForSale;
 
-        public string CurSpeech = "";
+        public string ShopKeepIdleImage;
+        public string ShopKeepHappyImage;
+
         public List<string> SpeechGreetings;
         public List<string> SpeechPurchased;
         public List<string> SpeechSoldOut;

@@ -11,6 +11,7 @@ namespace CatiArmi.Scripts
         public static void InvokeStoreRefresh() => StoreRefresh?.Invoke();
         public static void ClearStoreRefresh() => StoreRefresh = null;
 
+        public static string CurSpeech = "";
         public enum DialogState
         {
             Greeting,
@@ -23,15 +24,17 @@ namespace CatiArmi.Scripts
         };
         public static DialogState CurDialogState = DialogState.Greeting;
 
+        public static string CurShopkeepImage = "";
+
         public static void Setup()
         {
             Stores = new List<Store>()
             {
                 new Store()
                 {
-                    Name = "Placeholder's Pet Store",
+                    Name = "Donah Apt's Pet Store",
                     DisplayName = "Pet Store",
-                    Icon = "placeholders/pachimari-idle.png",
+                    Icon = "art/ui/shopgraphic-petstore.png",
                     PachisToUnlock = 0,
                     ItemsForSale = new List<StoreItem>()
                     {
@@ -41,6 +44,8 @@ namespace CatiArmi.Scripts
                         new WaterFillStoreItem(50) { Name = "Water Fill", Price = 5, LimitedItem = false },
                         new SnackStoreItem(0) { Name = "Fish Snack", Price = GameManager.SnackCosts[0], LimitedItem = false },
                     },
+                    ShopKeepIdleImage = "art/shopkeeps/shopkeep1-idle.png",
+                    ShopKeepHappyImage = "art/shopkeeps/shopkeep1-idle.png",
                     SpeechGreetings = new List<string>()
                     {
                         "Oh hello! Almost didn’t see you there!",
@@ -78,7 +83,7 @@ namespace CatiArmi.Scripts
                 },
                 new Store()
                 {
-                    Name = "Placeholder's Candy Store",
+                    Name = "Gothby's Candy Store",
                     DisplayName = "Candy Store",
                     Icon = "art/ui/shopgraphic-candystore.png",
                     PachisToUnlock = 20,
@@ -91,6 +96,8 @@ namespace CatiArmi.Scripts
                         new ToyStoreItem(0) { Name = "Teaser Toy", Price = GameManager.ToyCosts[0], LimitedItem = false },
                         new SnackStoreItem(3) { Name = "Toe Beans", Price = GameManager.SnackCosts[3], LimitedItem = false },
                     },
+                    ShopKeepIdleImage = "art/shopkeeps/shopkeep2-idle.png",
+                    ShopKeepHappyImage = "art/shopkeeps/shopkeep2-idle.png",
                     SpeechGreetings = new List<string>()
                     {
                         "On candy stripe legs… softly through the shadow… stealing past the windows… looking for the victim… shhh…. OH! Haha, I didn’t see you there.",
@@ -128,7 +135,7 @@ namespace CatiArmi.Scripts
                 },
                 new Store()
                 {
-                    Name = "Placeholder's Toy Store",
+                    Name = "Salamander Knight's Toy Store",
                     DisplayName = "Toy Store",
                     Icon = "art/ui/shopgraphic-toystore.png",
                     PachisToUnlock = 50,
@@ -142,6 +149,8 @@ namespace CatiArmi.Scripts
                         new SnackStoreItem(5) { Name = "Soft Food Can", Price = GameManager.SnackCosts[5], LimitedItem = false },
                         //new PlaceableStoreItem { Placeable = new Pachimari(), Name = "Da golden pachi", Icon = "placeholders/pachimari-idle.png", Price = 999, LimitedItem = false },
                     },
+                    ShopKeepIdleImage = "art/shopkeeps/shopkeep3-idle.png",
+                    ShopKeepHappyImage = "art/shopkeeps/shopkeep3-idle.png",
                     SpeechGreetings = new List<string>()
                     {
                         "[The meek salamander befuddles you with his shockingly intoxicating voice] Why hello there, traveler! Welcome to my shop!",
@@ -184,8 +193,10 @@ namespace CatiArmi.Scripts
 
         public static void InvokeSpeechEnteredStore()
         {
-            CurStore.CurSpeech = CurStore.SpeechGreetings[RandomNumberGenerator.GetInt32(0, CurStore.SpeechGreetings.Count)];
+            CurSpeech = CurStore.SpeechGreetings[RandomNumberGenerator.GetInt32(0, CurStore.SpeechGreetings.Count)];
             CurDialogState = DialogState.Greeting;
+
+            CurShopkeepImage = CurStore.ShopKeepIdleImage;
 
             InvokeStoreRefresh();
         }
@@ -194,8 +205,10 @@ namespace CatiArmi.Scripts
         {
             if (CurDialogState != DialogState.Purchased)
             {
-                CurStore.CurSpeech = CurStore.SpeechPurchased[RandomNumberGenerator.GetInt32(0, CurStore.SpeechPurchased.Count)];
+                CurSpeech = CurStore.SpeechPurchased[RandomNumberGenerator.GetInt32(0, CurStore.SpeechPurchased.Count)];
                 CurDialogState = DialogState.Purchased;
+
+                CurShopkeepImage = CurStore.ShopKeepHappyImage;
             }
 
             InvokeStoreRefresh();
@@ -205,8 +218,10 @@ namespace CatiArmi.Scripts
         {
             if (CurDialogState != DialogState.Soldout)
             {
-                CurStore.CurSpeech = CurStore.SpeechSoldOut[RandomNumberGenerator.GetInt32(0, CurStore.SpeechSoldOut.Count)];
+                CurSpeech = CurStore.SpeechSoldOut[RandomNumberGenerator.GetInt32(0, CurStore.SpeechSoldOut.Count)];
                 CurDialogState = DialogState.Soldout;
+
+                CurShopkeepImage = CurStore.ShopKeepIdleImage;
             }
 
             InvokeStoreRefresh();
@@ -216,8 +231,10 @@ namespace CatiArmi.Scripts
         {
             if (CurDialogState != DialogState.CantAfford)
             {
-                CurStore.CurSpeech = CurStore.SpeechCantAfford[RandomNumberGenerator.GetInt32(0, CurStore.SpeechCantAfford.Count)];
+                CurSpeech = CurStore.SpeechCantAfford[RandomNumberGenerator.GetInt32(0, CurStore.SpeechCantAfford.Count)];
                 CurDialogState = DialogState.CantAfford;
+
+                CurShopkeepImage = CurStore.ShopKeepIdleImage;
             }
 
             InvokeStoreRefresh();
@@ -227,8 +244,10 @@ namespace CatiArmi.Scripts
         {
             if (CurDialogState != DialogState.FullFood)
             {
-                CurStore.CurSpeech = CurStore.SpeechFullFood[RandomNumberGenerator.GetInt32(0, CurStore.SpeechFullFood.Count)];
+                CurSpeech = CurStore.SpeechFullFood[RandomNumberGenerator.GetInt32(0, CurStore.SpeechFullFood.Count)];
                 CurDialogState = DialogState.FullFood;
+
+                CurShopkeepImage = CurStore.ShopKeepIdleImage;
             }
 
             InvokeStoreRefresh();
@@ -238,20 +257,24 @@ namespace CatiArmi.Scripts
         {
             if (CurDialogState != DialogState.FullWater)
             {
-                CurStore.CurSpeech = CurStore.SpeechFullWater[RandomNumberGenerator.GetInt32(0, CurStore.SpeechFullWater.Count)];
+                CurSpeech = CurStore.SpeechFullWater[RandomNumberGenerator.GetInt32(0, CurStore.SpeechFullWater.Count)];
                 CurDialogState = DialogState.FullWater;
+
+                CurShopkeepImage = CurStore.ShopKeepIdleImage;
             }
 
             InvokeStoreRefresh();
         }
 
         public static void InvokeSpeechNoSpace()
+        {
+            if (CurDialogState != DialogState.NoSpace)
             {
-                if (CurDialogState != DialogState.NoSpace)
-                {
-                    CurStore.CurSpeech = CurStore.SpeechNoSpace[RandomNumberGenerator.GetInt32(0, CurStore.SpeechNoSpace.Count)];
-                    CurDialogState = DialogState.NoSpace;
-                }
+                CurSpeech = CurStore.SpeechNoSpace[RandomNumberGenerator.GetInt32(0, CurStore.SpeechNoSpace.Count)];
+                CurDialogState = DialogState.NoSpace;
+
+                CurShopkeepImage = CurStore.ShopKeepIdleImage;
+            }
 
             InvokeStoreRefresh();
         }

@@ -25,7 +25,7 @@
          @* Body *@
          <Row>
              <Column ColumnSize="ColumnSize.Is8" Height="Height.Rem(37)">
-                 <Image Source="placeholders/Chopper.png" VerticalAlignment="VerticalAlignment.Bottom" />
+                 <Image Source="@StoreManager.CurShopkeepImage" VerticalAlignment="VerticalAlignment.Bottom" Height="Height.Rem(42)" />
              </Column>
              <Column ColumnSize="ColumnSize.Is4">
                  <Container TextAlignment="TextAlignment.Center" Padding="Padding.Is2">
@@ -41,7 +41,7 @@
              <Container Width="Width.Is100" style="position: relative;">
                  <Image Source="art/ui/dialogbox.png" Width="Width.Is100" Height="Height.Rem(16)" />
                  <Row Class="centered-dialog" Width="Width.Rem(70)">
-                     <Text TextSize="TextSize.Heading1" VerticalAlignment="VerticalAlignment.Top">@StoreManager.CurStore.CurSpeech</Text>
+                     <Text TextSize="TextSize.Heading1" VerticalAlignment="VerticalAlignment.Top">@StoreManager.CurSpeech</Text>
                 </Row>
             </Container>
          </Row>
